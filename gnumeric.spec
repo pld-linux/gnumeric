@@ -4,40 +4,45 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.70
-Release:	3
+Version:	0.72
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-miscfix.patch
 Patch1:		%{name}-no_version.patch
 Patch2:		%{name}-am15.patch
+Patch3:		%{name}-xml-i18n.patch
+Patch4:		%{name}-bonobo.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	ORBit-devel
 BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{!?_without_bonobo:BuildRequires:	bonobo-devel => 1.0.3}
-BuildRequires:	gal-devel >= 0.11.2
+%{!?_without_bonobo:BuildRequires:	bonobo-devel >= 1.0.9}
+BuildRequires:	gal-devel >= 0.14
 %{!?_with_gb:BuildRequires:	gb-devel >= 0.0.15}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
-BuildRequires:	gnome-print-devel => 0.25
+BuildRequires:	gnome-print-devel >= 0.29
 BuildRequires:	gtk+-devel >= 1.2.2
-BuildRequires:	guile-devel
-BuildRequires:	libglade-devel >= 0.14
-BuildRequires:	libxml-devel => 1.8.10
-BuildRequires:	libole2-devel => 0.1.4
+BuildRequires:	libglade-devel >= 0.16
+BuildRequires:	libxml-devel >= 1.8.14
+BuildRequires:	libole2-devel >= 0.2.3
+#BuildRequires:	guile-devel >= 1.5
+#BuildRequires:	libgda-devel >= 0.2.11
+#BuildRequires:	psiconv-devel
 BuildRequires:	perl
 BuildRequires:	python-devel >= 2.1
 BuildRequires:	bison
 BuildRequires:	flex
-%requires_eq	guile
+BuildRequires:	xml-i18n-tools >= 0.9-3
+#%#requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -57,13 +62,15 @@ jeste¶ gotów na u¿ywanie Gnumerica. Starali¶my siê sklonowaæ wszystkie
 dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 
 %prep
-%setup  -q
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
-rm missing acinclude.m4
+rm -f missing acinclude.m4
 libtoolize --copy --force
 gettextize --copy --force
 aclocal -I macros
