@@ -20,7 +20,6 @@ Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.3/%{name}-%{version}.tar.bz2
 # Source0-md5:	14c7e3cf3f3eda61f1d029f6f473d678
-#Patch0:		%{name}-compile_fix.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.4.2
@@ -97,7 +96,6 @@ Gnumeric - це програма електронних таблиць для GNOME.
 
 %prep
 %setup -q
-#%patch0 -p1
 
 %build
 glib-gettextize --copy --force
