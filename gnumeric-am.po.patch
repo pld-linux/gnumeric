@@ -1,0 +1,11 @@
+--- gnumeric-1.2.13/po/am.po.wiget	2004-06-23 06:41:03.000000000 +0200
++++ gnumeric-1.2.13/po/am.po	2004-10-05 12:00:42.358548382 +0200
+@@ -5176,7 +5176,7 @@
+ 
+ #: plugins/fn-info/plugin.xml.in.h:2
+ msgid "Information"
+-msgstr "&መረጃ"
++msgstr "መረጃ"
+ 
+ #: plugins/fn-info/plugin.xml.in.h:3
+ msgid "Information Functions"
