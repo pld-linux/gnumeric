@@ -5,6 +5,9 @@
 %bcond_without	mono	# build without mono scripting engine
 %bcond_without	python	# build without python support
 #
+%ifnarch %{ix86} amd64 arm hppa ppc s390 sparc sparcv9 sparc64
+%undefine	with_mono
+%endif
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
 Summary(es):	La hoja de c·lculo del GNOME
@@ -15,7 +18,7 @@ Summary(uk):	ÂÃ≈À‘“œŒŒ¶ ‘¡¬Ã…√¶ ƒÃ— GNOME
 Summary(zh_CN):	Linuxœ¬µƒExcel -- GNOMEµÁ◊”±Ì∏Ò
 Name:		gnumeric
 Version:	1.4.3
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -119,10 +122,10 @@ intltoolize --copy --force
 	--disable-static \
 	--disable-schemas-install \
 	--with-psiconv \
-	--with%{?!with_gnome:out}-gnome \
-	--with%{?!with_python:out}-python \
-	--with%{?!with_gda:out}-gda \
-	--with%{?!with_mono:out}-mono \
+	--with%{!?with_gnome:out}-gnome \
+	--with%{!?with_python:out}-python \
+	--with%{!?with_gda:out}-gda \
+	--with%{!?with_mono:out}-mono \
 	--without-guile \
 	--without-gb
 
