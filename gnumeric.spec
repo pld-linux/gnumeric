@@ -34,13 +34,14 @@ BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gal-devel >= 0.19
 %{?_with_gb:BuildRequires:	gb-devel >= 0.0.19}
+BuildRequires:	gdk-pixbuf-gnome-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel >= 0.29
 BuildRequires:	gtk+-devel >= 1.2.7
 BuildRequires:	glib-devel >= 1.2.7
 BuildRequires:	intltool
-BuildRequires:	libglade-devel >= 0.16
+BuildRequires:	libglade-gnome-devel >= 0.16
 BuildRequires:	libxml-devel >= 1.8.14
 BuildRequires:	libole2-devel >= 0.2.4
 #BuildRequires:	guile-devel >= 1.4
@@ -120,8 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	Applicationsdir=%{_applnkdir}/Office/Spreadsheets
 
-gzip -9nf AUTHORS ChangeLog NEWS README TODO
-
 %find_lang %{name} --with-gnome
 
 %clean
@@ -129,7 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
 %attr(-,root,root) %{_libdir}/gnumeric
 %attr(755,root,root) %{_libdir}/gnumericConf.sh
