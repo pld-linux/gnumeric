@@ -1,7 +1,9 @@
+#
+# Conditional build:
 # _without_bonobo
 # _without_python
 # _without_gda
-
+#
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
 Summary(es):	La hoja de calculo del GNOME
@@ -54,8 +56,8 @@ BuildRequires:	libgda-devel
 %if %{!?_without_python:1}0
 Requires:	python-modules
 %endif
-Requires(post,postun): /sbin/ldconfig
 Requires(post):	GConf2
+Requires(post):	scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -149,10 +151,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.py
 %{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
 
-%{_datadir}/applications/*.desktop
+%{_desktopdir}/*.desktop
 %{_datadir}/mime-info/*
-%{_datadir}/pixmaps/*.???
-%{_datadir}/pixmaps/gnumeric
+%{_pixmapsdir}/*.???
+%{_pixmapsdir}/gnumeric
 %{_omf_dest_dir}/%{name}
 
 %dir %{_datadir}/gnumeric
