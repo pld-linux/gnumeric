@@ -56,8 +56,6 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
-mv $RPM_BUILD_ROOT%{_bindir}/gnumeric-bonobo \
-	$RPM_BUILD_ROOT%{_bindir}/gnumeric
 
 strip --strip-debug $RPM_BUILD_ROOT%{_libdir}/gnumeric/plugins/%{version}/lib*so.*.*
 
