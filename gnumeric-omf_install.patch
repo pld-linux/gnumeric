@@ -1,0 +1,19 @@
+diff -aurN gnumeric-1.4.0.orig/omf.make gnumeric-1.4.0/omf.make
+--- gnumeric-1.4.0.orig/omf.make	2004-11-29 10:54:15.948209000 +0100
++++ gnumeric-1.4.0/omf.make	2004-11-29 10:54:00.592543416 +0100
+@@ -45,7 +45,6 @@
+ 	for file in $(omffile); do \
+ 		$(INSTALL_DATA) $$file.out $(DESTDIR)$(omf_dest_dir)/$$file; \
+ 	done
+-	-scrollkeeper-update -p $(DESTDIR)$(scrollkeeper_localstate_dir) -o $(DESTDIR)$(omf_dest_dir)
+ 
+ uninstall-local-omf:
+ 	-for file in $(srcdir)/*.omf; do \
+@@ -53,7 +52,6 @@
+ 		rm -f $(DESTDIR)$(omf_dest_dir)/$$basefile; \
+ 	done
+ 	-rmdir $(DESTDIR)$(omf_dest_dir)
+-	-scrollkeeper-update -p $(DESTDIR)$(scrollkeeper_localstate_dir)
+ 
+ clean-local-omf:
+ 	-for file in $(omffile); do \
