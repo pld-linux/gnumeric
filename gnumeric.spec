@@ -7,9 +7,10 @@ Summary(pl):	Arkusz kalkulacyjny GNOME
 Summary(pt_BR):	A planilha do GNOME
 Summary(ru):	üÌÅËÔÒÏÎÎÙÅ ÔÁÂÌÉÃÙ ÄÌÑ GNOME
 Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
+Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ 
 Name:		gnumeric
 Version:	1.0.9
-Release:	1
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -51,6 +52,7 @@ BuildRequires:	perl
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	oaf-devel >= 0.6.2
 #%requires_eq	guile
+Requires:	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
