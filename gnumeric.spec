@@ -2,7 +2,7 @@ Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
 Version:	0.61
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -15,6 +15,8 @@ Patch1:		%{name}-no_version.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	ORBit-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 #BuildRequires:	bonobo-devel => 0.2
 BuildRequires:	docbook-dsssl => 1.52
 BuildRequires:	gal-devel >= 0.4.1
@@ -54,8 +56,9 @@ dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 
 %build
 gettextize --copy --force
-automake
+aclocal -I macros
 autoconf
+automake -a -c
 GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH 
 %configure \
 	--disable-static \
