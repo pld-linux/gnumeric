@@ -17,7 +17,7 @@ URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	ORBit-devel
 #BuildRequires:	bonobo-devel => 0.2
 BuildRequires:	docbook-dsssl => 1.52
-BuildRequires:	gal-devel
+BuildRequires:	gal-devel >= 0.2.2
 #BuildRequires:	gb-devel >= 0.0.15
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
