@@ -70,12 +70,12 @@ Gnumeric - це програма електронних таблиць для GNOME.
 %build
 export LC_ALL=C
 #rm -f missing acinclude.m4
-#%{__libtoolize}
-#%{__gettextize}
-#%{__aclocal}
-#%{__autoheader}
-#%{__autoconf}
-#%{__automake}
+#%%{__libtoolize}
+#%%{__gettextize}
+#%%{__aclocal}
+#%%{__autoheader}
+#%%{__autoconf}
+#%%{__automake}
 #GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
 %configure \
 	--disable-static \
