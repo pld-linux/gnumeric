@@ -25,7 +25,7 @@ Patch3:		%{name}-gb.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 Requires:	gnome-print >= 0.34-3
-Requires:	Guppi >= 0.40.3
+Conflicts:	Guppi < 0.40.3
 BuildRequires:	ORBit-devel
 BuildRequires:	libtool
 BuildRequires:	autoconf
