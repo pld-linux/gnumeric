@@ -3,7 +3,7 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.69
+Version:	0.70
 Release:	1
 Epoch:		1
 License:	GPL
@@ -21,7 +21,6 @@ BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?_with_bonobo:BuildRequires:	bonobo-devel => 1.0.3}
-BuildRequires:	docbook-style-dsssl => 1.52
 BuildRequires:	gal-devel >= 0.9
 %{?_with_gb:BuildRequires:	gb-devel >= 0.0.15}
 BuildRequires:	gettext-devel
