@@ -20,6 +20,7 @@ License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/gnome/sources/gnumeric/1.1/%{name}-%{version}.tar.bz2
+# Source0-md5:	7a03f24e492479b90c50c71448cc83b7
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	libtool
 BuildRequires:	autoconf
