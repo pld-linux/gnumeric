@@ -24,6 +24,7 @@ Patch2:		%{name}-am15.patch
 Patch3:		%{name}-gb.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
+Requires:	gnome-print >= 0.34-3
 BuildRequires:	ORBit-devel
 BuildRequires:	libtool
 BuildRequires:	autoconf
