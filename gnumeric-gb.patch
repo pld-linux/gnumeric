@@ -1,0 +1,18 @@
+diff -urN gnumeric-1.0.1.org/configure.in gnumeric-1.0.1/configure.in
+--- gnumeric-1.0.1.org/configure.in	Thu Jan 10 01:22:16 2002
++++ gnumeric-1.0.1/configure.in	Thu Jan 10 13:17:14 2002
+@@ -444,11 +444,11 @@
+ )
+ 
+ if $try_gb; then
+-	AC_MSG_CHECKING(for Gb == 0.0.17						)
++	AC_MSG_CHECKING(for Gb >= 0.0.17						)
+ 	if gnome-config --libs gb > /dev/null 2>&1; then
+ 		verstxt=`gnome-config --modversion gb 2>/dev/null`
+ 		vers=`echo "$verstxt" | awk -F. '{ printf "%d", $1 * 10000 + $2 * 100 + $3; }'`
+-		if test "$vers" -eq 000017; then
++		if test "$vers" -ge 000017; then
+ 			AC_MSG_RESULT($marker_ok found $verstxt)
+ 			AC_DEFINE(ENABLE_GB)
+ 			GB_LIBS=`gnome-config --libs gb`
+
