@@ -1,8 +1,8 @@
 #
 # Conditional build:
-# _without_bonobo
-# _without_python
-# _without_gda
+# _without_bonobo	- build without bonobo
+# _without_python	- build without python support
+# _without_gda		- build without gda
 #
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
@@ -33,6 +33,14 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 2.0.0
 BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	libart_lgpl-devel >= 2.3.12
+%if %{!?_without_bonobo:1}0
+BuildRequires:	libbonobo-devel >= 2.0.0
+BuildRequires:	libbonoboui-devel >= 2.3.3-2
+BuildRequires:	libgsf-gnome-devel >= 1.8.1-2
+%endif
+%if %{!?_without_gda:1}0
+BuildRequires:	libgda-devel
+%endif
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnome-devel >= 2.2.0
 BuildRequires:	libgnomecanvas-devel >= 2.2.0
@@ -45,14 +53,6 @@ BuildRequires:	perl
 %if %{!?_without_python:1}0
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 1.99.16
-%endif
-%if %{!?_without_bonobo:1}0
-BuildRequires:	libbonobo-devel >= 2.0.0
-BuildRequires:	libbonoboui-devel >= 2.3.3-2
-BuildRequires:	libgsf-gnome-devel >= 1.8.1-2
-%endif
-%if %{!?_without_gda:1}0
-BuildRequires:	libgda-devel
 %endif
 Requires(post):	GConf2
 Requires(post):	scrollkeeper
