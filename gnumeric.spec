@@ -60,7 +60,7 @@ BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 2.0.0
 %endif
 Requires(post):	GConf2
-Requires(post):	scrollkeeper
+Requires(post,postun):	scrollkeeper
 %if %{with python}
 Requires:	python-modules
 %endif
@@ -136,10 +136,15 @@ rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -rf $RPM_BUILD_ROOT
 
 %post
+umask 022
 /usr/bin/scrollkeeper-update
 %gconf_schema_install
+[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 
-%postun -p /usr/bin/scrollkeeper-update
+%postun
+umask 022
+/usr/bin/scrollkeeper-update
+[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
