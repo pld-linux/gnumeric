@@ -1,7 +1,7 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.59
+Version:	0.60
 Release:	1
 Epoch:		1
 License:	GPL
@@ -12,7 +12,6 @@ Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
 Patch0:		%{name}-miscfix.patch
 Patch1:		%{name}-no_version.patch
-Patch2:		%{name}-POTFILES.in-fix.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	ORBit-devel
@@ -51,7 +50,6 @@ dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 gettextize --copy --force
