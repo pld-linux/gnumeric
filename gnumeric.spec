@@ -98,11 +98,12 @@ Gnumeric - це програма електронних таблиць для GNOME.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+rm -f acinclude.m4
 %patch7 -p1
 
 %build
 touch po/POTFILES
-rm -f missing acinclude.m4
+rm -f missing
 %{__libtoolize}
 %{__gettextize}
 %{__aclocal} -I macros
