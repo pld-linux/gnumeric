@@ -3,7 +3,7 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.67
+Version:	0.68
 Release:	1
 Epoch:		1
 License:	GPL
