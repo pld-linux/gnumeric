@@ -1,10 +1,14 @@
-
-%bcond_without gnome	# build without gnome
-%bcond_without python	# build without python support
-%bcond_without gda	# build without gda
-%bcond_without mono	# build without mono scripting engine
-
+# TODO
+# - fix Autoformats (bashizm patch breaks it)
+#
+# Conditional build
+%bcond_without	gnome	# build without gnome
+%bcond_without	python	# build without python support
+%bcond_without	gda	# build without gda
+%bcond_without	mono	# build without mono scripting engine
+#
 %include	/usr/lib/rpm/macros.perl
+#
 Summary:	The GNOME spreadsheet
 Summary(es):	La hoja de cАlculo del GNOME
 Summary(pl):	Arkusz kalkulacyjny GNOME
@@ -13,15 +17,16 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.3.93
-Release:	0.9
+Version:	1.4.0
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	b54145544b09aa151dfe18ff46c6f1fc
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.4/%{name}-%{version}.tar.bz2
+# Source0-md5:	f6b4bb2cdac76b3b9ffc2b3a146a5408
 Patch0:		%{name}-bashizm.patch
+Patch1:		%{name}-omf_install.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.4.2
@@ -39,7 +44,7 @@ BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonobo-devel >= 2.6.0
 BuildRequires:	libbonoboui-devel >= 2.6.0
-BuildRequires:	libgsf-gnome-devel >= 1.10.0
+BuildRequires:	libgsf-gnome-devel >= 1.11.0
 %endif
 %if %{with gda}
 BuildRequires:	libgda-devel >= 1.0.1
@@ -48,10 +53,10 @@ BuildRequires:	libgnomedb-devel >= 1.0.1
 BuildRequires:	libglade2-devel >= 1:2.4.0
 %{?with_gnome:BuildRequires:	libgnome-devel >= 2.6.0}
 BuildRequires:	libgnomecanvas-devel >= 2.6.0
-BuildRequires:	libgnomeprint-devel >= 2.6.0
-BuildRequires:	libgnomeprintui-devel >= 2.6.0
+BuildRequires:	libgnomeprint-devel >= 2.8.1
+BuildRequires:	libgnomeprintui-devel >= 2.8.1
 %{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.6.0}
-BuildRequires:	libgsf-devel >= 1.10.0
+BuildRequires:	libgsf-devel >= 1.11.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
@@ -79,7 +84,8 @@ possible with Excel in terms of usability.
 
 %description -l es
 Gnumeric es un programa de hoja de cАlculo para GNOME. Este programa
-procura ser reemplazar los programas comerciales, asМ que ha gozado
+p
+rocura ser reemplazar los programas comerciales, asМ que ha gozado
 bastante esfuerzo. Si conoce Excel, deberМa estar preparado para usar
 Gnumeric. Intentamos clonar todas las buenas cualidades y seguir lo
 mАs compatible que fuera posible, en cuanto a la usabilidad.
@@ -103,6 +109,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 glib-gettextize --copy --force
@@ -133,6 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
+rm -r $RPM_BUILD_ROOT%{_datadir}/mc/templates/gnumeric.desktop
 
 %find_lang %{name} --with-gnome
 
@@ -167,8 +175,8 @@ umask 022
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.xml
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.la
 %if %{with python}
-#%{_libdir}/gnumeric/%{version}*/plugins/*/*.py
-#%{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
+%{_libdir}/gnumeric/%{version}*/plugins/*/*.py
+%{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
 %endif
 
 %{_desktopdir}/*.desktop
