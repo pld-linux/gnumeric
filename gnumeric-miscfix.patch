@@ -1,16 +1,32 @@
---- gnumeric-0.35/src/widgets/widget-editable-label.c.sopwith	Mon Sep 13 17:44:22 1999
-+++ gnumeric-0.35/src/widgets/widget-editable-label.c	Mon Sep 13 17:44:43 1999
-@@ -120,6 +120,7 @@
- {
- 	GtkWidget *toplevel;
+diff -urN gnumeric-0.64.org/Makefile.am gnumeric-0.64/Makefile.am
+--- gnumeric-0.64.org/Makefile.am	Mon Apr 23 10:59:56 2001
++++ gnumeric-0.64/Makefile.am	Mon Apr 23 11:07:39 2001
+@@ -66,9 +66,4 @@
+ 	cp $(srcdir)/samples/*gnumeric $(distdir)/samples	
+ 	cp gnumeric.spec $(distdir)
  
-+	gtk_widget_grab_focus (GTK_WIDGET (el));
- 	/*
- 	 * Create a GtkEntry to actually do the editing.
- 	 */
---- gnumeric-0.35/src/Makefile.in.sopwith	Tue Sep  7 20:39:00 1999
-+++ gnumeric-0.35/src/Makefile.in	Mon Sep 13 17:44:08 1999
-@@ -42,6 +42,7 @@
+-if BONOBO
+-gnumeric_version="$(VERSION)-bonobo"
+-else
+-gnumeric_version="$(VERSION)"
+-endif
+ 
+diff -urN gnumeric-0.64.org/configure.in gnumeric-0.64/configure.in
+--- gnumeric-0.64.org/configure.in	Mon Apr 23 10:59:56 2001
++++ gnumeric-0.64/configure.in	Mon Apr 23 11:01:05 2001
+@@ -56,7 +56,7 @@
+ dnl and why we have so many translations.
+ dnl
+ ALL_LINGUAS="ca cs da de en_AU en_CA en_GB el es es_DO es_GT es_HN es_MX es_PA es_PE es_SV et fi fr ga gl hr hu it ja ko nl no pl pt pt_BR ru sk sv tr uk zh_CN.GB2312 zh_TW.Big5"
+-AM_GNOME_GETTEXT
++AM_GNU_GETTEXT
+ # AM_GNOME_GETTEXT above substs $DATADIRNAME
+ # this is the directory where the *.{mo,gmo} files are installed
+ gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
+diff -urN gnumeric-0.64.org/src/Makefile.in gnumeric-0.64/src/Makefile.in
+--- gnumeric-0.64.org/src/Makefile.in	Mon Apr 23 11:00:05 2001
++++ gnumeric-0.64/src/Makefile.in	Mon Apr 23 11:00:34 2001
+@@ -37,6 +37,7 @@
  sbindir = @sbindir@
  libexecdir = @libexecdir@
  datadir = @datadir@
@@ -18,3 +34,28 @@
  sysconfdir = @sysconfdir@
  sharedstatedir = @sharedstatedir@
  localstatedir = @localstatedir@
+diff -urN gnumeric-0.64.org/src/dialogs/Makefile.am gnumeric-0.64/src/dialogs/Makefile.am
+--- gnumeric-0.64.org/src/dialogs/Makefile.am	Mon Apr 23 11:00:06 2001
++++ gnumeric-0.64/src/dialogs/Makefile.am	Mon Apr 23 11:08:25 2001
+@@ -4,10 +4,8 @@
+ iconsdir = $(datadir)/pixmaps/gnumeric
+ 
+ if BONOBO
+-gnumeric_version="$(VERSION)-bonobo"
+ libdialogs_a_SOURCES =	$(std_SOURCES) dialog-graph-guru.c
+ else
+-gnumeric_version="$(VERSION)"
+ libdialogs_a_SOURCES =	$(std_SOURCES)
+ endif
+ gnumeric_libdir = $(datadir)/gnumeric/$(gnumeric_version)
+diff -urN gnumeric-0.64.org/src/widgets/widget-editable-label.c gnumeric-0.64/src/widgets/widget-editable-label.c
+--- gnumeric-0.64.org/src/widgets/widget-editable-label.c	Mon Apr 23 11:00:08 2001
++++ gnumeric-0.64/src/widgets/widget-editable-label.c	Mon Apr 23 11:00:34 2001
+@@ -124,6 +124,7 @@
+ {
+ 	gtk_widget_grab_focus (GTK_WIDGET (el));
+ 
++	gtk_widget_grab_focus (GTK_WIDGET (el));
+ 	/*
+ 	 * Create a GtkEntry to actually do the editing.
+ 	 */
