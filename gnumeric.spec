@@ -14,7 +14,7 @@ Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
 Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ
 Name:		gnumeric
 Version:	1.1.19
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -28,37 +28,37 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
-BuildRequires:	gal-devel >= 1.99.6
+BuildRequires:	gal-devel >= 1.99.9
 BuildRequires:	gettext-devel
-BuildRequires:	perl
-BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	libart_lgpl-devel >= 2.3.12
+BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnome-devel >= 2.2.0
+BuildRequires:	libgnomecanvas-devel >= 2.2.0
 BuildRequires:	libgnomeprint-devel >= 2.2.0
 BuildRequires:	libgnomeprintui-devel >= 2.2.0
-BuildRequires:	libgnomeui-devel >= 2.2.0
-BuildRequires:	libgsf-devel >= 1.8.1
+BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
+BuildRequires:	libgsf-devel >= 1.8.1-2
 BuildRequires:	libxml2-devel >= 2.4.12
-BuildRequires:	libglade2-devel >= 2.0.1
-BuildRequires:	libgnomecanvas-devel >= 2.2.0
-BuildRequires:	libart_lgpl-devel >= 2.3.12
+BuildRequires:	perl
 %if %{!?_without_python:1}0
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 1.99.16
 %endif
 %if %{!?_without_bonobo:1}0
 BuildRequires:	libbonobo-devel >= 2.0.0
-BuildRequires:	libbonoboui-devel >= 2.0.0
-BuildRequires:	libgsf-gnome-devel >= 1.8.1
+BuildRequires:	libbonoboui-devel >= 2.3.3-2
+BuildRequires:	libgsf-gnome-devel >= 1.8.1-2
 %endif
 %if %{!?_without_gda:1}0
 BuildRequires:	libgda-devel
 %endif
+Requires(post):	GConf2
+Requires(post):	scrollkeeper
 %if %{!?_without_python:1}0
 Requires:	python-modules
 %endif
-Requires(post):	GConf2
-Requires(post):	scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
