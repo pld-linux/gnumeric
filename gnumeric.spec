@@ -14,7 +14,7 @@ Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
 Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ
 Name:		gnumeric
 Version:	1.1.17
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -28,7 +28,7 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
-BuildRequires:	gal-devel >= 1.99.4
+BuildRequires:	gal-devel >= 1.99.6
 BuildRequires:	gettext-devel
 BuildRequires:	perl
 BuildRequires:	gtk+2-devel >= 2.0.0
