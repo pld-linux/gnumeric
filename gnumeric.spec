@@ -96,6 +96,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_applnkdir}/Office/Spreadsheets/*
 %{_datadir}/gnumeric
 %{_datadir}/mime-info/*
-%{_datadir}/pixmaps/*
+%{_pixmapsdir}/*
 %{_datadir}/mc/*
 %{_datadir}/oaf/*
