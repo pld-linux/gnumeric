@@ -10,7 +10,7 @@ Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я 
 Name:		gnumeric
 Version:	1.0.9
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -24,6 +24,7 @@ Patch3:		%{name}-ac25x.patch
 Patch4:		%{name}-am16.patch
 Patch5:		%{name}-psicov_hack.patch
 Patch6:		%{name}-omf.patch
+Patch7:		%{name}-desktop.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 Requires:	gnome-print >= 0.34-3
@@ -97,6 +98,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 touch po/POTFILES
@@ -142,7 +144,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
-%attr(-,root,root) %{_libdir}/gnumeric
+%dir %{_libdir}/gnumeric
+%dir %{_libdir}/gnumeric/plugins
+%dir %{_libdir}/gnumeric/plugins/*
+%{_libdir}/gnumeric/plugins/*/*.py
+%{_libdir}/gnumeric/plugins/*/*.xml
+%{_libdir}/gnumeric/plugins/*/*.la
+%attr(755,root,root) %{_libdir}/gnumeric/plugins/*/*.so
 %attr(755,root,root) %{_libdir}/gnumericConf.sh
 %{_datadir}/gnumeric
 %{_datadir}/mc/*
