@@ -5,6 +5,8 @@ Summary:	The GNOME spreadsheet
 Summary(es):	La hoja de calculo del GNOME
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Summary(pt_BR):	A planilha do GNOME
+Summary(ru):	Электронные таблицы для GNOME
+Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Name:		gnumeric
 Version:	1.0.6
 Release:	1
@@ -73,6 +75,12 @@ dobre cechy i byФ kompatybilnym z Excelem w sensie u©yteczno╤ci.
 Este pacote instala a planilha do GNOME, que foi feita para substituir
 qualquer planilha comercial, pois uma quantidade razoАvel de trabalho
 foi (e estА sendo) colocada para tornА-la a melhor possМvel.
+
+%description -l ru
+Gnumeric - это программа электронных таблиц для GNOME.
+
+%description -l uk
+Gnumeric - це програма електронних таблиць для GNOME.
 
 %prep
 %setup -q
