@@ -15,4 +15,15 @@ diff -urN gnumeric-1.0.1.org/configure.in gnumeric-1.0.1/configure.in
  			AC_MSG_RESULT($marker_ok found $verstxt)
  			AC_DEFINE(ENABLE_GB)
  			GB_LIBS=`gnome-config --libs gb`
-
+diff -urN gnumeric-1.0.1.org/plugins/gb/Makefile.am gnumeric-1.0.1/plugins/gb/Makefile.am
+--- gnumeric-1.0.1.org/plugins/gb/Makefile.am	Thu Jan 10 01:22:21 2002
++++ gnumeric-1.0.1/plugins/gb/Makefile.am	Thu Jan 10 16:44:07 2002
+@@ -34,7 +34,7 @@
+ gnum_gb_la_LIBADD =		\
+ 	$(GB_LIBS)		\
+ 	$(GNUMERIC_LIBS)	\
+-	-lm @GLIB_LIBS@ -lgb -lgbrun
++	-lm @GLIB_LIBS@
+ 
+ xml_in_files = plugin.xml.in
+ xml_DATA = $(xml_in_files:.xml.in=.xml)
