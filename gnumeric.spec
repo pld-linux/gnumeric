@@ -7,7 +7,7 @@ Summary(pl):	Arkusz kalkulacyjny GNOME
 Summary(pt_BR):	A planilha do GNOME
 Name:		gnumeric
 Version:	1.0.4
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -49,7 +49,7 @@ BuildRequires:	libole2-devel >= 0.2.4
 BuildRequires:	libgda-devel >= 0.2.93
 #BuildRequires:	psiconv-devel
 BuildRequires:	perl
-BuildRequires:	python-devel >= 2.1
+BuildRequires:	python-devel >= 2.2
 BuildRequires:	oaf-devel >= 0.6.2
 #%requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
