@@ -17,14 +17,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.4.1
+Version:	1.4.2
 Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	bc60b5c342908e969b320ab833e6b151
+# Source0-md5:	095167b8f123b3cf4bf76111a9a2cd1e
 Patch0:		%{name}-bashizm.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
@@ -107,7 +107,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch0 -p0
 
 %build
 cp /usr/share/gnome-common/data/omf.make .
@@ -191,4 +191,5 @@ umask 022
 %{_datadir}/gnumeric/%{version}*/glade
 %{_datadir}/gnumeric/%{version}*/templates
 
-#%{_mandir}/man1/*
+%{_mandir}/man1/gnumeric.1.gz
+%{_mandir}/man1/ssconvert.1.gz
