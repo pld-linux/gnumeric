@@ -1,9 +1,9 @@
-diff -urN gnumeric-0.64.org/Makefile.am gnumeric-0.64/Makefile.am
---- gnumeric-0.64.org/Makefile.am	Mon Apr 23 10:59:56 2001
-+++ gnumeric-0.64/Makefile.am	Mon Apr 23 11:07:39 2001
-@@ -66,9 +66,4 @@
- 	cp $(srcdir)/samples/*gnumeric $(distdir)/samples	
- 	cp gnumeric.spec $(distdir)
+diff -Nur gnumeric-0.67.orig/Makefile.am gnumeric-0.67/Makefile.am
+--- gnumeric-0.67.orig/Makefile.am	Thu Jun 28 22:51:29 2001
++++ gnumeric-0.67/Makefile.am	Wed Jul  4 15:46:22 2001
+@@ -40,11 +40,6 @@
+ 	xml-i18n-update.in	\
+ 	$(oaf_in_files)
  
 -if BONOBO
 -gnumeric_version="$(VERSION)-bonobo"
@@ -11,22 +11,24 @@ diff -urN gnumeric-0.64.org/Makefile.am gnumeric-0.64/Makefile.am
 -gnumeric_version="$(VERSION)"
 -endif
  
-diff -urN gnumeric-0.64.org/configure.in gnumeric-0.64/configure.in
---- gnumeric-0.64.org/configure.in	Mon Apr 23 10:59:56 2001
-+++ gnumeric-0.64/configure.in	Mon Apr 23 11:01:05 2001
-@@ -56,7 +56,7 @@
+ ## Cloned from gnome-print
+ ##
+diff -Nur gnumeric-0.67.orig/configure.in gnumeric-0.67/configure.in
+--- gnumeric-0.67.orig/configure.in	Thu Jun 28 22:53:00 2001
++++ gnumeric-0.67/configure.in	Wed Jul  4 15:46:49 2001
+@@ -77,7 +77,7 @@
  dnl and why we have so many translations.
  dnl
- ALL_LINGUAS="ca cs da de en_AU en_CA en_GB el es es_DO es_GT es_HN es_MX es_PA es_PE es_SV et fi fr ga gl hr hu it ja ko nl no pl pt pt_BR ru sk sv tr uk zh_CN.GB2312 zh_TW.Big5"
+ ALL_LINGUAS="ca cs da de en_AU en_CA en_GB el es es_DO es_GT es_HN es_MX es_PA es_PE es_SV et fi fr ga gl hr hu it ja nl no pl pt pt_BR ru sk sv tr uk zh_CN.GB2312 zh_TW.Big5"
 -AM_GNOME_GETTEXT
 +AM_GNU_GETTEXT
  # AM_GNOME_GETTEXT above substs $DATADIRNAME
  # this is the directory where the *.{mo,gmo} files are installed
  gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
-diff -urN gnumeric-0.64.org/src/Makefile.in gnumeric-0.64/src/Makefile.in
---- gnumeric-0.64.org/src/Makefile.in	Mon Apr 23 11:00:05 2001
-+++ gnumeric-0.64/src/Makefile.in	Mon Apr 23 11:00:34 2001
-@@ -37,6 +37,7 @@
+diff -Nur gnumeric-0.67.orig/src/Makefile.in gnumeric-0.67/src/Makefile.in
+--- gnumeric-0.67.orig/src/Makefile.in	Fri Jun 29 00:23:30 2001
++++ gnumeric-0.67/src/Makefile.in	Wed Jul  4 15:46:22 2001
+@@ -27,6 +27,7 @@
  sbindir = @sbindir@
  libexecdir = @libexecdir@
  datadir = @datadir@
@@ -34,9 +36,9 @@ diff -urN gnumeric-0.64.org/src/Makefile.in gnumeric-0.64/src/Makefile.in
  sysconfdir = @sysconfdir@
  sharedstatedir = @sharedstatedir@
  localstatedir = @localstatedir@
-diff -urN gnumeric-0.64.org/src/dialogs/Makefile.am gnumeric-0.64/src/dialogs/Makefile.am
---- gnumeric-0.64.org/src/dialogs/Makefile.am	Mon Apr 23 11:00:06 2001
-+++ gnumeric-0.64/src/dialogs/Makefile.am	Mon Apr 23 11:08:25 2001
+diff -Nur gnumeric-0.67.orig/src/dialogs/Makefile.am gnumeric-0.67/src/dialogs/Makefile.am
+--- gnumeric-0.67.orig/src/dialogs/Makefile.am	Sun Jun 17 06:55:26 2001
++++ gnumeric-0.67/src/dialogs/Makefile.am	Wed Jul  4 15:46:22 2001
 @@ -4,10 +4,8 @@
  iconsdir = $(datadir)/pixmaps/gnumeric
  
@@ -48,9 +50,9 @@ diff -urN gnumeric-0.64.org/src/dialogs/Makefile.am gnumeric-0.64/src/dialogs/Ma
  libdialogs_a_SOURCES =	$(std_SOURCES)
  endif
  gnumeric_libdir = $(datadir)/gnumeric/$(gnumeric_version)
-diff -urN gnumeric-0.64.org/src/widgets/widget-editable-label.c gnumeric-0.64/src/widgets/widget-editable-label.c
---- gnumeric-0.64.org/src/widgets/widget-editable-label.c	Mon Apr 23 11:00:08 2001
-+++ gnumeric-0.64/src/widgets/widget-editable-label.c	Mon Apr 23 11:00:34 2001
+diff -Nur gnumeric-0.67.orig/src/widgets/widget-editable-label.c gnumeric-0.67/src/widgets/widget-editable-label.c
+--- gnumeric-0.67.orig/src/widgets/widget-editable-label.c	Tue Mar 13 02:00:52 2001
++++ gnumeric-0.67/src/widgets/widget-editable-label.c	Wed Jul  4 15:46:22 2001
 @@ -124,6 +124,7 @@
  {
  	gtk_widget_grab_focus (GTK_WIDGET (el));
