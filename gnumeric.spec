@@ -6,7 +6,7 @@ Copyright:   GPL
 Group:       Applications/Spreadsheets
 Source:      ftp://ftp.gnome.org/pub/GNOME/sources/%{name}-%{version}.tar.gz
 URL:         http://www.gnome.org/gnumeric
-Requires:    gtk+ = 1.1.12, glib = 1.1.12, gule = 1.3,
+Requires:    gtk+ = 1.1.12, glib = 1.1.12, guile = 1.3
 Requires:    gnome-libs = 0.99.2, ORBit = 0.3.91
 BuildRoot:   /tmp/%{name}-%{version}-root
 
@@ -19,8 +19,7 @@ GNOME based spreadsheet.
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure \
-	--prefix=/usr/X11R6 \
-	--without-static
+	--prefix=/usr/X11R6
 make
 
 %install
@@ -40,7 +39,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644, root, root, 755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755, root, root) /usr/X11R6/bin/*
-/usr/X11R6/lib/gnumeric
+%dir /usr/X11R6/lib/gnumeric
+%dir /usr/X11R6/lib/gnumeric/plugins
+%attr(755, root, root) /usr/X11R6/lib/gnumeric/plugins/lib*.so*
+/usr/X11R6/lib/gnumeric/plugins/lib*.la
 /usr/X11R6/share/apps/Applications/*
 /usr/X11R6/share/apps/Productivity/*
 /usr/X11R6/share/gnumeric
@@ -71,7 +73,6 @@ rm -rf $RPM_BUILD_ROOT
   [0.6-1]
 - more locales (cs, de, es_*, no*),
 - updated %files for 0.6,
-- added --without-static to configure parameters,
 - added LDFLAGS="-s" to ./configure enviroment.
 
 * Fri Oct  2 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
