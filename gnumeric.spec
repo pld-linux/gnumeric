@@ -1,10 +1,11 @@
 # _with_bonobo
-# _with_gb
+# _without_gb
+%include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
 Version:	0.70
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -14,15 +15,16 @@ Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
 Patch0:		%{name}-miscfix.patch
 Patch1:		%{name}-no_version.patch
+Patch2:		%{name}-am15.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	ORBit-devel
 BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?_with_bonobo:BuildRequires:	bonobo-devel => 1.0.3}
+%{!?_without_bonobo:BuildRequires:	bonobo-devel => 1.0.3}
 BuildRequires:	gal-devel >= 0.11.2
-%{?_with_gb:BuildRequires:	gb-devel >= 0.0.15}
+%{!?_with_gb:BuildRequires:	gb-devel >= 0.0.15}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel => 0.25
@@ -58,6 +60,7 @@ dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 rm missing acinclude.m4
@@ -70,9 +73,11 @@ GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
 %configure \
 	--disable-static \
 	--without-included-gettext \
-	%{!?_with_bonobo:--without-bonobo} \
-	%{!?_with_gb:--without-gb} \
-	--with-guile
+	--with%{?_without_bonobo:out}-bonobo \
+	--with%{!?_with_gb:out}-gb \
+	--with-bonobo \
+	--with-guile \
+	--with-python
 %{__make}
 
 %install
