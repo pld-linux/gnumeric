@@ -1,0 +1,17 @@
+diff -Nru gnumeric-0.70/configure.in gnumeric-0.70.new/configure.in
+--- gnumeric-0.70/configure.in	Mon Sep 10 02:28:32 2001
++++ gnumeric-0.70.new/configure.in	Mon Sep 10 02:21:41 2001
+@@ -141,8 +141,13 @@
+ 		PSICONV_LIBS=""
+ 		PSICONV_CFLAGS=""
+ 		with_psiconv=false
++	else
++		PSICONV_LIBS="$psiconv_libs -lpsiconv"
++		PSICONV_CFLAGS="$psiconv_cflags"
+ 	fi
+ 
++	AC_SUBST(PSICONV_LIBS)
++	AC_SUBST(PSICONV_CFLAGS)
+ 	AM_CONDITIONAL(WITH_PSICONV,$with_psiconv)
+ fi
+ 
