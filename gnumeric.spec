@@ -87,7 +87,7 @@ gettextize --copy --force
 intltoolize --copy --force
 aclocal -I macros
 autoconf
-automake -a -c
+automake -a -c -f
 GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
 %configure \
 	--disable-gtk-doc \
