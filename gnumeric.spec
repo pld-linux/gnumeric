@@ -24,6 +24,7 @@ BuildRequires:	gnome-print-devel => 0.16
 BuildRequires:	libxml-devel => 1.8.5
 BuildRequires:	bonobo-devel => 0.2
 BuildRequires:	gettext-devel
+BuildRequires:	docbook-dsssl => 1.52
 %requires_eq	guile
 BuildRoot:	/tmp/%{name}-%{version}-root-%(id -u -n)
 
