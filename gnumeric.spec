@@ -22,7 +22,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 %{?_with_bonobo:BuildRequires:	bonobo-devel => 1.0.3}
 BuildRequires:	docbook-style-dsssl => 1.52
-BuildRequires:	gal-devel >= 0.7
+BuildRequires:	gal-devel >= 0.8
 %{?_with_gb:BuildRequires:	gb-devel >= 0.0.15}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
