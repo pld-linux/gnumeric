@@ -6,8 +6,8 @@ Summary(es):	La hoja de calculo del GNOME
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Summary(pt_BR):	A planilha do GNOME
 Name:		gnumeric
-Version:	1.0.1
-Release:	2
+Version:	1.0.2
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
