@@ -1,7 +1,7 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.52
+Version:	0.54
 Release:	1
 License:	GPL
 Group:		X11/Applications
@@ -17,7 +17,7 @@ BuildRequires:	gtk+-devel >= 1.2.2
 BuildRequires:	xpm-devel
 BuildRequires:	ORBit-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
-BuildRequires:	libglade-devel >= 0.11
+BuildRequires:	libglade-devel >= 0.13
 BuildRequires:	gnome-print-devel => 0.16
 BuildRequires:	libxml-devel => 1.8.5
 BuildRequires:	bonobo-devel => 0.2
@@ -65,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-strip --strip-debug $RPM_BUILD_ROOT%{_libdir}/gnumeric/plugins/%{version}/lib*so.*.*
+strip --strip-debug $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/gnum_*so*
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
@@ -80,10 +80,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/gnumeric
-%dir %{_libdir}/gnumeric/plugins
-%dir %{_libdir}/gnumeric/plugins/%{version}
-%attr(755,root,root) %{_libdir}/gnumeric/plugins/%{version}/lib*.so*
-%attr(755,root,root) %{_libdir}/gnumeric/plugins/%{version}/lib*.la
+%dir %{_libdir}/gnumeric/%{version}
+%dir %{_libdir}/gnumeric/%{version}/plugins
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnum*.so*
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnum*.la
 
 %{_sysconfdir}/CORBA/servers/*
 
