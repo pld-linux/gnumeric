@@ -24,6 +24,7 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
+BuildRequires:	gal2-devel
 BuildRequires:	gettext-devel
 BuildRequires:	perl
 BuildRequires:	python-devel >= 2.2
