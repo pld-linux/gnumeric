@@ -6,7 +6,7 @@ Summary(es):	La hoja de calculo del GNOME
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Summary(pt_BR):	A planilha do GNOME
 Name:		gnumeric
-Version:	1.0.5
+Version:	1.0.6
 Release:	1
 Epoch:		1
 License:	GPL
@@ -17,7 +17,7 @@ Patch0:		%{name}-miscfix.patch
 Patch1:		%{name}-no_version.patch
 Patch2:		%{name}-am15.patch
 Patch3:		%{name}-gb.patch
-Patch4:		%{name}-no_doc.patch
+Patch4:		%{name}-empty_plugins.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 Requires:	gnome-print >= 0.34-3
