@@ -1,12 +1,11 @@
 #
-# Conditional build
+# Conditional build:
 %bcond_without	gda	# build without gda
 %bcond_without	gnome	# build without gnome
 %bcond_without	mono	# build without mono scripting engine
 %bcond_without	python	# build without python support
 #
 %include	/usr/lib/rpm/macros.perl
-#
 Summary:	The GNOME spreadsheet
 Summary(es):	La hoja de cálculo del GNOME
 Summary(pl):	Arkusz kalkulacyjny GNOME
@@ -81,8 +80,7 @@ possible with Excel in terms of usability.
 
 %description -l es
 Gnumeric es un programa de hoja de cálculo para GNOME. Este programa
-p
-rocura ser reemplazar los programas comerciales, así que ha gozado
+procura ser reemplazar los programas comerciales, así que ha gozado
 bastante esfuerzo. Si conoce Excel, debería estar preparado para usar
 Gnumeric. Intentamos clonar todas las buenas cualidades y seguir lo
 más compatible que fuera posible, en cuanto a la usabilidad.
@@ -135,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	docdir=/usr/share/gnome/help/gnumeric/C
+	docdir=/usr/share/gnome/help/gnumeric/C \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
