@@ -13,14 +13,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.1.17
-Release:	2
+Version:	1.1.18
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/gnome/sources/gnumeric/1.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	7a03f24e492479b90c50c71448cc83b7
+# Source0-md5:	b847d5ad0c932e3afdb48842efba508b
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	libtool
 BuildRequires:	autoconf
@@ -37,7 +37,7 @@ BuildRequires:	libgnome-devel >= 2.2.0
 BuildRequires:	libgnomeprint-devel >= 2.2.0
 BuildRequires:	libgnomeprintui-devel >= 2.2.0
 BuildRequires:	libgnomeui-devel >= 2.2.0
-BuildRequires:	libgsf-devel >= 1.8.0
+BuildRequires:	libgsf-devel >= 1.8.1
 BuildRequires:	libxml2-devel >= 2.4.12
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomecanvas-devel >= 2.2.0
@@ -147,6 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnumeric/%{version}*/plugins
 %dir %{_libdir}/gnumeric/%{version}*/plugins/*
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}*/plugins/*/*.so
+%{_libdir}/gnumeric/%{version}*/plugins/*/*.glade
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.xml
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.la
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.py
