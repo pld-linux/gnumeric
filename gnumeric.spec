@@ -1,14 +1,14 @@
-Summary:     The GNOME spreadsheet
-Name:        gnumeric
-Version:     0.6
-Release:     1
-Copyright:   GPL
-Group:       Applications/Spreadsheets
-Source:      ftp://ftp.gnome.org/pub/GNOME/sources/%{name}-%{version}.tar.gz
-URL:         http://www.gnome.org/gnumeric
-Requires:    gtk+ = 1.1.12, glib = 1.1.12, guile = 1.3
-Requires:    gnome-libs = 0.99.2, ORBit = 0.3.91
-BuildRoot:   /tmp/%{name}-%{version}-root
+Summary:	The GNOME spreadsheet
+Name:		gnumeric
+Version:	0.22
+Release:	1
+Copyright:	GPL
+Group:		Applications/Spreadsheets
+Source:		ftp://ftp.gnome.org/pub/GNOME/sources/%{name}-%{version}.tar.gz
+URL:		http://www.gnome.org/gnumeric
+Requires:	gtk+ = 1.2.1, glib = 1.2.1, guile = 1.3
+Requires:	gnome-libs = 1.0.5, ORBit = 0.4.2
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 GNOME based spreadsheet.
@@ -19,16 +19,14 @@ GNOME based spreadsheet.
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure \
-	--prefix=/usr/X11R6
+	--prefix=/usr/X11R6 \
+	--disable-static
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/X11R6/share/apps/Productivity
 
 make prefix=$RPM_BUILD_ROOT/usr/X11R6 install
-
-install gnumeric.desktop $RPM_BUILD_ROOT/usr/X11R6/share/apps/Productivity
 
 strip --strip-debug $RPM_BUILD_ROOT/usr/X11R6/lib/gnumeric/plugins/lib*so.*.*
 
@@ -43,8 +41,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/X11R6/lib/gnumeric/plugins
 %attr(755, root, root) /usr/X11R6/lib/gnumeric/plugins/lib*.so*
 /usr/X11R6/lib/gnumeric/plugins/lib*.la
-/usr/X11R6/share/apps/Applications/*
-/usr/X11R6/share/apps/Productivity/*
+/usr/X11R6/share/gnome/apps/Applications/*
+/usr/X11R6/share/gnome/help/gnumeric
 /usr/X11R6/share/gnumeric
 /usr/X11R6/share/mime-info/*
 /usr/X11R6/share/pixmaps/*
@@ -65,10 +63,15 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ja)    /usr/X11R6/share/locale/ja/LC_MESSAGES/gnumeric.mo
 %lang(ko)    /usr/X11R6/share/locale/ko/LC_MESSAGES/gnumeric.mo
 %lang(no)    /usr/X11R6/share/locale/no/LC_MESSAGES/gnumeric.mo
-%lang(no_NO) /usr/X11R6/share/locale/no_NO/LC_MESSAGES/gnumeric.mo
+%lang(pl)    /usr/X11R6/share/locale/pl/LC_MESSAGES/gnumeric.mo
 %lang(pt)    /usr/X11R6/share/locale/pt/LC_MESSAGES/gnumeric.mo
+%lang(ru)    /usr/X11R6/share/locale/ru/LC_MESSAGES/gnumeric.mo
 
 %changelog
+* Thu Apr  1 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.22-1]
+- more locales (pl, ru).
+
 * Tue Jan 05 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.6-1]
 - more locales (cs, de, es_*, no*),
