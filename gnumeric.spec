@@ -46,7 +46,7 @@ BuildRequires:	libgsf-gnome-devel >= 1.11.0
 %endif
 %if %{with gda}
 BuildRequires:	libgda-devel >= 1.0.1
-BuildRequires:	libgnomedb-devel >= 1.0.1
+BuildRequires:	libgnomedb-devel >= 1.2.1
 %endif
 BuildRequires:	libglade2-devel >= 1:2.4.0
 %{?with_gnome:BuildRequires:	libgnome-devel >= 2.6.0}
