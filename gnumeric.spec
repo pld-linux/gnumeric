@@ -10,7 +10,7 @@ Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я 
 Name:		gnumeric
 Version:	1.0.9
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -22,6 +22,7 @@ Patch2:		%{name}-gb.patch
 Patch3:		%{name}-ac25x.patch
 Patch4:		%{name}-am16.patch
 Patch5:		%{name}-psicov_hack.patch
+Patch6:		%{name}-omf.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 Requires:	gnome-print >= 0.34-3
@@ -94,6 +95,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 touch po/POTFILES
