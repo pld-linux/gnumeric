@@ -9,51 +9,31 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я 
 Name:		gnumeric
-Version:	1.0.9
-Release:	4
+Version:	1.1.11
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-miscfix.patch
-Patch1:		%{name}-no_version.patch
-Patch2:		%{name}-gb.patch
-Patch3:		%{name}-ac25x.patch
-Patch4:		%{name}-am16.patch
-Patch5:		%{name}-psicov_hack.patch
-Patch6:		%{name}-omf.patch
-Icon:		gnumeric.xpm
+Source0:	ftp://ftp.gnome.org/pub/gnome/sources/gnumeric/1.1/%{name}-%{version}.tar.bz2
+#Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
-Requires:	gnome-print >= 0.34-3
-Conflicts:	Guppi < 0.40.3
-BuildRequires:	ORBit-devel
 BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	bonobo-devel >= 1.0.9
 BuildRequires:	docbook-utils
 BuildRequires:	flex
-BuildRequires:	gal-devel >= 0.19
-%{?_with_gb:BuildRequires:	gb-devel >= 0.0.19}
-BuildRequires:	gdk-pixbuf-gnome-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-libs-devel >= 1.0.56
-BuildRequires:	gnome-print-devel >= 0.29
-BuildRequires:	gtk+-devel >= 1.2.7
-BuildRequires:	glib-devel >= 1.2.7
-BuildRequires:	libglade-gnome-devel >= 0.16
-BuildRequires:	libxml-devel >= 1.8.14
-BuildRequires:	libole2-devel >= 0.2.4
-#BuildRequires:	guile-devel >= 1.4
-BuildRequires:	libgda-devel >= 0.2.93
-#BuildRequires:	psiconv-devel
 BuildRequires:	perl
 BuildRequires:	python-devel >= 2.2
-BuildRequires:	oaf-devel >= 0.6.2
-#%requires_eq	guile
+BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	libgnome-devel >= 2.0.0
+BuildRequires:	libgnomeui-devel >= 2.0.0
 Requires:	python-modules
+Requires(post,postun): /sbin/ldconfig
+Requires(post):	GConf2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -89,26 +69,18 @@ Gnumeric - це програма електронних таблиць для GNOME.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
-touch po/POTFILES
-rm -f missing acinclude.m4
-%{__libtoolize}
-%{__gettextize}
-%{__aclocal} -I macros
-%{__autoheader}
-%{__autoconf}
-%{__automake}
-GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
+export LC_ALL=C
+#rm -f missing acinclude.m4
+#%{__libtoolize}
+#%{__gettextize}
+#%{__aclocal} -I macros
+#%{__autoheader}
+#%{__autoconf}
+#%{__automake}
+#GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
 %configure \
-	--disable-gtk-doc \
 	--disable-static \
 	--without-included-gettext \
 	--with-bonobo \
@@ -131,22 +103,46 @@ rm -rf $RPM_BUILD_ROOT
 
 %find_lang %{name} --with-gnome
 
+# .la files are use less in this case
+rm -r $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}*/plugins/*/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /usr/bin/scrollkeeper-update
+%post
+/usr/bin/scrollkeeper-update
+GCONF_CONFIG_SOURCE="`%{_bindir}/gconftool-2 --get-default-source`" \
+%{_bindir}/gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/*.schemas > /dev/null 
 %postun -p /usr/bin/scrollkeeper-update
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
-%attr(-,root,root) %{_libdir}/gnumeric
-%attr(755,root,root) %{_libdir}/gnumericConf.sh
-%{_datadir}/gnumeric
+%{_libdir}/bonobo/servers/*
+%dir %{_libdir}/gnumeric
+%dir %{_libdir}/gnumeric/%{version}*
+%dir %{_libdir}/gnumeric/%{version}*/plugins
+%dir %{_libdir}/gnumeric/%{version}*/plugins/*
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}*/plugins/*/*.so
+%{_libdir}/gnumeric/%{version}*/plugins/*/*.xml
+%{_libdir}/gnumeric/%{version}*/plugins/*/*.py
+%{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
+%dir %{_datadir}/gnumeric
+%dir %{_datadir}/gnumeric/%{version}*
+%{_datadir}/gnumeric/%{version}*/plot-types.xml
+%{_datadir}/gnumeric/%{version}*/glade
+%{_datadir}/gnumeric/%{version}*/gnome-2.0
+%{_datadir}/gnumeric/%{version}*/idl
+%{_datadir}/gnumeric/%{version}*/autoformat-templates
+%{_datadir}/gnumeric/%{version}*/templates
+%dir %{_datadir}/gnumeric/%{version}*/share
+%dir %{_datadir}/gnumeric/%{version}*/share/gnome
+%dir %{_datadir}/gnumeric/%{version}*/share/gnome/help
+# FIXME: this is for ?
 %{_datadir}/mc/*
 %{_datadir}/mime-info/*
-%{_datadir}/oaf/*
 %{_omf_dest_dir}/%{name}
 %{_pixmapsdir}/*
 %{_applnkdir}/Office/Spreadsheets/*
+%{_sysconfdir}/gconf/schemas/*
