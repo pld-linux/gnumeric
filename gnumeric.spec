@@ -5,7 +5,7 @@ Release:	1
 Copyright:	GPL
 Group:		Applications/Spreadsheets
 Source:		ftp://ftp.gnome.org/pub/GNOME/sources/%{name}-%{version}.tar.gz
-URL:		http://www.gnome.org/gnumeric
+URL:		http://www.gnome.org/gnumeric/
 Requires:	gtk+ = 1.2.1, glib = 1.2.1, guile = 1.3
 Requires:	gnome-libs = 1.0.5, ORBit = 0.4.2
 BuildRoot:	/tmp/%{name}-%{version}-root
