@@ -10,7 +10,7 @@ Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
 Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ
 Name:		gnumeric
 Version:	1.1.11
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -35,10 +35,6 @@ Requires:	python-modules
 Requires(post,postun): /sbin/ldconfig
 Requires(post):	GConf2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_prefix		/usr/X11R6
-%define		_sysconfdir	/etc/X11/GNOME
-%define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
 
 %description
 GNOME based spreadsheet. Gnumeric is a spreadsheet program for GNOME.
@@ -108,8 +104,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /usr/bin/scrollkeeper-update
-GCONF_CONFIG_SOURCE="`%{_bindir}/gconftool-2 --get-default-source`" \
-%{_bindir}/gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/*.schemas > /dev/null
+%gconf_schema_install
+
 %postun -p /usr/bin/scrollkeeper-update
 
 %files -f %{name}.lang
