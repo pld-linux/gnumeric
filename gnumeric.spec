@@ -32,6 +32,7 @@ BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	intltool >= 0.28
 BuildRequires:	libart_lgpl-devel >= 2.3.12
@@ -106,7 +107,7 @@ mv po/{no,nb}.po
 glib-gettextize --copy --force
 intltoolize --copy --force
 %{__libtoolize}
-%{__aclocal} -I %{_aclocaldir}/gnome2-macros
+%{__aclocal}
 %{__autoheader}
 %{__autoconf}
 %{__automake}
