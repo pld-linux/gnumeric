@@ -31,6 +31,7 @@ BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.0.0
 BuildRequires:	libgnome-devel >= 2.0.0
 BuildRequires:	libgnomeui-devel >= 2.0.0
+BuildRequires:	libgsf-devel
 Requires:	python-modules
 Requires(post,postun): /sbin/ldconfig
 Requires(post):	GConf2
