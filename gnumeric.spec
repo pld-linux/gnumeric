@@ -1,28 +1,31 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.56
+Version:	0.57
 Release:	1
+Epoch:		1
 License:	GPL
 Group:		X11/Applications
+Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
-Patch0:		gnumeric-miscfix.patch
+Patch0:		%{name}-miscfix.patch
+Patch1:		%{name}-no_version.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
-BuildRequires:	guile-devel
-BuildRequires:	gtk+-devel >= 1.2.2
-BuildRequires:	xpm-devel
 BuildRequires:	ORBit-devel
-BuildRequires:	gnome-libs-devel >= 1.0.56
-BuildRequires:	libglade-devel >= 0.13
-BuildRequires:	gnome-print-devel => 0.16
-BuildRequires:	libxml-devel => 1.8.5
 BuildRequires:	bonobo-devel => 0.2
-BuildRequires:	gettext-devel
 BuildRequires:	docbook-dsssl => 1.52
-BuildRequires:	libole2-devel
+BuildRequires:	gal-devel
+BuildRequires:	gettext-devel
+BuildRequires:	gnome-libs-devel >= 1.0.56
+BuildRequires:	gnome-print-devel => 0.24
+BuildRequires:	gtk+-devel >= 1.2.2
+BuildRequires:	guile-devel
+BuildRequires:	libglade-devel >= 0.14
+BuildRequires:	libxml-devel => 1.8.5
+BuildRequires:	libole2-devel => 0.1.4
 %requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -45,12 +48,13 @@ dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 %prep
 %setup  -q
 %patch0 -p1
+%patch1 -p1
 
 %build
-LDFLAGS="-s"; export LDFLAGS
 gettextize --copy --force
 automake
 autoconf
+GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH 
 %configure \
 	--disable-static \
 	--without-included-gettext \
@@ -62,12 +66,9 @@ autoconf
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	Applicationsdir=%{_applnkdir}/Office/Spreadsheets \
-	install
-
-strip --strip-debug $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/gnum_*so*
+	Applicationsdir=%{_applnkdir}/Office/Spreadsheets
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
@@ -78,20 +79,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc {AUTHORS,ChangeLog,NEWS,README,TODO}.gz
-
+%doc *.gz
+%{_sysconfdir}/CORBA/servers/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/gnumeric
-%dir %{_libdir}/gnumeric/%{version}
-%dir %{_libdir}/gnumeric/%{version}/plugins
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnum*.so*
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnum*.la
-
-%{_sysconfdir}/CORBA/servers/*
+%dir %{_libdir}/gnumeric/plugins
+%{_libdir}/gnumericConf.sh
+%attr(755,root,root) %{_libdir}/gnumeric/plugins/gnum*.so*
+%{_datadir}/gnome/ui/*
 
 %{_applnkdir}/Office/Spreadsheets/*
 %{_datadir}/gnumeric
 %{_datadir}/mime-info/*
 %{_datadir}/pixmaps/*
 %{_datadir}/mc/*
-%{_datadir}/idl/*
+%{_datadir}/oaf/*
