@@ -1,12 +1,12 @@
-#
-# Conditional build:
-# _without_bonobo	- build without bonobo
-# _without_python	- build without python support
-# _without_gda		- build without gda
-#
+
+%bcond_without bonobo	# build without bonobo
+%bcond_without python	# build without python support
+%bcond_without gb	# build without gb
+%bcond_without gda	# build without gda
+
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
-Summary(es):	La hoja de calculo del GNOME
+Summary(es):	La hoja de c·lculo del GNOME
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Summary(pt_BR):	A planilha do GNOME
 Summary(ru):	¸Ã≈À‘“œŒŒŸ≈ ‘¡¬Ã…√Ÿ ƒÃ— GNOME
@@ -33,12 +33,12 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 2.0.0
 BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	libart_lgpl-devel >= 2.3.12
-%if %{!?_without_bonobo:1}0
+%if %{with bonobo}
 BuildRequires:	libbonobo-devel >= 2.0.0
 BuildRequires:	libbonoboui-devel >= 2.3.3-2
 BuildRequires:	libgsf-gnome-devel >= 1.8.1-2
 %endif
-%if %{!?_without_gda:1}0
+%if %{with gda}
 BuildRequires:	libgda-devel >= 1.0.0
 %endif
 BuildRequires:	libglade2-devel >= 2.0.1
@@ -51,13 +51,13 @@ BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
 BuildRequires:	libgsf-devel >= 1.8.1-2
 BuildRequires:	libxml2-devel >= 2.4.12
 BuildRequires:	perl
-%if %{!?_without_python:1}0
+%if %{with python}
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 1.99.16
 %endif
 Requires(post):	GConf2
 Requires(post):	scrollkeeper
-%if %{!?_without_python:1}0
+%if %{with python}
 Requires:	python-modules
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,7 +71,11 @@ tried to clone all of the good features and stay as compatible as
 possible with Excel in terms of usability.
 
 %description -l es
-La hoja de calculo del GNOME.
+Gnumeric es un programa de hoja de c·lculo para GNOME. Este programa
+procura ser reemplazar los programas comerciales, asÌ que ha gozado
+bastante esfuerzo. Si conoce Excel, deberÌa estar preparado para usar
+Gnumeric. Intentamos clonar todas las buenas cualidades y seguir lo
+m·s compatible que fuera posible, en cuanto a la usabilidad.
 
 %description -l pl
 Bazuj±cy na GNOME arkusz kalkulacyjny. Je∂li znasz arkusz Excel to
@@ -96,11 +100,11 @@ Gnumeric - √≈ –“œ«“¡Õ¡ ≈Ã≈À‘“œŒŒ…» ‘¡¬Ã…√ÿ ƒÃ— GNOME.
 %configure \
 	--disable-static \
 	--disable-schemas-install \
-	--with%{?_without_bonobo:out}-bonobo \
-	--with%{?!_with_gb:out}-gb \
-	--with%{?_without_python:out}-python \
+	--with%{?!with_bonobo:out}-bonobo \
+	--with%{?!with_gb:out}-gb \
+	--with%{?!with_python:out}-python \
 	--without-guile \
-	--with%{?_without_gda:out}-gda
+	--with%{?!with_gda:out}-gda
 
 %{__make}
 
@@ -109,7 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1	
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 %find_lang %{name} --with-gnome
 
@@ -129,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/*
 
-%if %{?!_without_bonobo:1}0
+%if %{with_bonobo}
 %attr(755,root,root) %{_libdir}/gnumeric-component
 %{_libdir}/bonobo/servers/*
 %endif
