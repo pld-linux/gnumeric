@@ -2,14 +2,13 @@ Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
 Version:	0.54
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
-Patch0:		gnumeric-applnkdir.patch
-Patch1:		gnumeric-miscfix.patch
+Patch0:		gnumeric-miscfix.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	guile-devel
@@ -45,7 +44,6 @@ dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 %prep
 %setup  -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
@@ -63,7 +61,10 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install DESTDIR=$RPM_BUILD_ROOT
+make \
+	DESTDIR=$RPM_BUILD_ROOT \
+	Applicationsdir=%{_applnkdir}/Office/Spreadsheets \
+	install
 
 strip --strip-debug $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/gnum_*so*
 
@@ -87,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_sysconfdir}/CORBA/servers/*
 
-%{_applnkdir}/Applications/*
+%{_applnkdir}/Office/Spreadsheets/*
 %{_datadir}/gnumeric
 %{_datadir}/mime-info/*
 %{_datadir}/pixmaps/*
