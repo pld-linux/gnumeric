@@ -3,8 +3,8 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.64
-Release:	3
+Version:	0.67
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -20,7 +20,7 @@ BuildRequires:	ORBit-devel
 BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?_with_bonobo:BuildRequires:	bonobo-devel => 0.2}
+%{?_with_bonobo:BuildRequires:	bonobo-devel => 1.0.3}
 BuildRequires:	docbook-style-dsssl => 1.52
 BuildRequires:	gal-devel >= 0.7
 %{?_with_gb:BuildRequires:	gb-devel >= 0.0.15}
@@ -93,11 +93,13 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
-%{_sysconfdir}/CORBA/servers/*
+# Two lines below are commented out only for 0.67.
+# Please check with next version if they are back.
+#%{_sysconfdir}/CORBA/servers/*
 %attr(755,root,root) %{_bindir}/*
 %attr(-,root,root) %{_libdir}/gnumeric
 %attr(755,root,root) %{_libdir}/gnumericConf.sh
-%{_datadir}/gnome/ui/*
+#%{_datadir}/gnome/ui/*
 
 %{_applnkdir}/Office/Spreadsheets/*
 %{_datadir}/gnumeric
