@@ -1,8 +1,8 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.54
-Release:	2
+Version:	0.56
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
@@ -22,6 +22,7 @@ BuildRequires:	libxml-devel => 1.8.5
 BuildRequires:	bonobo-devel => 0.2
 BuildRequires:	gettext-devel
 BuildRequires:	docbook-dsssl => 1.52
+BuildRequires:	libole2-devel
 %requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,7 +55,7 @@ autoconf
 	--disable-static \
 	--without-included-gettext \
 	--with-guile \
-	--with-bonobo
+	--without-bonobo
 #	--with-gb
 %{__make}
 
