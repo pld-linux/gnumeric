@@ -10,7 +10,7 @@ Patch0:		gnumeric-applnkdir.patch
 Patch1:		gnumeric-miscfix.patch
 Patch2:		gnumeric-DESTDIR.patch
 Patch3:		gnumeric-bonobo_fix.patch
-Icon:		gnumeric-logo.xpm
+Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	guile-devel
 BuildRequires:	gtk+-devel >= 1.2.0
