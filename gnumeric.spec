@@ -14,7 +14,7 @@ Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
 Version:	1.2.13
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
