@@ -1,0 +1,10 @@
+--- gnumeric-1.2.13/gnumeric.desktop.in.wiget	2004-10-01 13:28:53.160373896 +0200
++++ gnumeric-1.2.13/gnumeric.desktop.in	2004-10-01 13:33:38.915317190 +0200
+@@ -9,6 +9,7 @@
+ Type=Application
+ Categories=Application;Office;Spreadsheet;
+ StartupNotify=true
++MimeType=application/x-gnumeric;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/xls;application/x-xls;application/x-applix-spreadsheet;application/vnd.lotus-1-2-3;text/x-comma-separated-values;text/csv;application/csv;application/tab-separated-values;application/x-oleo;appliation/x-xbase;application/vnd.sun.xml.calc;application/vnd.sun.xml.calc.template;application/x-quattro-pro;application/x-sc;application/x-sylk;application/x-planperfect;application/x-mps;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=gnumeric
+ X-GNOME-Bugzilla-Component=
