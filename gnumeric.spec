@@ -7,13 +7,13 @@ Group:		X11/Applications/Spreadsheets
 Group(pl):	X11/Aplikacje/Arkusze kalkulacyjne
 Source:		ftp://ftp.gnome.org/pub/GNOME/sources/%{name}-%{version}.tar.gz
 URL:		http://www.gnome.org/gnumeric/
-BuildPrereq:	guile-devel
-BuildPrereq:	gtk+-devel >= 1.2.0
-BuildPrereq:	glib-devel >= 1.2.0
-BuildPrereq:	XFree86-devel
-BuildPrereq:	xpm-devel
-BuildPrereq:	ORBit-devel
-BuildPrereq:	gnome-libs-devel
+BuildRequires:	guile-devel
+BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	glib-devel >= 1.2.0
+BuildRequires:	XFree86-devel
+BuildRequires:	xpm-devel
+BuildRequires:	ORBit-devel
+BuildRequires:	gnome-libs-devel
 Requires:	gtk+ >= 1.2.0
 Requires:	glib >= 1.2.0
 %requires_eq	guile
