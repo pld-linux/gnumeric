@@ -24,3 +24,16 @@ diff -Nru gnumeric-0.60/src/dialogs/Makefile.am gnumeric-0.60.new/src/dialogs/Ma
  
  INCLUDES = 								\
  	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 			\
+--- gnumeric-0.71/src/dialogs/Makefile.am.orig	Tue Oct  9 02:51:39 2001
++++ gnumeric-0.71/src/dialogs/Makefile.am	Tue Oct  9 02:55:35 2001
+@@ -4,10 +4,8 @@
+ iconsdir = $(datadir)/pixmaps/gnumeric
+ 
+ if BONOBO
+-gnumeric_version="$(VERSION)-bonobo"
+ libdialogs_a_SOURCES =	$(base_files) dialog-graph-guru.c
+ else
+-gnumeric_version="$(VERSION)"
+ libdialogs_a_SOURCES =	$(base_files)
+ endif
+ gnumeric_libdir = $(datadir)/gnumeric
