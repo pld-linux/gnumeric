@@ -13,14 +13,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.1.20
+Version:	1.2.0
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	ftp://ftp.gnome.org/pub/gnome/sources/gnumeric/1.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	665cc405f0aaec6a36cca18189b8ff2c
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.2/%{name}-%{version}.tar.bz2
+# Source0-md5:	21f565b128b22246a7c2a51267e575df
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	libtool
 BuildRequires:	autoconf
@@ -39,7 +39,7 @@ BuildRequires:	libbonoboui-devel >= 2.3.3-2
 BuildRequires:	libgsf-gnome-devel >= 1.8.1-2
 %endif
 %if %{!?_without_gda:1}0
-BuildRequires:	libgda-devel
+BuildRequires:	libgda-devel >= 1.0.0
 %endif
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnome-devel >= 2.2.0
@@ -92,22 +92,15 @@ Gnumeric - це програма електронних таблиць для GNOME.
 %setup -q
 
 %build
+#do we need it?
 export LC_ALL=C
-#rm -f missing acinclude.m4
-#%%{__libtoolize}
-#%%{__gettextize}
-#%%{__aclocal}
-#%%{__autoheader}
-#%%{__autoconf}
-#%%{__automake}
-#GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
+###############
 %configure \
 	--disable-static \
-	--without-included-gettext \
+	--disable-schemas-install \
 	--with%{?_without_bonobo:out}-bonobo \
 	--with%{?!_with_gb:out}-gb \
 	--with%{?_without_python:out}-python \
-	--without-evolution \
 	--without-guile \
 	--with%{?_without_gda:out}-gda
 
@@ -118,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	omf_dest_dir=%{_omf_dest_dir}/%{name}
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1	
 
 %find_lang %{name} --with-gnome
 
@@ -166,5 +159,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnumeric/%{version}*/idl
 %{_datadir}/gnumeric/%{version}*/autoformat-templates
 %{_datadir}/gnumeric/%{version}*/templates
-%dir %{_datadir}/gnumeric/%{version}*/gnome
-%dir %{_datadir}/gnumeric/%{version}*/gnome/help
