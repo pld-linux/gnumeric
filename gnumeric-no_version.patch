@@ -1,0 +1,26 @@
+diff -Nru gnumeric-0.57/configure.in gnumeric-0.57.new/configure.in
+--- gnumeric-0.57/configure.in	Tue Oct 10 04:55:13 2000
++++ gnumeric-0.57.new/configure.in	Thu Oct 26 12:50:34 2000
+@@ -241,8 +241,8 @@
+ gnumeric_prefix="${prefix}"
+ gnumeric_exec_prefix="${exec_prefix}"
+ gnumeric_version="${VERSION}${bonobo_suffix}"
+-gnumeric_datadir="${datadir}/gnumeric/${gnumeric_version}/"
+-gnumeric_libdir="${libdir}/gnumeric/${gnumeric_version}/"
++gnumeric_datadir="${datadir}/gnumeric/"
++gnumeric_libdir="${libdir}/gnumeric/"
+ gnumeric_plugindir="${gnumeric_libdir}plugins/"
+ gnumeric_gladedir="${gnumeric_datadir}glade/"
+ gnumeric_autoformatdir="${gnumeric_datadir}autoformat-templates/"
+diff -Nru gnumeric-0.57/src/dialogs/Makefile.am gnumeric-0.57.new/src/dialogs/Makefile.am
+--- gnumeric-0.57/src/dialogs/Makefile.am	Tue Oct 10 05:45:58 2000
++++ gnumeric-0.57.new/src/dialogs/Makefile.am	Tue Oct 31 09:03:35 2000
+@@ -10,7 +10,7 @@
+ gnumeric_version="$(VERSION)"
+ libdialogs_a_SOURCES =	$(std_SOURCES)
+ endif
+-gnumeric_libdir = $(datadir)/gnumeric/$(gnumeric_version)
++gnumeric_libdir = $(datadir)/gnumeric
+ 
+ INCLUDES = 								\
+ 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 			\
