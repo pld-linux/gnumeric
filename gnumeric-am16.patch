@@ -1,0 +1,144 @@
+--- gnumeric-1.0.9/doc/sv/Makefile.am~	Thu Sep 19 06:51:39 2002
++++ gnumeric-1.0.9/doc/sv/Makefile.am	Thu Sep 19 06:51:39 2002
+@@ -5,6 +5,7 @@
+ 
+ dist-hook : app-dist-hook
+ 
++EXTRA_DIST = topic.dat
++
+ include $(srcdir)/../gnumeric-doc.make
+ 
+-EXTRA_DIST = topic.dat
+--- gnumeric-1.0.9/doc/sk/Makefile.am~	Thu Sep 19 06:52:48 2002
++++ gnumeric-1.0.9/doc/sk/Makefile.am	Thu Sep 19 06:52:48 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/ru/Makefile.am~	Thu Sep 19 06:53:39 2002
++++ gnumeric-1.0.9/doc/ru/Makefile.am	Thu Sep 19 06:53:39 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/pt/Makefile.am~	Thu Sep 19 06:54:20 2002
++++ gnumeric-1.0.9/doc/pt/Makefile.am	Thu Sep 19 06:54:20 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/pl/Makefile.am~	Thu Sep 19 06:54:48 2002
++++ gnumeric-1.0.9/doc/pl/Makefile.am	Thu Sep 19 06:54:48 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/no/Makefile.am~	Thu Sep 19 06:55:15 2002
++++ gnumeric-1.0.9/doc/no/Makefile.am	Thu Sep 19 06:55:15 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/nl/Makefile.am~	Thu Sep 19 06:55:42 2002
++++ gnumeric-1.0.9/doc/nl/Makefile.am	Thu Sep 19 06:55:42 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/ja/Makefile.am~	Thu Sep 19 06:56:21 2002
++++ gnumeric-1.0.9/doc/ja/Makefile.am	Thu Sep 19 06:56:21 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/hu/Makefile.am~	Thu Sep 19 06:56:48 2002
++++ gnumeric-1.0.9/doc/hu/Makefile.am	Thu Sep 19 06:56:48 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/es/Makefile.am~	Thu Sep 19 06:57:17 2002
++++ gnumeric-1.0.9/doc/es/Makefile.am	Thu Sep 19 06:57:17 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/de/Makefile.am~	Thu Sep 19 06:57:42 2002
++++ gnumeric-1.0.9/doc/de/Makefile.am	Thu Sep 19 06:57:42 2002
+@@ -5,6 +5,6 @@
+ 
+ dist-hook : app-dist-hook
+ 
+-include $(srcdir)/../gnumeric-doc.make
+-
+ EXTRA_DIST = topic.dat
++
++include $(srcdir)/../gnumeric-doc.make
+--- gnumeric-1.0.9/doc/gnumeric-doc.make~	Thu Sep 19 07:03:55 2002
++++ gnumeric-1.0.9/doc/gnumeric-doc.make	Thu Sep 19 07:03:55 2002
+@@ -7,10 +7,6 @@
+ 
+ docname = gnumeric
+ gnumeric_docdir  = $(top_srcdir)/doc
+-sgml_ents += functions.sgml
+-
+-gnumeric_helpdir = $(datadir)/gnome/help/gnumeric/$(lang)
+-gnumeric_help_DATA = topic.dat
+ 
+ # include generated files to simplify installation
+ EXTRA_DIST +=					\
+--- gnumeric-1.0.9/doc/C/Makefile.am~	Fri Sep 20 05:31:36 2002
++++ gnumeric-1.0.9/doc/C/Makefile.am	Fri Sep 20 05:31:36 2002
+@@ -286,7 +286,6 @@
+ figures/zoom-toolbar.png	\
+ figures/zoom.png
+ 
+-docname = gnumeric
+ lang = C
+ omffile = gnumeric-C.omf
+ sgml_ents = 					\
