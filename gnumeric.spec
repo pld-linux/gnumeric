@@ -3,7 +3,8 @@ Name:		gnumeric
 Version:	0.23
 Release:	2
 Copyright:	GPL
-Group:		Applications/Spreadsheets
+Group:		X11/Applications/Spreadsheets
+Group(pl):	X11/Aplikacje/Arkusze kalkulacyjne
 Source:		ftp://ftp.gnome.org/pub/GNOME/sources/%{name}-%{version}.tar.gz
 URL:		http://www.gnome.org/gnumeric/
 BuildPrereq:	guile-devel
@@ -26,7 +27,7 @@ GNOME based spreadsheet.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr/X11R6 \
 	--disable-static
 make
