@@ -1,0 +1,35 @@
+- added using CVS keywords in %changelog (for automating them).
+
+* Fri Apr 23 1999 Artur Frysiak <wiget@pld.org.pl>
+  [0.23-2]
+- replacement in %files
+- gzipped %%doc
+- compiled on rpm 3
+
+* Thu Apr  1 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.22-1]
+- more locales (pl, ru).
+
+* Tue Jan 05 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.6-1]
+- more locales (cs, de, es_*, no*),
+- updated %files for 0.6,
+- added LDFLAGS="-s" to ./configure enviroment.
+
+* Fri Oct  2 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.3-2]
+- added -q %setup parameter,
+- changed Buildroot to /tmp/%%{name}-%%{version}-root,
+- added using %%{name} and %%{version} in Source,
+- added using $RPM_OPT_FLAGS during compile,
+- removed COPYING from %doc,
+- added stripping plugins and binaries,
+- added %lang macros for /usr/X11R6/share/locale/*/LC_MESSAGES/gnumeric.mo
+  files,
+- added full %attr description in %files.
+
+* Thu Sep 24 1998 Michael Fulbright <msf@redhat.com>
+- Version 0.3
+
+* Thu Sep 24 1998 Michael Fulbright <msf@redhat.com>
+- Version 0.2
