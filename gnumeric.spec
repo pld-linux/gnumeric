@@ -4,7 +4,7 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.76
+Version:	1.0.1
 Release:	1
 Epoch:		1
 License:	GPL
@@ -16,8 +16,7 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version
 Patch0:		%{name}-miscfix.patch
 Patch1:		%{name}-no_version.patch
 Patch2:		%{name}-am15.patch
-Patch3:		%{name}-xml-i18n.patch
-Patch4:		%{name}-bonobo.patch
+Patch3:		%{name}-gb.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	ORBit-devel
@@ -25,8 +24,8 @@ BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{!?_without_bonobo:BuildRequires:	bonobo-devel >= 1.0.9}
-BuildRequires:	gal-devel >= 0.14
-%{!?_with_gb:BuildRequires:	gb-devel >= 0.0.19}
+BuildRequires:	gal-devel >= 0.16
+%{!?_without_gb:BuildRequires:	gb-devel >= 0.0.19}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel >= 0.29
@@ -35,16 +34,17 @@ BuildRequires:	glib-devel >= 1.2.7
 BuildRequires:	libglade-devel >= 0.16
 BuildRequires:	libxml-devel >= 1.8.14
 BuildRequires:	libole2-devel >= 0.2.4
-#BuildRequires:	guile-devel >= 1.5
-#BuildRequires:	libgda-devel >= 0.2.11
+#BuildRequires:	guile-devel >= 1.4
+BuildRequires:	libgda-devel >= 0.2.93
 #BuildRequires:	psiconv-devel
 BuildRequires:	perl
 BuildRequires:	python-devel >= 2.1
 BuildRequires:	bison
 BuildRequires:	flex
-BuildRequires:	xml-i18n-tools >= 0.9-3
+BuildRequires:	intltool
 BuildRequires:	oaf-devel >= 0.6.2
-#%#requires_eq	guile
+BuildRequires:	docbook-utils
+#%requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -69,24 +69,25 @@ dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 rm -f missing acinclude.m4
 libtoolize --copy --force
 gettextize --copy --force
-xml-i18n-toolize --force
+intltoolize --copy --force
 aclocal -I macros
 autoconf
 automake -a -c
 GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH 
 %configure \
+	--disable-gtk-doc \
 	--disable-static \
 	--without-included-gettext \
 	--with%{?_without_bonobo:out}-bonobo \
-	--with%{!?_with_gb:out}-gb \
-	--with-guile \
-	--with-python
+	--with%{?_without_gb:out}-gb \
+	--with-python \
+	--without-evolution \
+	--with-guile
 %{__make}
 
 %install
@@ -106,17 +107,12 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
-# Two lines below are commented out only for 0.67.
-# Please check with next version if they are back.
-#%{_sysconfdir}/CORBA/servers/*
 %attr(755,root,root) %{_bindir}/*
 %attr(-,root,root) %{_libdir}/gnumeric
 %attr(755,root,root) %{_libdir}/gnumericConf.sh
-#%{_datadir}/gnome/ui/*
-
-%{_applnkdir}/Office/Spreadsheets/*
 %{_datadir}/gnumeric
-%{_datadir}/mime-info/*
-%{_pixmapsdir}/*
 %{_datadir}/mc/*
+%{_datadir}/mime-info/*
 %{_datadir}/oaf/*
+%{_pixmapsdir}/*
+%{_applnkdir}/Office/Spreadsheets/*
