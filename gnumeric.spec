@@ -13,14 +13,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.3.90
+Version:	1.3.91
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	1fb7264fee91e440c4e13c1e0ce0c9ea
+# Source0-md5:	9f5928c0aebd041b7b4de8098188f48a
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.4.2
@@ -54,6 +54,7 @@ BuildRequires:	libgsf-devel >= 1.10.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
+BuildRequires:	pango-devel >= 1:1.6.0
 BuildRequires:	perl-base
 BuildRequires:	psiconv-devel >= 0.9.3
 %if %{with python}
