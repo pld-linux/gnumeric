@@ -4,7 +4,7 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.72
+Version:	0.74
 Release:	1
 Epoch:		1
 License:	GPL
@@ -73,6 +73,7 @@ dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 rm -f missing acinclude.m4
 libtoolize --copy --force
 gettextize --copy --force
+xml-i18n-toolize --force
 aclocal -I macros
 autoconf
 automake -a -c
@@ -82,7 +83,6 @@ GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
 	--without-included-gettext \
 	--with%{?_without_bonobo:out}-bonobo \
 	--with%{!?_with_gb:out}-gb \
-	--with-bonobo \
 	--with-guile \
 	--with-python
 %{__make}
