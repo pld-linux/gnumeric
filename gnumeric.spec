@@ -9,14 +9,13 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.1.11
+Version:	1.1.16
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/gnome/sources/gnumeric/1.1/%{name}-%{version}.tar.bz2
-#Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	libtool
 BuildRequires:	autoconf
@@ -24,15 +23,15 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
-BuildRequires:	gal2-devel
+BuildRequires:	gal2-devel >= 1.99.1
 BuildRequires:	gettext-devel
 BuildRequires:	perl
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.0.0
-BuildRequires:	libgnome-devel >= 2.0.0
-BuildRequires:	libgnomeui-devel >= 2.0.0
-BuildRequires:	libgsf-devel
+BuildRequires:	libgnome-devel >= 2.2.0
+BuildRequires:	libgnomeui-devel >= 2.2.0
+BuildRequires:	libgsf-devel >= 1.7.2
 Requires:	python-modules
 Requires(post,postun): /sbin/ldconfig
 Requires(post):	GConf2
@@ -73,7 +72,7 @@ export LC_ALL=C
 #rm -f missing acinclude.m4
 #%{__libtoolize}
 #%{__gettextize}
-#%{__aclocal} -I macros
+#%{__aclocal}
 #%{__autoheader}
 #%{__autoconf}
 #%{__automake}
@@ -96,7 +95,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	Applicationsdir=%{_applnkdir}/Office/Spreadsheets \
 	omf_dest_dir=%{_omf_dest_dir}/%{name}
 
 %find_lang %{name} --with-gnome
@@ -113,7 +111,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
+%{_sysconfdir}/gconf/schemas/*
+
 %attr(755,root,root) %{_bindir}/*
+
+%attr(755,root,root) %{_libdir}/gnumeric-component
 %{_libdir}/bonobo/servers/*
 %dir %{_libdir}/gnumeric
 %dir %{_libdir}/gnumeric/%{version}*
@@ -124,6 +126,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.la
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.py
 %{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
+
+%{_datadir}/applications/*.desktop
+%{_datadir}/mime-info/*
+%{_datadir}/pixmaps/*.???
+%{_datadir}/pixmaps/gnumeric/*
+%{_omf_dest_dir}/%{name}
+
 %dir %{_datadir}/gnumeric
 %dir %{_datadir}/gnumeric/%{version}*
 %{_datadir}/gnumeric/%{version}*/plot-types.xml
@@ -135,10 +144,3 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnumeric/%{version}*/share
 %dir %{_datadir}/gnumeric/%{version}*/share/gnome
 %dir %{_datadir}/gnumeric/%{version}*/share/gnome/help
-# FIXME: this is for ?
-%{_datadir}/mc/*
-%{_datadir}/mime-info/*
-%{_omf_dest_dir}/%{name}
-%{_pixmapsdir}/*
-%{_applnkdir}/Office/Spreadsheets/*
-%{_sysconfdir}/gconf/schemas/*
