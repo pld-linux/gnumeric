@@ -4,8 +4,8 @@ Name:		gnumeric
 Version:	0.52
 Release:	1
 License:	GPL
-Group:		X11/Applications/Spreadsheets
-Group(pl):	X11/Aplikacje/Arkusze kalkulacyjne
+Group:		X11/Applications
+Group(pl):	X11/Aplikacje
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
 Patch0:		gnumeric-applnkdir.patch
@@ -30,17 +30,17 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	/etc/X11/GNOME
 
 %description
-GNOME based spreadsheet. Gnumeric is a spreadsheet program for GNOME. This
-program is intended to be a replacement for a commercial spreadsheet, so
-quite a bit of work has gone into the program. If you are familiar with
-Excel, you should be ready to use Gnumeric. We have tried to clone all of
-the good features and stay as compatible as possible with Excel in terms of
-usability.
+GNOME based spreadsheet. Gnumeric is a spreadsheet program for GNOME.
+This program is intended to be a replacement for a commercial
+spreadsheet, so quite a bit of work has gone into the program. If you
+are familiar with Excel, you should be ready to use Gnumeric. We have
+tried to clone all of the good features and stay as compatible as
+possible with Excel in terms of usability.
 
 %description -l pl
-Bazuj±cy na GNOME arkusz kalkulacyjny. Je¶li znasz arkusz Excel to jeste¶
-gotów na u¿ywanie Gnumerica. Starali¶my siê sklonowaæ wszystkie dobre cechy
-i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
+Bazuj±cy na GNOME arkusz kalkulacyjny. Je¶li znasz arkusz Excel to
+jeste¶ gotów na u¿ywanie Gnumerica. Starali¶my siê sklonowaæ wszystkie
+dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 
 %prep
 %setup  -q
