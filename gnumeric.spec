@@ -5,7 +5,7 @@ Release:	1
 Copyright:	GPL
 Group:		X11/Applications/Spreadsheets
 Group(pl):	X11/Aplikacje/Arkusze kalkulacyjne
-Source:		ftp://ftp.gnome.org/pub/GNOME/sources/gnumeric/%{name}-%{version}.tar.gz
+Source:		ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
 Patch0:		gnumeric-applnkdir.patch
 Patch1:		gnumeric-miscfix.patch
 Patch2:		gnumeric-DESTDIR.patch
