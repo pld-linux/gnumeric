@@ -1,4 +1,6 @@
-# _without_gb
+# _without_bonobo
+# _without_python
+# _without_gda
 
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
@@ -9,7 +11,7 @@ Summary(ru):	üÌÅËÔÒÏÎÎÙÅ ÔÁÂÌÉÃÙ ÄÌÑ GNOME
 Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
 Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ
 Name:		gnumeric
-Version:	1.1.16
+Version:	1.1.17
 Release:	1
 Epoch:		1
 License:	GPL
@@ -23,16 +25,35 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
-BuildRequires:	gal-devel >= 1.99.1
+BuildRequires:	gal-devel >= 1.99.4
 BuildRequires:	gettext-devel
 BuildRequires:	perl
-BuildRequires:	python-devel >= 2.2
 BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	glib2-devel >= 2.0.0
 BuildRequires:	libgnome-devel >= 2.2.0
+BuildRequires:	libgnomeprint-devel >= 2.2.0
+BuildRequires:	libgnomeprintui-devel >= 2.2.0
 BuildRequires:	libgnomeui-devel >= 2.2.0
-BuildRequires:	libgsf-devel >= 1.7.2
+BuildRequires:	libgsf-devel >= 1.8.0
+BuildRequires:	libxml2-devel >= 2.4.12
+BuildRequires:	libglade2-devel >= 2.0.1
+BuildRequires:	libgnomecanvas-devel >= 2.2.0
+BuildRequires:	libart_lgpl-devel >= 2.3.12
+%if %{!?_without_python:1}0
+BuildRequires:	python-devel >= 2.2
+BuildRequires:	python-pygtk-devel >= 1.99.16
+%endif
+%if %{!?_without_bonobo:1}0
+BuildRequires:	libbonobo-devel >= 2.0.0
+BuildRequires:	libbonoboui-devel >= 2.0.0
+BuildRequires:	libgsf-gnome-devel >= 1.8.0
+%endif
+%if %{!?_without_gda:1}0
+BuildRequires:	libgda-devel
+%endif
+%if %{!?_without_python:1}0
 Requires:	python-modules
+%endif
 Requires(post,postun): /sbin/ldconfig
 Requires(post):	GConf2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -80,13 +101,12 @@ export LC_ALL=C
 %configure \
 	--disable-static \
 	--without-included-gettext \
-	--with-bonobo \
-%{?_with_gb:--with-gb} \
-%{!?_with_gb:--without-gb} \
-	--with-python \
+	--with%{?_without_bonobo:out}-bonobo \
+	--with%{?!_with_gb:out}-gb \
+	--with%{?_without_python:out}-python \
 	--without-evolution \
 	--without-guile \
-	--with-gda
+	--with%{?_without_gda:out}-gda
 
 %{__make}
 
@@ -115,8 +135,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/*
 
+%if %{?!_without_bonobo:1}0
 %attr(755,root,root) %{_libdir}/gnumeric-component
 %{_libdir}/bonobo/servers/*
+%endif
 %dir %{_libdir}/gnumeric
 %dir %{_libdir}/gnumeric/%{version}*
 %dir %{_libdir}/gnumeric/%{version}*/plugins
@@ -130,17 +152,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applications/*.desktop
 %{_datadir}/mime-info/*
 %{_datadir}/pixmaps/*.???
-%{_datadir}/pixmaps/gnumeric/*
+%{_datadir}/pixmaps/gnumeric
 %{_omf_dest_dir}/%{name}
 
 %dir %{_datadir}/gnumeric
 %dir %{_datadir}/gnumeric/%{version}*
-%{_datadir}/gnumeric/%{version}*/plot-types.xml
 %{_datadir}/gnumeric/%{version}*/glade
 %{_datadir}/gnumeric/%{version}*/gnome-2.0
 %{_datadir}/gnumeric/%{version}*/idl
 %{_datadir}/gnumeric/%{version}*/autoformat-templates
 %{_datadir}/gnumeric/%{version}*/templates
-%dir %{_datadir}/gnumeric/%{version}*/share
-%dir %{_datadir}/gnumeric/%{version}*/share/gnome
-%dir %{_datadir}/gnumeric/%{version}*/share/gnome/help
+%dir %{_datadir}/gnumeric/%{version}*/gnome
+%dir %{_datadir}/gnumeric/%{version}*/gnome/help
