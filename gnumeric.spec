@@ -14,42 +14,44 @@ Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
 Version:	1.2.6
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.2/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.2/%{name}-%{version}.tar.bz2
 # Source0-md5:	5fd27da8feda72d78c7fac13458ec741
+Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/gnumeric/
-BuildRequires:	libtool
+BuildRequires:	GConf2-devel
+BuildRequires:	ORBit2-devel >= 2.4.2
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
-BuildRequires:	gal-devel >= 1.99.9
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 2.0.0
 BuildRequires:	gtk+2-devel >= 2.0.0
-BuildRequires:	intltool
+BuildRequires:	intltool >= 0.28
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with bonobo}
-BuildRequires:	libbonobo-devel >= 2.0.0
+BuildRequires:	libbonobo-devel >= 2.2.0
 BuildRequires:	libbonoboui-devel >= 2.3.3-2
-BuildRequires:	libgsf-gnome-devel >= 1.8.1-2
+BuildRequires:	libgsf-gnome-devel >= 1.8.2
 %endif
 %if %{with gda}
-BuildRequires:	libgda-devel >= 1.0.0
+BuildRequires:	libgda-devel >= 1.0.1
+BuildRequires:	libgnomedb-devel >= 1.0.1
 %endif
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnome-devel >= 2.2.0
 BuildRequires:	libgnomecanvas-devel >= 2.2.0
-BuildRequires:	libgnomedb-devel >= 0.90.2
 BuildRequires:	libgnomeprint-devel >= 2.4.2
 BuildRequires:	libgnomeprintui-devel >= 2.4.2
 BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
-BuildRequires:	libgsf-devel >= 1.8.1-2
+BuildRequires:	libgsf-devel >= 1.8.2
+BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
 BuildRequires:	perl-base
 %if %{with python}
@@ -96,10 +98,14 @@ Gnumeric - це програма електронних таблиць для GNOME.
 
 %prep
 %setup -q
+%patch0 -p1
+
+mv po/{no,nb}.po
 
 %build
 glib-gettextize --copy --force
 intltoolize --copy --force
+%{__libtoolize}
 %{__aclocal} -I %{_aclocaldir}/gnome2-macros
 %{__autoheader}
 %{__autoconf}
