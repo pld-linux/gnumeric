@@ -1,5 +1,5 @@
-# _with_bonobo
 # _without_gb
+
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
 Summary(es):	La hoja de calculo del GNOME
@@ -7,7 +7,7 @@ Summary(pl):	Arkusz kalkulacyjny GNOME
 Summary(pt_BR):	A planilha do GNOME
 Name:		gnumeric
 Version:	1.0.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -29,11 +29,11 @@ BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-%{!?_without_bonobo:BuildRequires:	bonobo-devel >= 1.0.9}
+BuildRequires:	bonobo-devel >= 1.0.9
 BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gal-devel >= 0.19
-%{!?_without_gb:BuildRequires:	gb-devel >= 0.0.19}
+%{?_with_gb:BuildRequires:	gb-devel >= 0.0.19}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel >= 0.29
@@ -96,11 +96,14 @@ GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
 	--disable-gtk-doc \
 	--disable-static \
 	--without-included-gettext \
-	--with%{?_without_bonobo:out}-bonobo \
-	--with%{?_without_gb:out}-gb \
+	--with-bonobo \
+%{?_with_gb:--with-gb} \
+%{!?_with_gb:--without-gb} \
 	--with-python \
 	--without-evolution \
-	--with-guile
+	--without-guile \
+	--with-gda
+
 %{__make}
 
 %install
