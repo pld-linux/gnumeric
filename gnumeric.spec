@@ -13,14 +13,15 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.3.91
-Release:	1
+Version:	1.3.92
+Release:	0.9
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	9f5928c0aebd041b7b4de8098188f48a
+# Source0-md5:	d5c1b7b6be6bc17851098b9e2edbed85
+Patch0:		%{name}-bashizm.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.4.2
@@ -101,6 +102,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 glib-gettextize --copy --force
@@ -165,8 +167,8 @@ umask 022
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.xml
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.la
 %if %{with python}
-%{_libdir}/gnumeric/%{version}*/plugins/*/*.py
-%{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
+#%{_libdir}/gnumeric/%{version}*/plugins/*/*.py
+#%{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
 %endif
 
 %{_desktopdir}/*.desktop
