@@ -13,14 +13,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.2.1
+Version:	1.2.2
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	51f0bd5c69e6b6d321909e8bfe2e2c2b
+# Source0-md5:	e6deff35d98794938cb7a3132bb55518
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	libtool
 BuildRequires:	autoconf
@@ -45,8 +45,8 @@ BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnome-devel >= 2.2.0
 BuildRequires:	libgnomecanvas-devel >= 2.2.0
 BuildRequires:	libgnomedb-devel >= 0.90.2
-BuildRequires:	libgnomeprint-devel >= 2.2.0
-BuildRequires:	libgnomeprintui-devel >= 2.2.0
+BuildRequires:	libgnomeprint-devel >= 2.4.2
+BuildRequires:	libgnomeprintui-devel >= 2.4.2
 BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
 BuildRequires:	libgsf-devel >= 1.8.1-2
 BuildRequires:	libxml2-devel >= 2.4.12
@@ -161,3 +161,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnumeric/%{version}*/idl
 %{_datadir}/gnumeric/%{version}*/autoformat-templates
 %{_datadir}/gnumeric/%{version}*/templates
+
+%{_mandir}/man1/*
