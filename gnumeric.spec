@@ -8,7 +8,7 @@ Summary(pt_BR):	A planilha do GNOME
 Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Name:		gnumeric
-Version:	1.0.6
+Version:	1.0.9
 Release:	1
 Epoch:		1
 License:	GPL
@@ -17,9 +17,10 @@ Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-miscfix.patch
 Patch1:		%{name}-no_version.patch
-Patch2:		%{name}-am15.patch
-Patch3:		%{name}-gb.patch
-Patch4:		%{name}-empty_plugins.patch
+Patch2:		%{name}-gb.patch
+Patch3:		%{name}-ac25x.patch
+Patch4:		%{name}-am16.patch
+Patch5:		%{name}-psicov_hack.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 Requires:	gnome-print >= 0.34-3
@@ -40,7 +41,6 @@ BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel >= 0.29
 BuildRequires:	gtk+-devel >= 1.2.7
 BuildRequires:	glib-devel >= 1.2.7
-BuildRequires:	intltool
 BuildRequires:	libglade-gnome-devel >= 0.16
 BuildRequires:	libxml-devel >= 1.8.14
 BuildRequires:	libole2-devel >= 0.2.4
@@ -55,6 +55,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_sysconfdir	/etc/X11/GNOME
+%define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
 
 %description
 GNOME based spreadsheet. Gnumeric is a spreadsheet program for GNOME.
@@ -90,13 +91,15 @@ Gnumeric - це програма електронних таблиць для GNOME.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
+touch po/POTFILES
 rm -f missing acinclude.m4
 %{__libtoolize}
 %{__gettextize}
-intltoolize --copy --force
-aclocal -I macros
+%{__aclocal} -I macros
+autoheader
 %{__autoconf}
 %{__automake}
 GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
@@ -119,12 +122,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	Applicationsdir=%{_applnkdir}/Office/Spreadsheets
+	Applicationsdir=%{_applnkdir}/Office/Spreadsheets \
+	omf_dest_dir=%{_omf_dest_dir}/%{name}
 
 %find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   -p /usr/bin/scrollkeeper-update
+%postun -p /usr/bin/scrollkeeper-update
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -136,5 +143,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mc/*
 %{_datadir}/mime-info/*
 %{_datadir}/oaf/*
+%{_omf_dest_dir}/%{name}
 %{_pixmapsdir}/*
 %{_applnkdir}/Office/Spreadsheets/*
