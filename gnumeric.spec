@@ -1,5 +1,5 @@
 
-%bcond_without bonobo	# build without bonobo
+%bcond_without gnome	# build without gnome
 %bcond_without python	# build without python support
 %bcond_without gda	# build without gda
 
@@ -12,15 +12,16 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.3.0
+Version:	1.3.1
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	56e8f6a24ce7fbcd6b705120f5dd99db
+# Source0-md5:	753b966dad1d61ef900eb40f5c8f37ad
 Patch0:		%{name}-locale-names.patch
+Patch1:		%{name}-compile_fix.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.4.2
@@ -30,26 +31,26 @@ BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.4.0
-BuildRequires:	gtk+2-devel >= 2:2.4.0
+BuildRequires:	glib2-devel >= 1:2.4.4
+BuildRequires:	gtk+2-devel >= 2:2.4.4
 BuildRequires:	intltool >= 0.28
 BuildRequires:	libart_lgpl-devel >= 2.3.12
-%if %{with bonobo}
+%if %{with gnome}
 BuildRequires:	libbonobo-devel >= 2.6.0
 BuildRequires:	libbonoboui-devel >= 2.6.0
-BuildRequires:	libgsf-gnome-devel >= 1.8.2
+BuildRequires:	libgsf-gnome-devel >= 1.10.0
 %endif
 %if %{with gda}
 BuildRequires:	libgda-devel >= 1.0.1
 BuildRequires:	libgnomedb-devel >= 1.0.1
 %endif
-BuildRequires:	libglade2-devel >= 1:2.3.6
-BuildRequires:	libgnome-devel >= 2.2.0
+BuildRequires:	libglade2-devel >= 1:2.4.0
+%{?with_gnome:BuildRequires:	libgnome-devel >= 2.6.0}
 BuildRequires:	libgnomecanvas-devel >= 2.6.0
 BuildRequires:	libgnomeprint-devel >= 2.6.0
 BuildRequires:	libgnomeprintui-devel >= 2.6.0
-BuildRequires:	libgnomeui-devel >= 2.6.0
-BuildRequires:	libgsf-devel >= 1.8.2
+%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.6.0}
+BuildRequires:	libgsf-devel >= 1.10.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
 BuildRequires:	perl-base
@@ -98,6 +99,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 mv po/{no,nb}.po
 
@@ -112,13 +114,7 @@ intltoolize --copy --force
 %configure \
 	--disable-static \
 	--disable-schemas-install \
-	%if %{with bonobo}
-	--enable-binobo-component \
-	--with-bonobo \
-	%else
-	--disable-binobo-component \
-	--without-bonobo \
-	%endif
+	--with%{?!with_gnome:out}-gnome \
 	--with%{?!with_python:out}-python \
 	--with%{?!with_gda:out}-gda \
 	--without-guile \
@@ -174,7 +170,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnumeric/%{version}*
 %{_datadir}/gnumeric/%{version}*/*.xml
 %{_datadir}/gnumeric/%{version}*/autoformat-templates
-%doc %{_datadir}/gnumeric/%{version}*/doc
 %{_datadir}/gnumeric/%{version}*/idl
 %{_datadir}/gnumeric/%{version}*/glade
 %{_datadir}/gnumeric/%{version}*/templates
