@@ -26,11 +26,12 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 %{!?_without_bonobo:BuildRequires:	bonobo-devel >= 1.0.9}
 BuildRequires:	gal-devel >= 0.14
-%{!?_with_gb:BuildRequires:	gb-devel >= 0.0.15}
+%{!?_with_gb:BuildRequires:	gb-devel >= 0.0.19}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel >= 0.29
 BuildRequires:	gtk+-devel >= 1.2.7
+BuildRequires:	glib-devel >= 1.2.7
 BuildRequires:	libglade-devel >= 0.16
 BuildRequires:	libxml-devel >= 1.8.14
 BuildRequires:	libole2-devel >= 0.2.4
