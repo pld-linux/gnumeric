@@ -56,7 +56,7 @@ autoconf
 	--with-guile \
 	--with-bonobo
 #	--with-gb
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
