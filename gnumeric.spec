@@ -41,33 +41,14 @@ strip --strip-debug $RPM_BUILD_ROOT/usr/X11R6/lib/gnumeric/plugins/lib*so.*.*
 
 gzip -9fn AUTHORS ChangeLog NEWS README TODO
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc {AUTHORS,ChangeLog,NEWS,README,TODO}.gz
-
-%lang(cs)    /usr/X11R6/share/locale/cs/LC_MESSAGES/gnumeric.mo
-%lang(de)    /usr/X11R6/share/locale/de/LC_MESSAGES/gnumeric.mo
-%lang(en_GB) /usr/X11R6/share/locale/en_GB/LC_MESSAGES/gnumeric.mo
-%lang(es)    /usr/X11R6/share/locale/es/LC_MESSAGES/gnumeric.mo
-%lang(es_DO) /usr/X11R6/share/locale/es_DO/LC_MESSAGES/gnumeric.mo
-%lang(es_GT) /usr/X11R6/share/locale/es_GT/LC_MESSAGES/gnumeric.mo
-%lang(es_HN) /usr/X11R6/share/locale/es_HN/LC_MESSAGES/gnumeric.mo
-%lang(es_MX) /usr/X11R6/share/locale/es_MX/LC_MESSAGES/gnumeric.mo
-%lang(es_PA) /usr/X11R6/share/locale/es_PA/LC_MESSAGES/gnumeric.mo
-%lang(es_PE) /usr/X11R6/share/locale/es_PE/LC_MESSAGES/gnumeric.mo
-%lang(es_SV) /usr/X11R6/share/locale/es_SV/LC_MESSAGES/gnumeric.mo
-%lang(fr)    /usr/X11R6/share/locale/fr/LC_MESSAGES/gnumeric.mo
-%lang(hu)    /usr/X11R6/share/locale/hu/LC_MESSAGES/gnumeric.mo
-%lang(it)    /usr/X11R6/share/locale/it/LC_MESSAGES/gnumeric.mo
-%lang(ja)    /usr/X11R6/share/locale/ja/LC_MESSAGES/gnumeric.mo
-%lang(ko)    /usr/X11R6/share/locale/ko/LC_MESSAGES/gnumeric.mo
-%lang(no)    /usr/X11R6/share/locale/no/LC_MESSAGES/gnumeric.mo
-%lang(pl)    /usr/X11R6/share/locale/pl/LC_MESSAGES/gnumeric.mo
-%lang(pt)    /usr/X11R6/share/locale/pt/LC_MESSAGES/gnumeric.mo
-%lang(ru)    /usr/X11R6/share/locale/ru/LC_MESSAGES/gnumeric.mo
 
 %attr(755,root,root) /usr/X11R6/bin/*
 %dir /usr/X11R6/lib/gnumeric
