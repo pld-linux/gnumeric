@@ -1,7 +1,7 @@
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.60
+Version:	0.61
 Release:	1
 Epoch:		1
 License:	GPL
@@ -17,7 +17,7 @@ URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	ORBit-devel
 #BuildRequires:	bonobo-devel => 0.2
 BuildRequires:	docbook-dsssl => 1.52
-BuildRequires:	gal-devel >= 0.3
+BuildRequires:	gal-devel >= 0.4.1
 #BuildRequires:	gb-devel >= 0.0.15
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
@@ -27,6 +27,7 @@ BuildRequires:	guile-devel
 BuildRequires:	libglade-devel >= 0.14
 BuildRequires:	libxml-devel => 1.8.5
 BuildRequires:	libole2-devel => 0.1.4
+BuildRequires:	perl
 %requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
