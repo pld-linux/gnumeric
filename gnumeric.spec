@@ -7,7 +7,7 @@ Summary(pl):	Arkusz kalkulacyjny GNOME
 Summary(pt_BR):	A planilha do GNOME
 Name:		gnumeric
 Version:	1.0.1
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -28,14 +28,18 @@ BuildRequires:	ORBit-devel
 BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bison
 %{!?_without_bonobo:BuildRequires:	bonobo-devel >= 1.0.9}
-BuildRequires:	gal-devel >= 0.16
+BuildRequires:	docbook-utils
+BuildRequires:	flex
+BuildRequires:	gal-devel >= 0.19
 %{!?_without_gb:BuildRequires:	gb-devel >= 0.0.19}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel >= 0.29
 BuildRequires:	gtk+-devel >= 1.2.7
 BuildRequires:	glib-devel >= 1.2.7
+BuildRequires:	intltool
 BuildRequires:	libglade-devel >= 0.16
 BuildRequires:	libxml-devel >= 1.8.14
 BuildRequires:	libole2-devel >= 0.2.4
@@ -44,11 +48,7 @@ BuildRequires:	libgda-devel >= 0.2.93
 #BuildRequires:	psiconv-devel
 BuildRequires:	perl
 BuildRequires:	python-devel >= 2.1
-BuildRequires:	bison
-BuildRequires:	flex
-BuildRequires:	intltool
 BuildRequires:	oaf-devel >= 0.6.2
-BuildRequires:	docbook-utils
 #%requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
