@@ -14,8 +14,6 @@ Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	guile-devel
 BuildRequires:	gtk+-devel >= 1.2.2
-BuildRequires:	glib-devel >= 1.2.2
-BuildRequires:	XFree86-devel
 BuildRequires:	xpm-devel
 BuildRequires:	ORBit-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
