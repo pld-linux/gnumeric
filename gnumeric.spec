@@ -1,8 +1,10 @@
+# bcond_on_bonobo
+# bcond_on_gb
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
-Version:	0.61
-Release:	2
+Version:	0.64
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -15,21 +17,24 @@ Patch1:		%{name}-no_version.patch
 Icon:		gnumeric.xpm
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	ORBit-devel
+BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
-#BuildRequires:	bonobo-devel => 0.2
-BuildRequires:	docbook-dsssl => 1.52
-BuildRequires:	gal-devel >= 0.4.1
-#BuildRequires:	gb-devel >= 0.0.15
+%{?bcond_on_bonobo:BuildRequires:	bonobo-devel => 0.2}
+BuildRequires:	docbook-style-dsssl => 1.52
+BuildRequires:	gal-devel >= 0.7
+%{?bcond_on_gb:BuildRequires:	gb-devel >= 0.0.15}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel => 0.25
 BuildRequires:	gtk+-devel >= 1.2.2
 BuildRequires:	guile-devel
 BuildRequires:	libglade-devel >= 0.14
-BuildRequires:	libxml-devel => 1.8.5
+BuildRequires:	libxml-devel => 1.8.10
 BuildRequires:	libole2-devel => 0.1.4
 BuildRequires:	perl
+BuildRequires:	bison
+BuildRequires:	flex
 %requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -55,6 +60,8 @@ dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 %patch1 -p1
 
 %build
+rm missing acinclude.m4
+libtoolize --copy --force
 gettextize --copy --force
 aclocal -I macros
 autoconf
@@ -63,9 +70,9 @@ GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
 %configure \
 	--disable-static \
 	--without-included-gettext \
-	--with-guile \
-	--without-bonobo \
-	--without-gb
+	%{!?bcond_on_bonobo:--without-bonobo} \
+	%{!?bcond_on_gb:--without-gb} \
+	--with-guile
 %{__make}
 
 %install
@@ -87,10 +94,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 %{_sysconfdir}/CORBA/servers/*
 %attr(755,root,root) %{_bindir}/*
-%dir %{_libdir}/gnumeric
-%dir %{_libdir}/gnumeric/plugins
-%{_libdir}/gnumericConf.sh
-%attr(755,root,root) %{_libdir}/gnumeric/plugins/gnum*.so*
+%attr(-,root,root) %{_libdir}/gnumeric
+%attr(755,root,root) %{_libdir}/gnumericConf.sh
 %{_datadir}/gnome/ui/*
 
 %{_applnkdir}/Office/Spreadsheets/*
