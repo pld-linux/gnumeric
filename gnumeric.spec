@@ -1,7 +1,6 @@
 
 %bcond_without bonobo	# build without bonobo
 %bcond_without python	# build without python support
-%bcond_without gb	# build without gb
 %bcond_without gda	# build without gda
 
 %include	/usr/lib/rpm/macros.perl
@@ -13,50 +12,50 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.2.11
+Version:	1.3.0
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	7e06156f85cadb114ef9e53362d20957
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.3/%{name}-%{version}.tar.bz2
+# Source0-md5:	56e8f6a24ce7fbcd6b705120f5dd99db
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.4.2
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 2.0.0
-BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	glib2-devel >= 1:2.4.0
+BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	intltool >= 0.28
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with bonobo}
-BuildRequires:	libbonobo-devel >= 2.2.0
-BuildRequires:	libbonoboui-devel >= 2.3.3-2
+BuildRequires:	libbonobo-devel >= 2.6.0
+BuildRequires:	libbonoboui-devel >= 2.6.0
 BuildRequires:	libgsf-gnome-devel >= 1.8.2
 %endif
 %if %{with gda}
 BuildRequires:	libgda-devel >= 1.0.1
 BuildRequires:	libgnomedb-devel >= 1.0.1
 %endif
-BuildRequires:	libglade2-devel >= 2.0.1
+BuildRequires:	libglade2-devel >= 1:2.3.6
 BuildRequires:	libgnome-devel >= 2.2.0
-BuildRequires:	libgnomecanvas-devel >= 2.2.0
-BuildRequires:	libgnomeprint-devel >= 2.4.2
-BuildRequires:	libgnomeprintui-devel >= 2.4.2
-BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
+BuildRequires:	libgnomecanvas-devel >= 2.6.0
+BuildRequires:	libgnomeprint-devel >= 2.6.0
+BuildRequires:	libgnomeprintui-devel >= 2.6.0
+BuildRequires:	libgnomeui-devel >= 2.6.0
 BuildRequires:	libgsf-devel >= 1.8.2
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
 BuildRequires:	perl-base
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
-BuildRequires:	python-pygtk-devel >= 1.99.16
+BuildRequires:	python-pygtk-devel >= 2.0.0
 %endif
 Requires(post):	GConf2
 Requires(post):	scrollkeeper
@@ -113,11 +112,17 @@ intltoolize --copy --force
 %configure \
 	--disable-static \
 	--disable-schemas-install \
-	--with%{?!with_bonobo:out}-bonobo \
-	--with%{?!with_gb:out}-gb \
+	%if %{with bonobo}
+	--enable-binobo-component \
+	--with-bonobo \
+	%else
+	--disable-binobo-component \
+	--without-bonobo \
+	%endif
 	--with%{?!with_python:out}-python \
+	--with%{?!with_gda:out}-gda \
 	--without-guile \
-	--with%{?!with_gda:out}-gda
+	--without-gb
 
 %{__make}
 
@@ -146,10 +151,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/*
 
-%if %{with_bonobo}
-%attr(755,root,root) %{_libdir}/gnumeric-component
 %{_libdir}/bonobo/servers/*
-%endif
 %dir %{_libdir}/gnumeric
 %dir %{_libdir}/gnumeric/%{version}*
 %dir %{_libdir}/gnumeric/%{version}*/plugins
@@ -158,21 +160,23 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.glade
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.xml
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.la
+%if %{with python}
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.py
 %{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
+%endif
 
 %{_desktopdir}/*.desktop
 %{_datadir}/mime-info/*
-%{_pixmapsdir}/*.???
-%{_pixmapsdir}/gnumeric
+%{_pixmapsdir}/*
 %{_omf_dest_dir}/%{name}
 
 %dir %{_datadir}/gnumeric
 %dir %{_datadir}/gnumeric/%{version}*
-%{_datadir}/gnumeric/%{version}*/glade
-%{_datadir}/gnumeric/%{version}*/gnome-2.0
-%{_datadir}/gnumeric/%{version}*/idl
+%{_datadir}/gnumeric/%{version}*/*.xml
 %{_datadir}/gnumeric/%{version}*/autoformat-templates
+%doc %{_datadir}/gnumeric/%{version}*/doc
+%{_datadir}/gnumeric/%{version}*/idl
+%{_datadir}/gnumeric/%{version}*/glade
 %{_datadir}/gnumeric/%{version}*/templates
 
-%{_mandir}/man1/*
+#%{_mandir}/man1/*
