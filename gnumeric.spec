@@ -56,7 +56,7 @@ rm -rf $RPM_BUILD_ROOT
 - added using %%{name} and %%{version} in Source,
 - added using $RPM_OPT_FLAGS during compile,
 - removed COPYING from %doc,
-- added striping plugins and binaries,
+- added stripping plugins and binaries,
 - added %lang macros for /usr/X11R6/share/locale/*/LC_MESSAGES/gnumeric.mo
   files,
 - added full %attr description in %files.
