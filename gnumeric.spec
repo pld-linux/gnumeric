@@ -1,5 +1,5 @@
-# bcond_on_bonobo
-# bcond_on_gb
+# _with_bonobo
+# _with_gb
 Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
@@ -20,10 +20,10 @@ BuildRequires:	ORBit-devel
 BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?bcond_on_bonobo:BuildRequires:	bonobo-devel => 0.2}
+%{?_with_bonobo:BuildRequires:	bonobo-devel => 0.2}
 BuildRequires:	docbook-style-dsssl => 1.52
 BuildRequires:	gal-devel >= 0.7
-%{?bcond_on_gb:BuildRequires:	gb-devel >= 0.0.15}
+%{?_with_gb:BuildRequires:	gb-devel >= 0.0.15}
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel => 0.25
@@ -70,8 +70,8 @@ GNOME_LIBCONFIG_PATH=/usr/lib; export GNOME_LIBCONFIG_PATH
 %configure \
 	--disable-static \
 	--without-included-gettext \
-	%{!?bcond_on_bonobo:--without-bonobo} \
-	%{!?bcond_on_gb:--without-gb} \
+	%{!?_with_bonobo:--without-bonobo} \
+	%{!?_with_gb:--without-gb} \
 	--with-guile
 %{__make}
 
