@@ -35,7 +35,7 @@ BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 2.0.0
 BuildRequires:	gnome-common >= 2.8.0
-BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	gtk+2-devel >= 1:2.0.0
 BuildRequires:	intltool >= 0.28
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with bonobo}
