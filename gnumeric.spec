@@ -30,10 +30,10 @@ BuildRequires:	gal-devel >= 0.14
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	gnome-print-devel >= 0.29
-BuildRequires:	gtk+-devel >= 1.2.2
+BuildRequires:	gtk+-devel >= 1.2.7
 BuildRequires:	libglade-devel >= 0.16
 BuildRequires:	libxml-devel >= 1.8.14
-BuildRequires:	libole2-devel >= 0.2.3
+BuildRequires:	libole2-devel >= 0.2.4
 #BuildRequires:	guile-devel >= 1.5
 #BuildRequires:	libgda-devel >= 0.2.11
 #BuildRequires:	psiconv-devel
@@ -42,6 +42,7 @@ BuildRequires:	python-devel >= 2.1
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	xml-i18n-tools >= 0.9-3
+BuildRequires:	oaf-devel >= 0.6.2
 #%#requires_eq	guile
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
