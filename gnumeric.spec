@@ -4,7 +4,7 @@ Summary:	The GNOME spreadsheet
 Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
 Version:	0.64
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -33,6 +33,7 @@ BuildRequires:	libglade-devel >= 0.14
 BuildRequires:	libxml-devel => 1.8.10
 BuildRequires:	libole2-devel => 0.1.4
 BuildRequires:	perl
+BuildRequires:	python-devel
 BuildRequires:	bison
 BuildRequires:	flex
 %requires_eq	guile
