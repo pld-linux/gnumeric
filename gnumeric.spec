@@ -1,7 +1,7 @@
 Summary:	The GNOME spreadsheet
 Name:		gnumeric
-Version:	0.23
-Release:	2
+Version:	0.25
+Release:	1
 Copyright:	GPL
 Group:		X11/Applications/Spreadsheets
 Group(pl):	X11/Aplikacje/Arkusze kalkulacyjne
@@ -50,6 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %lang(cs)    /usr/X11R6/share/locale/cs/LC_MESSAGES/gnumeric.mo
 %lang(de)    /usr/X11R6/share/locale/de/LC_MESSAGES/gnumeric.mo
+%lang(en_GB) /usr/X11R6/share/locale/en_GB/LC_MESSAGES/gnumeric.mo
 %lang(es)    /usr/X11R6/share/locale/es/LC_MESSAGES/gnumeric.mo
 %lang(es_DO) /usr/X11R6/share/locale/es_DO/LC_MESSAGES/gnumeric.mo
 %lang(es_GT) /usr/X11R6/share/locale/es_GT/LC_MESSAGES/gnumeric.mo
