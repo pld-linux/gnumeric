@@ -92,7 +92,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 
 %build
 rm -f missing acinclude.m4
-libtoolize --copy --force
+%{__libtoolize}
 gettextize --copy --force
 intltoolize --copy --force
 aclocal -I macros
