@@ -1,0 +1,220 @@
+diff -Nru gnumeric-0.70/configure.ac gnumeric-0.70.new/configure.ac
+--- gnumeric-0.70/configure.ac	Wed Aug 15 20:31:49 2001
++++ gnumeric-0.70.new/configure.ac	Mon Sep 10 02:27:45 2001
+@@ -120,10 +120,6 @@
+ 	GNOME_CHECK_GUILE
+ fi
+ 
+-AC_SUBST(CFLAGS)
+-AC_SUBST(CPPFLAGS)
+-AC_SUBST(LDFLAGS)
+-
+ dnl **************************************************
+ dnl * psiconv support
+ dnl **************************************************
+@@ -141,8 +137,13 @@
+ 		PSICONV_LIBS=""
+ 		PSICONV_CFLAGS=""
+ 		with_psiconv=false
++	else
++		PSICONV_LIBS="$psiconv_libs -lpsiconv"
++		PSICONV_CFLAGS="$psiconv_cflags"
+ 	fi
+ 
++	AC_SUBST(PSICONV_LIBS)
++	AC_SUBST(PSICONV_CFLAGS)
+ 	AM_CONDITIONAL(WITH_PSICONV,$with_psiconv)
+ fi
+ 
+diff -Nru gnumeric-0.70/configure.in gnumeric-0.70.new/configure.in
+--- gnumeric-0.70/configure.in	Mon Sep 10 02:28:32 2001
++++ gnumeric-0.70.new/configure.in	Mon Sep 10 02:21:41 2001
+@@ -141,8 +141,13 @@
+ 		PSICONV_LIBS=""
+ 		PSICONV_CFLAGS=""
+ 		with_psiconv=false
++	else
++		PSICONV_LIBS="$psiconv_libs -lpsiconv"
++		PSICONV_CFLAGS="$psiconv_cflags"
+ 	fi
+ 
++	AC_SUBST(PSICONV_LIBS)
++	AC_SUBST(PSICONV_CFLAGS)
+ 	AM_CONDITIONAL(WITH_PSICONV,$with_psiconv)
+ fi
+ 
+diff -Nru gnumeric-0.70/idl/Makefile.am gnumeric-0.70.new/idl/Makefile.am
+--- gnumeric-0.70/idl/Makefile.am	Tue Aug 21 01:13:44 2001
++++ gnumeric-0.70.new/idl/Makefile.am	Mon Sep 10 00:30:11 2001
+@@ -60,10 +60,11 @@
+ EXTRA_DIST = $(idl_DATA)
+ # Do not use built sources BUILT_SOURCES
+ # it attempts to build the source even if it is not used.
+-CLEANFILES  += $(GNUMERIC_GENERATED)		\
+-	       $(GNUMERIC_GRAPHS_GENERATED)	\
+-	       $(EVOLUTION_GENERATED)		\
+-		stamp_gnumeric stamp_gnumeric_graphs stamp_evolution
++CLEANFILES  = \
++	$(GNUMERIC_GENERATED)		\
++	$(GNUMERIC_GRAPHS_GENERATED)	\
++	$(EVOLUTION_GENERATED)		\
++	stamp_gnumeric stamp_gnumeric_graphs stamp_evolution
+ 
+ dist-hook :
+ 	cd $(distdir) && rm -f $(CLEANFILES)
+diff -Nru gnumeric-0.70/plugins/perl/Makefile.am gnumeric-0.70.new/plugins/perl/Makefile.am
+--- gnumeric-0.70/plugins/perl/Makefile.am	Mon Feb 12 23:32:55 2001
++++ gnumeric-0.70.new/plugins/perl/Makefile.am	Mon Sep 10 02:25:10 2001
+@@ -1,11 +1,4 @@
+ # Do not build by default until we are ready.
+-#if WITH_PERL
+-PERL_PROGRAMS_TARGET = perl.so
+-PERL_DATA_TARGET = plugin.xml
+-#else
+-#PERL_PROGRAMS_TARGET =
+-#PERL_DATA_TARGET =
+-#endif
+ 
+ gnperldir = $(gnumeric_datadir)/perl
+ PERL_CFLAGS = -I../.. $(PERL_CCCDLFLAGS)		\
+@@ -19,9 +12,9 @@
+ #
+ 
+ gnumeric_plugin_perldir = $(gnumeric_plugindir)/perl
+-gnumeric_plugin_perl_DATA = $(PERL_DATA_TARGET)
+-gnumeric_plugin_perl_PROGRAMS = $(PERL_PROGRAMS_TARGET)
+-perl_so_SOURCES = perl.c
++gnumeric_plugin_perl_DATA = plugin.xml
++gnumeric_plugin_perl_PROGRAMS = perl.la
++perl_la_SOURCES = perl.c
+ 
+ perl.so: perl.o xsinit.o ext.timestamp
+ 	-$(PERL_LD) $(PERL_LDDLFLAGS) -o perl.so perl.o xsinit.o $(PERL_LDOPTS)
+diff -Nru gnumeric-0.70/src/Makefile.am gnumeric-0.70.new/src/Makefile.am
+--- gnumeric-0.70/src/Makefile.am	Mon Aug 20 23:51:34 2001
++++ gnumeric-0.70.new/src/Makefile.am	Mon Sep 10 01:19:19 2001
+@@ -21,7 +21,7 @@
+ 	$(EXTRA_GNOME_CFLAGS)						\
+ 	$(GUILE_INCS)
+ 
+-GNUMERIC_BASE_SOURCES =				\
++GNUMERIC_BASE_src_files =			\
+ 	analysis-tools.c			\
+ 	analysis-tools.h			\
+ 	application.c				\
+@@ -73,7 +73,7 @@
+ 	expr-name.h				\
+ 	file.c					\
+ 	file.h					\
+-	file-priv.h					\
++	file-priv.h				\
+ 	file-autoft.c				\
+ 	file-autoft.h				\
+ 	format-template.h			\
+@@ -238,11 +238,11 @@
+ 	xml-io-autoft.h
+ 
+ # TODO : split the bonobo and corba tests one day
+-GNUMERIC_CORBA_SOURCES = 			\
++GNUMERIC_CORBA_src_files = 			\
+ 	workbook-control-corba.c		\
+ 	workbook-control-corba.h
+ 
+-GNUMERIC_BONOBO_SOURCES = 			\
++GNUMERIC_BONOBO_src_files = 			\
+ 	bonobo-io.c				\
+ 	bonobo-io.h				\
+ 	embeddable-grid.c			\
+@@ -255,47 +255,46 @@
+ 	sheet-object-container.h		\
+ 	sheet-object-item.c			\
+ 	sheet-object-item.h			\
+-	$(GNUMERIC_CORBA_SOURCES)
++	$(GNUMERIC_CORBA_src_files)
+ 
+ if BONOBO
+ gnumeric_SOURCES =				\
+-	$(GNUMERIC_BASE_SOURCES)		\
++	$(GNUMERIC_BASE_src_files)		\
+ 	corba-args.c				\
+-	$(GNUMERIC_BONOBO_SOURCES)
++	$(GNUMERIC_BONOBO_src_files)
+ 
+-gnumeric_LDADD =				\
+-	$(gnumeric_libs)			\
+-	-lbonobo-print				\
+-	../idl/libGnumericIDL.a			\
+-	$(EXTRA_GNOME_LIBS)			\
+-	$(GNOME_XML_LIB) 			\
+-	$(GUILE_LIBS)				\
++gnumeric_LDADD =					\
++	$(top_builddir)/src/dialogs/libdialogs.a	\
++	$(top_builddir)/src/widgets/libwidgets.a	\
++	$(top_builddir)/src/functions/libfunctions.a	\
++	-lbonobo-print					\
++	$(top_builddir)/idl/libGnumericIDL.a		\
++	$(EXTRA_GNOME_LIBS)				\
++	$(GNOME_XML_LIB) 				\
++	$(GUILE_LIBS)					\
+ 	$(INTLLIBS)
+ else
+ gnumeric_SOURCES =				\
+-	$(GNUMERIC_BASE_SOURCES)		\
++	$(GNUMERIC_BASE_src_files)		\
+ 	normal-args.c
+ 
+-gnumeric_LDADD = 				\
+-	$(gnumeric_libs)			\
+-	$(EXTRA_GNOME_LIBS)			\
+-	$(GNOME_XML_LIB) 			\
+-	$(GUILE_LIBS)				\
++gnumeric_LDADD = 					\
++	$(top_builddir)/src/dialogs/libdialogs.a	\
++	$(top_builddir)/src/widgets/libwidgets.a	\
++	$(top_builddir)/src/functions/libfunctions.a	\
++	$(EXTRA_GNOME_LIBS)				\
++	$(GNOME_XML_LIB) 				\
++	$(GUILE_LIBS)					\
+ 	$(INTLLIBS)
+ endif
+ 
+ gnumeric_LDFLAGS = -export-dynamic
+ 
+-gnumeric_libs =					\
+-	dialogs/libdialogs.a			\
+-	widgets/libwidgets.a			\
+-	functions/libfunctions.a
+-
+ # include conditional files to ensure everything gets distributed no matter
+ # what the build
+ EXTRA_DIST = portability.h.in GNOME_Gnumeric.xml \
+ 	    normal-args.c corba-args.c		 \
+-	    $(GNUMERIC_BONOBO_SOURCES)
++	    $(GNUMERIC_BONOBO_src_files)
+ dist-hook:
+ 	-mkdir $(distdir)/pixmaps
+ 	cp $(srcdir)/pixmaps/*.xpm $(distdir)/pixmaps
+diff -Nru gnumeric-0.70/src/dialogs/Makefile.am gnumeric-0.70.new/src/dialogs/Makefile.am
+--- gnumeric-0.70/src/dialogs/Makefile.am	Mon Sep 10 02:28:32 2001
++++ gnumeric-0.70.new/src/dialogs/Makefile.am	Mon Sep 10 00:47:22 2001
+@@ -4,9 +4,9 @@
+ iconsdir = $(datadir)/pixmaps/gnumeric
+ 
+ if BONOBO
+-libdialogs_a_SOURCES =	$(std_SOURCES) dialog-graph-guru.c
++libdialogs_a_SOURCES =	$(std_src_files) dialog-graph-guru.c
+ else
+-libdialogs_a_SOURCES =	$(std_SOURCES)
++libdialogs_a_SOURCES =	$(std_src_files)
+ endif
+ gnumeric_libdir = $(datadir)/gnumeric
+ 
+@@ -23,7 +23,7 @@
+ 
+ noinst_LIBRARIES = libdialogs.a
+ 
+-std_SOURCES =					\
++std_src_files =					\
+ 	dialog-about.c				\
+ 	dialog-advanced-filter.c		\
+ 	dialog-analysis-tools.c			\
