@@ -14,7 +14,7 @@ Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
 Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ
 Name:		gnumeric
 Version:	1.2.13
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -60,8 +60,8 @@ BuildRequires:	perl-base
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 1.99.16
 %endif
-Requires(post):	GConf2
-Requires(post):	scrollkeeper
+Requires(post,postun):	GConf2
+Requires(post,postun):	scrollkeeper
 %if %{with python}
 Requires:	python-modules
 %endif
@@ -139,8 +139,11 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /usr/bin/scrollkeeper-update
 %gconf_schema_install
+[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 
-%postun -p /usr/bin/scrollkeeper-update
+%postun 
+/usr/bin/scrollkeeper-update
+[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
