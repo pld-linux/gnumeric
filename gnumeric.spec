@@ -1,10 +1,12 @@
 Summary:	The GNOME spreadsheet
+Summary(pl):	Arkusz kalkulacyjny GNOME
 Name:		gnumeric
 Version:	0.50
 Release:	1
 License:	GPL
 Group:		X11/Applications/Spreadsheets
 Group(pl):	X11/Aplikacje/Arkusze kalkulacyjne
+Vendor:         Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
 Patch0:		gnumeric-applnkdir.patch
 Patch1:		gnumeric-miscfix.patch
@@ -16,7 +18,7 @@ BuildRequires:	glib-devel >= 1.2.2
 BuildRequires:	XFree86-devel
 BuildRequires:	xpm-devel
 BuildRequires:	ORBit-devel
-BuildRequires:	gnome-libs-devel
+BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	libglade-devel >= 0.11
 BuildRequires:	gnome-print-devel => 0.14
 BuildRequires:	libxml-devel => 1.8.5
@@ -37,6 +39,11 @@ Excel, you should be ready to use Gnumeric. We have tried to clone all of
 the good features and stay as compatible as possible with Excel in terms of
 usability.
 
+%description -l pl
+Bazuj±cy na GNOME arkusz kalkulacyjny. Je¶li znasz arkusz Excel to jeste¶
+gotów na u¿ywanie Gnumerica. Starali¶my siê sklonowaæ wszystkie dobre
+cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
+
 %prep
 %setup  -q
 %patch0 -p1
@@ -49,7 +56,10 @@ automake
 autoconf
 %configure \
 	--disable-static \
+	--without-included-gettext \
+	--with-guile \
 	--with-bonobo
+#	--with-gb
 make
 
 %install
@@ -83,3 +93,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnumeric
 %{_datadir}/mime-info/*
 %{_datadir}/pixmaps/*
+%{_datadir}/mc/*
+%{_datadir}/idl/*
