@@ -18,7 +18,7 @@ Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
 Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ
 Name:		gnumeric
 Version:	1.4.3
-Release:	0.1
+Release:	0.3
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -108,7 +108,7 @@ Gnumeric - ÃÅ ÐÒÏÇÒÁÍÁ ÅÌÅËÔÒÏÎÎÉÈ ÔÁÂÌÉÃØ ÄÌÑ GNOME.
 
 %prep
 %setup -q
-%patch0 -p0
+#%patch0 -p0 
 %patch1 -p0
 
 %build
@@ -144,6 +144,16 @@ rm -rf $RPM_BUILD_ROOT
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -r $RPM_BUILD_ROOT%{_datadir}/mc/templates/gnumeric.desktop
+
+########################  FAKE !  ########################################
+# Change location in omf file to real (needs update in every version up) #
+##########################################################################
+sed -e 's#gnumeric/1.4.3/doc#gnome/help/gnumeric#' \
+$RPM_BUILD_ROOT%{_omf_dest_dir}/%{name}/gnumeric-C.omf > \
+$RPM_BUILD_ROOT%{_omf_dest_dir}/%{name}/gnumeric-C.omf.out
+
+mv $RPM_BUILD_ROOT%{_omf_dest_dir}/%{name}/gnumeric-C.{omf.out,omf}
+######################## END FAKE ########################################
 
 %find_lang %{name} --with-gnome
 
