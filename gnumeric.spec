@@ -103,9 +103,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %find_lang %{name} --with-gnome
 
-# .la files are use less in this case
-rm -r $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}*/plugins/*/*.la
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -126,6 +123,7 @@ GCONF_CONFIG_SOURCE="`%{_bindir}/gconftool-2 --get-default-source`" \
 %dir %{_libdir}/gnumeric/%{version}*/plugins/*
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}*/plugins/*/*.so
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.xml
+%{_libdir}/gnumeric/%{version}*/plugins/*/*.la
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.py
 %{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
 %dir %{_datadir}/gnumeric
