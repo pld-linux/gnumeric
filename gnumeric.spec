@@ -6,7 +6,7 @@ Release:	1
 License:	GPL
 Group:		X11/Applications/Spreadsheets
 Group(pl):	X11/Aplikacje/Arkusze kalkulacyjne
-Vendor:         Gnumeric List <gnumeric-list@gnome.org>
+Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.gz
 Patch0:		gnumeric-applnkdir.patch
 Patch1:		gnumeric-miscfix.patch
@@ -20,12 +20,12 @@ BuildRequires:	xpm-devel
 BuildRequires:	ORBit-devel
 BuildRequires:	gnome-libs-devel >= 1.0.56
 BuildRequires:	libglade-devel >= 0.11
-BuildRequires:	gnome-print-devel => 0.14
+BuildRequires:	gnome-print-devel => 0.16
 BuildRequires:	libxml-devel => 1.8.5
 BuildRequires:	bonobo-devel => 0.2
 BuildRequires:	gettext-devel
 %requires_eq	guile
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	/tmp/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_sysconfdir	/etc/X11/GNOME
@@ -41,8 +41,8 @@ usability.
 
 %description -l pl
 Bazuj±cy na GNOME arkusz kalkulacyjny. Je¶li znasz arkusz Excel to jeste¶
-gotów na u¿ywanie Gnumerica. Starali¶my siê sklonowaæ wszystkie dobre
-cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
+gotów na u¿ywanie Gnumerica. Starali¶my siê sklonowaæ wszystkie dobre cechy
+i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
 
 %prep
 %setup  -q
