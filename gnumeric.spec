@@ -26,11 +26,10 @@ BuildRequires:	bonobo-devel => 0.2
 BuildRequires:	gettext-devel
 BuildRequires:	docbook-dsssl => 1.52
 %requires_eq	guile
-BuildRoot:	/tmp/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_sysconfdir	/etc/X11/GNOME
-%define		_applnkdir	%{_datadir}/applnk
 
 %description
 GNOME based spreadsheet. Gnumeric is a spreadsheet program for GNOME. This
