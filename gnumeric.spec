@@ -191,5 +191,5 @@ umask 022
 %{_datadir}/gnumeric/%{version}*/glade
 %{_datadir}/gnumeric/%{version}*/templates
 
-%{_mandir}/man1/gnumeric.1.gz
-%{_mandir}/man1/ssconvert.1.gz
+%{_mandir}/man1/gnumeric.1*
+%{_mandir}/man1/ssconvert.1*
