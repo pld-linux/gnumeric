@@ -13,14 +13,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.2.11
+Version:	1.2.12
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	7e06156f85cadb114ef9e53362d20957
+# Source0-md5:	ef9285d53c9eec2c1f20d10420c2bcf8
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
@@ -38,19 +38,19 @@ BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with bonobo}
 BuildRequires:	libbonobo-devel >= 2.2.0
 BuildRequires:	libbonoboui-devel >= 2.3.3-2
-BuildRequires:	libgsf-gnome-devel >= 1.8.2
+BuildRequires:	libgsf-gnome-devel >= 1.9.0
 %endif
 %if %{with gda}
 BuildRequires:	libgda-devel >= 1.0.1
 BuildRequires:	libgnomedb-devel >= 1.0.1
 %endif
-BuildRequires:	libglade2-devel >= 2.0.1
+BuildRequires:	libglade2-devel >= 1:2.0.1
 BuildRequires:	libgnome-devel >= 2.2.0
 BuildRequires:	libgnomecanvas-devel >= 2.2.0
 BuildRequires:	libgnomeprint-devel >= 2.4.2
 BuildRequires:	libgnomeprintui-devel >= 2.4.2
 BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
-BuildRequires:	libgsf-devel >= 1.8.2
+BuildRequires:	libgsf-devel >= 1.9.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
 BuildRequires:	perl-base
