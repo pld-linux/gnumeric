@@ -49,7 +49,7 @@ BuildRequires:	python-pygtk-devel >= 1.99.16
 %if %{!?_without_bonobo:1}0
 BuildRequires:	libbonobo-devel >= 2.0.0
 BuildRequires:	libbonoboui-devel >= 2.0.0
-BuildRequires:	libgsf-gnome-devel >= 1.8.2
+BuildRequires:	libgsf-gnome-devel >= 1.8.1
 %endif
 %if %{!?_without_gda:1}0
 BuildRequires:	libgda-devel
