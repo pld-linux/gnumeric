@@ -152,6 +152,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.la
 %{_libdir}/gnumeric/%{version}*/plugins/*/*.py
 %{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
+%{_libdir}/gnumeric/%{version}*/plugins/plot_*/*
 
 %{_desktopdir}/*.desktop
 %{_datadir}/mime-info/*
