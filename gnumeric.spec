@@ -2,7 +2,9 @@
 # _without_gb
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
+Summary(es):	La hoja de calculo del GNOME
 Summary(pl):	Arkusz kalkulacyjny GNOME
+Summary(pt_BR):	A planilha do GNOME
 Name:		gnumeric
 Version:	1.0.1
 Release:	1
@@ -10,7 +12,10 @@ Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
+Group(es):	X11/Aplicaciones
 Group(pl):	X11/Aplikacje
+Group(pt_BR):	X11/Aplicações
+Group(pt):	X11/Aplicações
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnumeric/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-miscfix.patch
@@ -58,10 +63,18 @@ are familiar with Excel, you should be ready to use Gnumeric. We have
 tried to clone all of the good features and stay as compatible as
 possible with Excel in terms of usability.
 
+%description -l es
+La hoja de calculo del GNOME.
+
 %description -l pl
 Bazuj±cy na GNOME arkusz kalkulacyjny. Je¶li znasz arkusz Excel to
 jeste¶ gotów na u¿ywanie Gnumerica. Starali¶my siê sklonowaæ wszystkie
 dobre cechy i byæ kompatybilnym z Excelem w sensie u¿yteczno¶ci.
+
+%description -l pt_BR
+Este pacote instala a planilha do GNOME, que foi feita para substituir
+qualquer planilha comercial, pois uma quantidade razoável de trabalho
+foi (e está sendo) colocada para torná-la a melhor possível.
 
 %prep
 %setup -q
