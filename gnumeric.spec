@@ -51,7 +51,7 @@ BuildRequires:	libgnomeprintui-devel >= 2.4.2
 BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
 BuildRequires:	libgsf-devel >= 1.8.1-2
 BuildRequires:	libxml2-devel >= 2.4.12
-BuildRequires:	perl
+BuildRequires:	perl-base
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 1.99.16
