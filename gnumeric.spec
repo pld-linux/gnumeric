@@ -1,5 +1,3 @@
-# TODO
-# - fix Autoformats (bashizm patch breaks it)
 #
 # Conditional build
 %bcond_without	gnome	# build without gnome
@@ -18,14 +16,14 @@ Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
 Version:	1.4.3
-Release:	0.3
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.4/%{name}-%{version}.tar.bz2
 # Source0-md5:	b684eec48b1696d7a8d7152d1e17741c
-Patch0:		%{name}-bashizm.patch
+#Patch0:		%{name}-bashizm.patch
 Patch1:		%{name}-help-path.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
@@ -108,7 +106,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 
 %prep
 %setup -q
-#%patch0 -p0 
+#%patch0 -p0 - seems to be obsoleted
 %patch1 -p0
 
 %build
