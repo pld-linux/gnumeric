@@ -6,7 +6,16 @@ Copyright:	GPL
 Group:		Applications/Spreadsheets
 Source:		ftp://ftp.gnome.org/pub/GNOME/sources/%{name}-%{version}.tar.gz
 URL:		http://www.gnome.org/gnumeric/
-Requires:	gtk+ = 1.2.1, glib = 1.2.1, guile = 1.3
+BuildPrereq:	gtk+-devel >= 1.1.16
+BuildPrereq:	glib-devel
+BuildPrereq:	gnome-libs-devel
+BuildPrereq:	ORBit-devel
+BuildPrereq:	libxml-devel
+BuildPrereq:	xpm-devel
+BuildPrereq:	guile-devel
+%requires_pkg	gtk+
+%requires_pkg	glib
+%requires_pkg	guile
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -33,12 +42,12 @@ strip --strip-debug $RPM_BUILD_ROOT/usr/X11R6/lib/gnumeric/plugins/lib*so.*.*
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755, root, root) /usr/X11R6/bin/*
+%attr(755,root,root) /usr/X11R6/bin/*
 %dir /usr/X11R6/lib/gnumeric
 %dir /usr/X11R6/lib/gnumeric/plugins
-%attr(755, root, root) /usr/X11R6/lib/gnumeric/plugins/lib*.so*
+%attr(755,root,root) /usr/X11R6/lib/gnumeric/plugins/lib*.so*
 /usr/X11R6/lib/gnumeric/plugins/lib*.la
 /usr/X11R6/share/gnome/apps/Applications/*
 /usr/X11R6/share/gnome/help/gnumeric
