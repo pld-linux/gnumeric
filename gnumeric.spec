@@ -18,7 +18,7 @@ Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
 Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ
 Name:		gnumeric
 Version:	1.4.3
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -66,8 +66,9 @@ BuildRequires:	psiconv-devel >= 0.9.3
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 2.0.0
 %endif
-Requires(post):	GConf2
-Requires(post,postun):	scrollkeeper
+Requires(post,preun):   GConf2 >= 2.10.0
+Requires(post,postun):  desktop-file-utils
+Requires(post,postun):  scrollkeeper
 %if %{with python}
 Requires:	python-modules
 %endif
@@ -111,8 +112,8 @@ Gnumeric - ÃÅ ÐÒÏÇÒÁÍÁ ÅÌÅËÔÒÏÎÎÉÈ ÔÁÂÌÉÃØ ÄÌÑ GNOME.
 %build
 rm -f ./omf.make
 cp /usr/share/gnome-common/data/omf.make .
-glib-gettextize --copy --force
-intltoolize --copy --force
+%{__glib_gettextize}
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoheader}
@@ -158,15 +159,20 @@ mv $RPM_BUILD_ROOT%{_omf_dest_dir}/%{name}/gnumeric-C.{omf.out,omf}
 rm -rf $RPM_BUILD_ROOT
 
 %post
-umask 022
-/usr/bin/scrollkeeper-update
-%gconf_schema_install
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+%gconf_schema_install gnumeric-dialogs.schemas
+%gconf_schema_install gnumeric-general.schemas
+%gconf_schema_install gnumeric-plugins.schemas
+%scrollkeeper_update_post
+%update_desktop_database_post
+
+%preun
+%gconf_schema_uninstall gnumeric-dialogs.schemas
+%gconf_schema_uninstall gnumeric-general.schemas
+%gconf_schema_uninstall gnumeric-plugins.schemas
 
 %postun
-umask 022
-/usr/bin/scrollkeeper-update
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
+%scrollkeeper_update_postun
+%update_desktop_database_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
