@@ -142,6 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -r $RPM_BUILD_ROOT%{_datadir}/mc/templates/gnumeric.desktop
+rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 
 ########################  FAKE !  ########################################
 # Change location in omf file to real (needs update in every version up) #
@@ -196,7 +197,6 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %{_desktopdir}/*.desktop
-%{_datadir}/mime-info/*
 %{_pixmapsdir}/*
 %{_omf_dest_dir}/%{name}
 
