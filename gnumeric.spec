@@ -5,7 +5,7 @@
 %bcond_without	mono	# build without mono scripting engine
 %bcond_without	python	# build without python support
 #
-%ifnarch %{ix86} amd64 arm hppa ppc s390 sparc sparcv9 sparc64
+%ifnarch %{ix86} %{x8664} alpha arm hppa ppc s390 sparc sparcv9 sparc64
 %undefine	with_mono
 %endif
 %include	/usr/lib/rpm/macros.perl
@@ -66,6 +66,7 @@ BuildRequires:	psiconv-devel >= 0.9.3
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 2.0.0
 %endif
+BuildRequires:	rpmbuild(macros) >= 1.213
 Requires(post,preun):   GConf2 >= 2.10.0
 Requires(post,postun):  desktop-file-utils
 Requires(post,postun):  scrollkeeper
