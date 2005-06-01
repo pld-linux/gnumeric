@@ -1,9 +1,0 @@
-diff -Nuard gnumeric-1.0.9.orig/doc/C/gnumeric-C.omf gnumeric-1.0.9/doc/C/gnumeric-C.omf
---- gnumeric-1.0.9.orig/doc/C/gnumeric-C.omf	Sat Jun  1 23:11:21 2002
-+++ gnumeric-1.0.9/doc/C/gnumeric-C.omf	Wed Oct  2 16:36:16 2002
-@@ -1,4 +1,5 @@
- <?xml version="1.0" standalone="no"?>
-+<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
- <omf>
-   <resource>
-     <creator>
