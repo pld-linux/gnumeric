@@ -61,12 +61,15 @@ BuildRequires:	libxml2-devel >= 2.4.12
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
 BuildRequires:	pango-devel >= 1:1.6.0
 BuildRequires:	perl-base
+BuildRequires:	pkgconfig
+BuildRequires:	popt-devel
 BuildRequires:	psiconv-devel >= 0.9.3
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 2.0.0
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
+BuildRequires:	scrollkeeper
 Requires(post,preun):	GConf2 >= 2.10.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	scrollkeeper
