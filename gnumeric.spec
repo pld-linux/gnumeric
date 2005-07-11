@@ -1,3 +1,5 @@
+# TODO:
+# - plugins subpackages
 #
 # Conditional build:
 %bcond_without	gda	# build without gda
@@ -17,14 +19,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.4.3
-Release:	4
+Version:	1.5.2
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	b684eec48b1696d7a8d7152d1e17741c
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.5/%{name}-%{version}.tar.bz2
+# Source0-md5:	70051ecbd00a4b2d58ed51ca552fdf22
 Patch0:		%{name}-help-path.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
@@ -43,7 +45,8 @@ BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonobo-devel >= 2.6.0
 BuildRequires:	libbonoboui-devel >= 2.6.0
-BuildRequires:	libgsf-gnome-devel >= 1.11.0
+BuildRequires:	libgoffice-devel
+BuildRequires:	libgsf-gnome-devel >= 1.12.1
 %endif
 %if %{with gda}
 BuildRequires:	libgda-devel >= 1.0.1
@@ -131,7 +134,6 @@ cp /usr/share/gnome-common/data/omf.make .
 	--with%{!?with_python:out}-python \
 	--with%{!?with_gda:out}-gda \
 	--with%{!?with_mono:out}-mono \
-	--without-guile \
 	--without-gb
 
 %{__make}
@@ -148,22 +150,13 @@ rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -r $RPM_BUILD_ROOT%{_datadir}/mc/templates/gnumeric.desktop
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 
-########################  FAKE !  ########################################
-# Change location in omf file to real (needs update in every version up) #
-##########################################################################
-sed -e 's#gnumeric/1.4.3/doc#gnome/help/gnumeric#' \
-$RPM_BUILD_ROOT%{_omf_dest_dir}/%{name}/gnumeric-C.omf > \
-$RPM_BUILD_ROOT%{_omf_dest_dir}/%{name}/gnumeric-C.omf.out
-
-mv $RPM_BUILD_ROOT%{_omf_dest_dir}/%{name}/gnumeric-C.{omf.out,omf}
-######################## END FAKE ########################################
-
-%find_lang %{name} --with-gnome
+%find_lang %{name} --with-gnome --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
+/sbin/ldconfig
 %gconf_schema_install gnumeric-dialogs.schemas
 %gconf_schema_install gnumeric-general.schemas
 %gconf_schema_install gnumeric-plugins.schemas
@@ -176,6 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_uninstall gnumeric-plugins.schemas
 
 %postun
+/sbin/ldconfig
 %scrollkeeper_update_postun
 %update_desktop_database_postun
 
@@ -185,19 +179,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/gconf/schemas/*
 
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %{_libdir}/bonobo/servers/*
+
 %dir %{_libdir}/gnumeric
-%dir %{_libdir}/gnumeric/%{version}*
-%dir %{_libdir}/gnumeric/%{version}*/plugins
-%dir %{_libdir}/gnumeric/%{version}*/plugins/*
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}*/plugins/*/*.so
-%{_libdir}/gnumeric/%{version}*/plugins/*/*.glade
-%{_libdir}/gnumeric/%{version}*/plugins/*/*.xml
-%{_libdir}/gnumeric/%{version}*/plugins/*/*.la
+%dir %{_libdir}/gnumeric/%{version}
+%dir %{_libdir}/gnumeric/%{version}/plugins
+%dir %{_libdir}/gnumeric/%{version}/plugins/*
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/*/*.so
+%{_libdir}/gnumeric/%{version}/plugins/*/*.xml
+%{_libdir}/gnumeric/%{version}/plugins/*/*.la
+%{_libdir}/gnumeric/%{version}/plugins/*/*.pl
 %if %{with python}
-%{_libdir}/gnumeric/%{version}*/plugins/*/*.py
-%{_libdir}/gnumeric/%{version}*/plugins/gnome-glossary/glossary-po-header
+%{_libdir}/gnumeric/%{version}/plugins/*/*.py
+%{_libdir}/gnumeric/%{version}/plugins/gnome-glossary/glossary-po-header
 %endif
 
 %{_desktopdir}/*.desktop
@@ -206,11 +202,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_datadir}/gnumeric
 %dir %{_datadir}/gnumeric/%{version}*
-%{_datadir}/gnumeric/%{version}*/*.xml
-%{_datadir}/gnumeric/%{version}*/autoformat-templates
-%{_datadir}/gnumeric/%{version}*/idl
-%{_datadir}/gnumeric/%{version}*/glade
-%{_datadir}/gnumeric/%{version}*/templates
+%{_datadir}/gnumeric/%{version}/*.xml
+%{_datadir}/gnumeric/%{version}/autoformat-templates
+%{_datadir}/gnumeric/%{version}/glade
+%{_datadir}/gnumeric/%{version}/idl
+%{_datadir}/gnumeric/%{version}/templates
 
 %{_mandir}/man1/gnumeric.1*
 %{_mandir}/man1/ssconvert.1*
