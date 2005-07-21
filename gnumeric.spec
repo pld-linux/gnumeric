@@ -110,10 +110,10 @@ Gnumeric - √≈ –“œ«“¡Õ¡ ≈Ã≈À‘“œŒŒ…» ‘¡¬Ã…√ÿ ƒÃ— GNOME.
 # plugins - import/export
 # applix
 %package plugin-applix
-Summary:        Applix plugin
-Summary(pl):    Wtyczka Applix
-Group:          Applications/Productivity
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	Applix plugin
+Summary(pl):	Wtyczka Applix
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-applix
 Imports Applix 4.[234] spreadsheets.
@@ -123,10 +123,10 @@ Importuje arkusze Applix w wersjach 4.[234].
 
 # data interchange format (DIF) 
 %package plugin-dif
-Summary:        Data Interchange Format plugin
-Summary(pl):    Wtyczka Data Interchange Format
-Group:          Applications/Productivity
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	Data Interchange Format plugin
+Summary(pl):	Wtyczka Data Interchange Format
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-dif
 Reads and writes information stored in the Data Interchange Format
@@ -138,10 +138,10 @@ danych (*.dif).
 
 # ms excel
 %package plugin-excel
-Summary:        MS Excel (tm) plugin
-Summary(pl):    Wtyczka MS Excel (tm)
-Group:          Applications/Productivity
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	MS Excel (tm) plugin
+Summary(pl):	Wtyczka MS Excel (tm)
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-excel
 Imports/exports MS Excel (tm) files.
@@ -151,10 +151,10 @@ Importuje/eksporuje pliki MS Excel (tm).
 
 # html
 %package plugin-html
-Summary:        HTML plugin
-Summary(pl):    Wtyczka HTML
-Group:          Applications/Productivity
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	HTML plugin
+Summary(pl):	Wtyczka HTML
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-html
 Imports/exports of HTML, TeX, DVI and roff formats.
@@ -164,10 +164,10 @@ Importuje/eksportuje formaty HTML, TeX, DVI i roff.
 
 # lotus 123
 %package plugin-lotus123
-Summary:        Lotus 123 plugin
-Summary(pl):    Wtyczka Lotus 123
-Group:          Applications/Productivity
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	Lotus 123 plugin
+Summary(pl):	Wtyczka Lotus 123
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-lotus123
 Imports Lotus 123 files.
@@ -177,10 +177,10 @@ Importuje pliki Lotusa 123.
 
 # gnu oleo
 %package plugin-gnuoleo
-Summary:        GNU Oleo plugin
-Summary(pl):    Wtyczka GNU Oleo
-Group:          Applications/Productivity
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	GNU Oleo plugin
+Summary(pl):	Wtyczka GNU Oleo
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-gnuoleo
 Imports GNU Oleo documents.
@@ -190,10 +190,10 @@ Importuje dokumenty GNU Oleo.
 
 # openoffice
 %package plugin-openoffice
-Summary:        OpenOffice.org plugin
-Summary(pl):    Wtyczka OpenOffice.org
-Group:          Applications/Productivity
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org plugin
+Summary(pl):	Wtyczka OpenOffice.org
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-openoffice
 Imports/exports OpenOffice.org/StarOffice spreadsheets.
@@ -348,7 +348,7 @@ Requires:	python-pygtk
 Sample Python plugin providing some (useless) functions.
 
 %description plugin-python -l pl
-Przyk≥adowa wtyczka Python dostarczaj±ca rÛønych (bezuøytecznych)
+Przyk≥adowa wtyczka Pythona, dostarczaj±ca rÛønych (bezuøytecznych)
 funkcji.
 
 %prep
