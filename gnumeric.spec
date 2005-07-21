@@ -2,8 +2,8 @@
 # Conditional build:
 %bcond_without	gda	# build without gda
 %bcond_without	gnome	# build without gnome
-%bcond_without	mono	# build without mono scripting engine
 %bcond_without	python	# build without python support
+%bcond_with	mono	# build without mono scripting engine
 #
 %ifnarch %{ix86} %{x8664} alpha arm hppa ppc s390 sparc sparcv9 sparc64
 %undefine	with_mono
@@ -59,6 +59,7 @@ BuildRequires:	libgnomeprintui-devel >= 2.8.1
 BuildRequires:	libgsf-devel >= 1.11.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
+# disabled by default - still experimental
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
 BuildRequires:	pango-devel >= 1:1.6.0
 BuildRequires:	perl-base
