@@ -357,8 +357,7 @@ funkcji.
 %patch0 -p0
 
 %build
-rm -f ./omf.make
-cp /usr/share/gnome-common/data/omf.make .
+%{__gnome_doc_common}
 %{__glib_gettextize}
 %{__intltoolize}
 %{__libtoolize}
