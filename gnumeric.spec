@@ -17,14 +17,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.5.2
+Version:	1.5.5
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	70051ecbd00a4b2d58ed51ca552fdf22
+# Source0-md5:	6769ce44d4d829f15b469111907fe7e2
 Patch0:		%{name}-help-path.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
@@ -47,8 +47,8 @@ BuildRequires:	libgoffice-devel
 BuildRequires:	libgsf-gnome-devel >= 1.12.1
 %endif
 %if %{with gda}
-BuildRequires:	libgda-devel >= 1.0.1
-BuildRequires:	libgnomedb-devel >= 1.2.1
+BuildRequires:	libgda-devel >= 1.3.91
+BuildRequires:	libgnomedb-devel >= 1.3.91
 %endif
 BuildRequires:	libglade2-devel >= 1:2.4.0
 %{?with_gnome:BuildRequires:	libgnome-devel >= 2.6.0}
@@ -467,6 +467,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_mandir}/man1/gnumeric.1*
 %{_mandir}/man1/ssconvert.1*
+%{_mandir}/man1/ssindex.1*
 
 # applix
 %files plugin-applix
