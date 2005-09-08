@@ -17,14 +17,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.5.5
+Version:	1.5.90
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	6769ce44d4d829f15b469111907fe7e2
+# Source0-md5:	180d2c64b91b26d6bd8ab93caae349fb
 Patch0:		%{name}-help-path.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
@@ -43,8 +43,8 @@ BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonobo-devel >= 2.6.0
 BuildRequires:	libbonoboui-devel >= 2.6.0
-BuildRequires:	libgoffice-devel
-BuildRequires:	libgsf-gnome-devel >= 1.12.1
+BuildRequires:	libgoffice-devel >= 0.0.4
+BuildRequires:	libgsf-gnome-devel >= 1.12.3
 %endif
 %if %{with gda}
 BuildRequires:	libgda-devel >= 1.3.91
@@ -56,7 +56,7 @@ BuildRequires:	libgnomecanvas-devel >= 2.6.0
 BuildRequires:	libgnomeprint-devel >= 2.8.1
 BuildRequires:	libgnomeprintui-devel >= 2.8.1
 %{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.6.0}
-BuildRequires:	libgsf-devel >= 1.11.0
+BuildRequires:	libgsf-devel >= 1.12.3
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
 # disabled by default - still experimental
