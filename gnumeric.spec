@@ -17,14 +17,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.5.90
+Version:	1.6.0
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	180d2c64b91b26d6bd8ab93caae349fb
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.6/%{name}-%{version}.tar.bz2
+# Source0-md5:	153c3a247cbe582f7be40fc9fdd903a6
 Patch0:		%{name}-help-path.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
@@ -43,12 +43,12 @@ BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonobo-devel >= 2.6.0
 BuildRequires:	libbonoboui-devel >= 2.6.0
-BuildRequires:	libgoffice-devel >= 0.0.4
-BuildRequires:	libgsf-gnome-devel >= 1.12.3
+BuildRequires:	libgoffice-devel >= 0.1.0
+BuildRequires:	libgsf-gnome-devel >= 1.13.2
 %endif
 %if %{with gda}
-BuildRequires:	libgda-devel >= 1.3.91
-BuildRequires:	libgnomedb-devel >= 1.3.91
+BuildRequires:	libgda-devel >= 1.9.100
+BuildRequires:	libgnomedb-devel >= 1.9.100
 %endif
 BuildRequires:	libglade2-devel >= 1:2.4.0
 %{?with_gnome:BuildRequires:	libgnome-devel >= 2.6.0}
@@ -425,7 +425,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TODO
 
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/lib*.so
 
 %dir %{_libdir}/gnumeric
 %dir %{_libdir}/gnumeric/%{version}
