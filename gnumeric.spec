@@ -26,7 +26,6 @@ Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.6/%{name}-%{version}.tar.bz2
 # Source0-md5:	153c3a247cbe582f7be40fc9fdd903a6
 Patch0:		%{name}-help-path.patch
-Patch1:		%{name}-CAN-2005-2491.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.4.2
@@ -356,7 +355,6 @@ funkcji.
 %prep
 %setup -q
 %patch0 -p0
-%patch1 -p1
 
 %build
 %{__gnome_doc_common}
@@ -440,7 +438,9 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with gnome}
 %{_datadir}/gnumeric/%{version}/idl
 %{_libdir}/bonobo/servers/*
-%{_sysconfdir}/gconf/schemas/*
+%{_sysconfdir}/gconf/schemas/gnumeric-dialogs.schemas
+%{_sysconfdir}/gconf/schemas/gnumeric-general.schemas
+%{_sysconfdir}/gconf/schemas/gnumeric-plugins.schemas
 
 %dir %{_libdir}/gnumeric/%{version}/plugins/corba
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/corba/*.so
