@@ -66,6 +66,7 @@ BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	psiconv-devel >= 0.9.3
+BuildRequires:	pxlib-devel
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 2.0.0
@@ -201,6 +202,19 @@ Imports/exports OpenOffice.org/StarOffice spreadsheets.
 
 %description plugin-openoffice -l pl
 Importuje/eksportuje arkusze OpenOffice.org/StarOffice.
+
+# paradox
+%package plugin-paradox
+Summary:	Paradox plugin
+Summary(pl):	Wtyczka Paradox
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description plugin-paradox
+Imports Paradox files.
+
+%description plugin-paradox -l pl
+Importuje pliki w formacie Paradoxa.
 
 # plan perfect
 %package plugin-planperfect
@@ -519,6 +533,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnumeric/%{version}/plugins/openoffice
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/openoffice/*.so
 %{_libdir}/gnumeric/%{version}/plugins/openoffice/*.xml
+
+# paradox
+%files plugin-paradox
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/paradox
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/paradox/*.so
+%{_libdir}/gnumeric/%{version}/plugins/paradox/*.xml
 
 # plan perfect
 %files plugin-planperfect
