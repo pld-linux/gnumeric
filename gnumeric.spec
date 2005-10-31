@@ -18,7 +18,7 @@ Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
 Version:	1.6.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -343,7 +343,7 @@ Summary(pl):	Wtyczk Pythona
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-modules
-Requires:	python-pygtk
+Requires:	python-pygtk-gtk
 
 %description plugin-python
 Sample Python plugin providing some (useless) functions.
