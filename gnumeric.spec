@@ -17,14 +17,14 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.6.0
-Release:	3
+Version:	1.6.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	153c3a247cbe582f7be40fc9fdd903a6
+# Source0-md5:	e6f769e4e74c29ffea0305d48691fe28
 Patch0:		%{name}-help-path.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
@@ -43,7 +43,7 @@ BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonobo-devel >= 2.6.0
 BuildRequires:	libbonoboui-devel >= 2.6.0
-BuildRequires:	libgoffice-devel >= 0.1.0
+BuildRequires:	libgoffice-devel >= 0.1.2
 BuildRequires:	libgsf-gnome-devel >= 1.13.2
 %endif
 %if %{with gda}
@@ -76,6 +76,7 @@ BuildRequires:	scrollkeeper
 Requires(post,preun):	GConf2 >= 2.10.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	scrollkeeper
+Requires:	libgoffice >= 0.1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -436,7 +437,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README
 
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so
