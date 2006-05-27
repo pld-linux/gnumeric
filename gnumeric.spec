@@ -18,17 +18,17 @@ Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
 Version:	1.6.3
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.6/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.6/%{name}-%{version}.tar.bz2
 # Source0-md5:	78ffd75ae6abc3bb20dd04407a082a26
 Patch0:		%{name}-help-path.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
-BuildRequires:	ORBit2-devel >= 2.4.2
+BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
@@ -36,13 +36,12 @@ BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.4.4
-BuildRequires:	gnome-common >= 2.8.0-2
+BuildRequires:	gnome-common >= 2.12.0
 BuildRequires:	gtk+2-devel >= 2:2.4.4
 BuildRequires:	intltool >= 0.28
 BuildRequires:	libart_lgpl-devel >= 2.3.12
-%if %{with gnome}
-BuildRequires:	libbonobo-devel >= 2.6.0
-BuildRequires:	libbonoboui-devel >= 2.6.0
+BuildRequires:	libbonobo-devel >= 2.14.0
+BuildRequires:	libbonoboui-devel >= 2.14.0
 BuildRequires:	libgoffice-devel >= 0.2.1
 BuildRequires:	libgsf-gnome-devel >= 1.13.2
 %endif
@@ -51,11 +50,11 @@ BuildRequires:	libgda-devel >= 1.9.100
 BuildRequires:	libgnomedb-devel >= 1.9.100
 %endif
 BuildRequires:	libglade2-devel >= 1:2.4.0
-%{?with_gnome:BuildRequires:	libgnome-devel >= 2.6.0}
-BuildRequires:	libgnomecanvas-devel >= 2.6.0
-BuildRequires:	libgnomeprint-devel >= 2.8.1
-BuildRequires:	libgnomeprintui-devel >= 2.8.1
-%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.6.0}
+%{?with_gnome:BuildRequires:	libgnome-devel >= 2.14.0}
+BuildRequires:	libgnomecanvas-devel >= 2.14.0
+BuildRequires:	libgnomeprint-devel >= 2.12.0
+BuildRequires:	libgnomeprintui-devel >= 2.12.0
+%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.14.0}
 BuildRequires:	libgsf-devel >= 1.12.3
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.12
@@ -73,9 +72,11 @@ BuildRequires:	python-pygtk-devel >= 2.0.0
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	scrollkeeper
-Requires(post,preun):	GConf2 >= 2.10.0
+Requires(post,preun):	GConf2 >= 2.14.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	scrollkeeper
+Requires:	libbonoboui >= 2.14.0
+%{?with_gnome:Requires:	libgnomeui >= 2.14.0}
 Requires:	libgoffice >= 0.2.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
