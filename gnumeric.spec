@@ -17,17 +17,17 @@ Summary(ru):	Электронные таблицы для GNOME
 Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
-Version:	1.6.3
-Release:	2
+Version:	1.7.0
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	78ffd75ae6abc3bb20dd04407a082a26
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.7/%{name}-%{version}.tar.bz2
+# Source0-md5:	2b90b9631f19130eec5e9f1c1e3cffb4
 Patch0:		%{name}-help-path.patch
 URL:		http://www.gnome.org/gnumeric/
-BuildRequires:	GConf2-devel
+BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -35,32 +35,30 @@ BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.4.4
+BuildRequires:	glib2-devel >= 1:2.11.2
 BuildRequires:	gnome-common >= 2.12.0
-BuildRequires:	gtk+2-devel >= 2:2.4.4
-BuildRequires:	intltool >= 0.28
+BuildRequires:	gtk+2-devel >= 2:2.9.2
+BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
-BuildRequires:	libbonobo-devel >= 2.14.0
+%if %{with gnome}
 BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.2.1
-BuildRequires:	libgsf-gnome-devel >= 1.13.2
+BuildRequires:	libgoffice-devel >= 0.3.0
+BuildRequires:	libgsf-gnome-devel >= 1.14.1
 %endif
 %if %{with gda}
 BuildRequires:	libgda-devel >= 1.9.100
 BuildRequires:	libgnomedb-devel >= 1.9.100
 %endif
-BuildRequires:	libglade2-devel >= 1:2.4.0
-%{?with_gnome:BuildRequires:	libgnome-devel >= 2.14.0}
-BuildRequires:	libgnomecanvas-devel >= 2.14.0
+BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprint-devel >= 2.12.0
 BuildRequires:	libgnomeprintui-devel >= 2.12.0
-%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.14.0}
-BuildRequires:	libgsf-devel >= 1.12.3
+%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.15.1}
+BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.4.12
+BuildRequires:	libxml2-devel >= 1:2.6.26
 # disabled by default - still experimental
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
-BuildRequires:	pango-devel >= 1:1.6.0
+BuildRequires:	pango-devel >= 1:1.13.1
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
@@ -68,16 +66,15 @@ BuildRequires:	psiconv-devel >= 0.9.3
 BuildRequires:	pxlib-devel
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
-BuildRequires:	python-pygtk-devel >= 2.0.0
+BuildRequires:	python-pygtk-devel >= 2:2.9.0
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	scrollkeeper
 Requires(post,preun):	GConf2 >= 2.14.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	scrollkeeper
-Requires:	libbonoboui >= 2.14.0
-%{?with_gnome:Requires:	libgnomeui >= 2.14.0}
-Requires:	libgoffice >= 0.2.1
+Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
+%{?with_gnome:Requires:	libgnomeui >= 2.15.1}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -110,6 +107,30 @@ Gnumeric - это программа электронных таблиц для GNOME.
 
 %description -l uk
 Gnumeric - це програма електронних таблиць для GNOME.
+
+%package -n libspreadsheet
+Summary:	libspreadsheet library
+Summary(pl):	Biblioteka libspreadsheet
+Group:		Libraries
+Requires:	libgoffice >= 0.3.0
+
+%description -n libspreadsheet
+libspreadsheet library.
+
+%description -n libspreadsheet -l pl
+Biblioteka libspreadsheet.
+
+%package -n libspreadsheet-devel
+Summary:	Header files for libspreadsheet library
+Summary(pl):	Pliki nagЁСwkowe biblioteki libspreadsheet
+Group:		Development/Libraries
+Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
+
+%description -n libspreadsheet-devel
+This is the package containing the header files for libspreadsheet library.
+
+%description -n libspreadsheet-devel -l pl
+Ten pakiet zawiera pliki nagЁСwkowe biblioteki libspreadsheet.
 
 # plugins - import/export
 # applix
@@ -370,7 +391,7 @@ funkcji.
 
 %prep
 %setup -q
-%patch0 -p0
+%patch0 -p1
 
 %build
 %{__gnome_doc_common}
@@ -405,7 +426,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/*/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
-rm -r $RPM_BUILD_ROOT%{_datadir}/mc/templates/gnumeric.desktop
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -413,7 +433,6 @@ rm -r $RPM_BUILD_ROOT%{_datadir}/mc/templates/gnumeric.desktop
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/ldconfig
 %if %{with gnome}
 %gconf_schema_install gnumeric-dialogs.schemas
 %gconf_schema_install gnumeric-general.schemas
@@ -430,18 +449,19 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %postun
-/sbin/ldconfig
 %scrollkeeper_update_postun
 %if %{with gnome}
 %update_desktop_database_postun
 %endif
+
+%post	-n libspreadsheet -p /sbin/ldconfig
+%postun	-n libspreadsheet -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so
 
 %dir %{_libdir}/gnumeric
 %dir %{_libdir}/gnumeric/%{version}
@@ -453,7 +473,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with gnome}
 %{_datadir}/gnumeric/%{version}/idl
-%{_libdir}/bonobo/servers/*
 %{_sysconfdir}/gconf/schemas/gnumeric-dialogs.schemas
 %{_sysconfdir}/gconf/schemas/gnumeric-general.schemas
 %{_sysconfdir}/gconf/schemas/gnumeric-plugins.schemas
@@ -486,6 +505,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/gnumeric.1*
 %{_mandir}/man1/ssconvert.1*
 %{_mandir}/man1/ssindex.1*
+
+%files -n libspreadsheet
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so
+
+%files -n libspreadsheet-devel
+%defattr(644,root,root,755)
+%{_includedir}/libspreadsheet-1-7
+%{_pkgconfigdir}/*.pc
 
 # applix
 %files plugin-applix
