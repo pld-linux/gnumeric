@@ -1,13 +1,12 @@
---- src/wbcg-actions.c.orig	2005-01-20 11:17:28.768454384 +0100
-+++ src/wbcg-actions.c	2005-01-20 11:20:26.250473016 +0100
-@@ -854,8 +854,8 @@
- #warning "handle translations when we generate them"
+diff -aurN gnumeric-1.7.0.orig/src/wbcg-actions.c gnumeric-1.7.0/src/wbcg-actions.c
+--- gnumeric-1.7.0.orig/src/wbcg-actions.c	2006-05-01 17:33:34.000000000 +0200
++++ gnumeric-1.7.0/src/wbcg-actions.c	2006-06-11 20:27:13.636128632 +0200
+@@ -899,7 +899,7 @@
+ 
  #ifndef G_OS_WIN32
  	argv[0] = (char *)"yelp";
--	argv[1] = g_build_filename (gnm_sys_data_dir (), "doc", "C",
--			"gnumeric.xml", NULL);
-+	argv[1] = g_build_filename ("/usr/share/gnome/help/gnumeric",
-+			"C/gnumeric.xml", NULL);
+-	argv[1] = (char *)"help:gnumeric";
++	argv[1] = (char *)"/usr/share/gnome/help/gnumeric/C/gnumeric.xml";
+ 	g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH,
+ 		NULL, NULL, NULL, &error);
  #else
- 	argv[0] = (char *)"hh";
- 	argv[1] = g_build_filename (gnm_sys_data_dir (), "doc", "C",
