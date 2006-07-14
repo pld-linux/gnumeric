@@ -18,7 +18,7 @@ Summary(uk):	åÌÅËÔÒÏÎÎ¦ ÔÁÂÌÉÃ¦ ÄÌÑ GNOME
 Summary(zh_CN):	LinuxÏÂµÄExcel -- GNOMEµç×Ó±í¸ñ
 Name:		gnumeric
 Version:	1.7.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -35,9 +35,9 @@ BuildRequires:	bison
 BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.11.2
+BuildRequires:	glib2-devel >= 1:2.12.0
 BuildRequires:	gnome-common >= 2.12.0
-BuildRequires:	gtk+2-devel >= 2:2.9.2
+BuildRequires:	gtk+2-devel >= 2:2.10.0
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
@@ -49,16 +49,16 @@ BuildRequires:	libgsf-gnome-devel >= 1.14.1
 BuildRequires:	libgda-devel >= 1.9.100
 BuildRequires:	libgnomedb-devel >= 1.9.100
 %endif
-BuildRequires:	libglade2-devel >= 1:2.5.1
+BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgnomeprint-devel >= 2.12.0
-BuildRequires:	libgnomeprintui-devel >= 2.12.0
-%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.15.1}
+BuildRequires:	libgnomeprintui-devel >= 2.12.1
+%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.15.2}
 BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
 # disabled by default - still experimental
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
-BuildRequires:	pango-devel >= 1:1.13.1
+BuildRequires:	pango-devel >= 1:1.13.3
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
@@ -66,7 +66,7 @@ BuildRequires:	psiconv-devel >= 0.9.3
 BuildRequires:	pxlib-devel
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
-BuildRequires:	python-pygtk-devel >= 2:2.9.0
+BuildRequires:	python-pygtk-devel >= 2:2.9.3
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	scrollkeeper
@@ -402,6 +402,7 @@ funkcji.
 %{__autoheader}
 %{__autoconf}
 %{__automake}
+LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--disable-static \
 	--disable-schemas-install \
