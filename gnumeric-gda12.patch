@@ -1,0 +1,108 @@
+diff -aurN gnumeric-1.6.3.orig/configure.in gnumeric-1.6.3/configure.in
+--- gnumeric-1.6.3.orig/configure.in	2006-03-20 18:27:13.000000000 +0100
++++ gnumeric-1.6.3/configure.in	2006-08-09 19:42:05.649114720 +0200
+@@ -369,11 +369,11 @@
+ 	fi
+ )
+ if test "$try_gda" = "true"; then
+-	PKG_CHECK_MODULES(GDA, [libgda-2.0 >= 1.3.0],
++	PKG_CHECK_MODULES(GDA, [libgda >= 1.2.3],
+ 		[gda_msg=yes],
+ 		[gda_msg="NO.  libgda problem"])
+ 	if test "$gda_msg" = "yes"; then
+-		PKG_CHECK_MODULES(GNOMEDB, [libgnomedb-2.0 >= 1.3.0],
++		PKG_CHECK_MODULES(GNOMEDB, [libgnomedb >= 1.2.2],
+ 			[gnomedb_msg="yes"],
+ 			[gnomedb_msg="NO. libgnomedb problem"])
+ 		if test "$gnomedb_msg" = "yes"; then
+diff -aurN gnumeric-1.6.3.orig/plugins/gda/plugin-gda.c gnumeric-1.6.3/plugins/gda/plugin-gda.c
+--- gnumeric-1.6.3.orig/plugins/gda/plugin-gda.c	2005-08-09 13:49:36.000000000 +0200
++++ gnumeric-1.6.3/plugins/gda/plugin-gda.c	2006-08-09 19:59:23.293368816 +0200
+@@ -87,8 +87,6 @@
+ #ifdef HAVE_LIBGNOMEDB
+ 	GtkWidget *dialog, *login;
+ #endif
+-	GError *error = NULL;
+-
+ 	/* initialize connection pool if first time */
+ 	if (!GDA_IS_CLIENT (connection_pool)) {
+ 		connection_pool = gda_client_new ();
+@@ -120,11 +118,7 @@
+ 	real_password = g_strdup (password);
+ #endif
+ 
+-	cnc = gda_client_open_connection (connection_pool, real_dsn, real_user, real_password, options, &error);
+-	if (!cnc) {
+-		g_warning ("Libgda error: %s\n", error->message);
+-		g_error_free (error);
+-	}
++	cnc = gda_client_open_connection (connection_pool, real_dsn, real_user, real_password, options);
+ 
+ 	g_free (real_dsn);
+ 	g_free (real_user);
+@@ -168,7 +162,6 @@
+ 	GdaDataModel*  recset;
+ 	GList*         recset_list;
+ 	GdaCommand*    cmd;
+-	GError*        error = NULL;
+ 
+ 	dsn_name = value_get_as_string (args[0]);
+ 	user_name = value_get_as_string (args[1]);
+@@ -184,7 +177,7 @@
+ 
+ 	/* execute command */
+ 	cmd = gda_command_new (sql, GDA_COMMAND_TYPE_SQL, 0);
+-	recset_list = gda_connection_execute_command (cnc, cmd, NULL, &error);
++	recset_list = gda_connection_execute_command (cnc, cmd, NULL);
+ 	gda_command_free (cmd);
+ 	if (recset_list) {
+ 		recset = (GdaDataModel *) recset_list->data;
+@@ -195,14 +188,9 @@
+ 
+ 		g_list_foreach (recset_list, (GFunc) g_object_unref, NULL);
+ 		g_list_free (recset_list);
+-	} else {
+-		if (error) {
+-			ret = value_new_error (ei->pos, error->message);
+-			g_error_free (error);
++
+ 		} else
+ 			ret = value_new_empty ();
+-	}
+-
+ 	return ret;
+ }
+ 
+@@ -244,7 +232,6 @@
+ 	GdaDataModel*  recset;
+ 	GList*         recset_list;
+ 	GdaCommand*    cmd;
+-	GError*        error = NULL;
+ 
+ 	dsn_name = value_get_as_string (args[0]);
+ 	user_name = value_get_as_string (args[1]);
+@@ -260,7 +247,7 @@
+ 
+ 	/* execute command */
+ 	cmd = gda_command_new (table, GDA_COMMAND_TYPE_TABLE, 0);
+-	recset_list = gda_connection_execute_command (cnc, cmd, NULL, &error);
++	recset_list = gda_connection_execute_command (cnc, cmd, NULL);
+ 	gda_command_free (cmd);
+ 	if (recset_list) {
+ 		recset = (GdaDataModel *) recset_list->data;
+@@ -271,14 +258,9 @@
+ 
+ 		g_list_foreach (recset_list, (GFunc) g_object_unref, NULL);
+ 		g_list_free (recset_list);
+-	} else {
+-		if (error) {
+-			ret = value_new_error (ei->pos, error->message);
+-			g_error_free (error);
++
+ 		} else
+ 			ret = value_new_empty ();
+-	}
+-
+ 	return ret;
+ }
+ 
