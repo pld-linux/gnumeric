@@ -26,6 +26,7 @@ Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/1.6/%{name}-%{version}.tar.bz2
 # Source0-md5:	78ffd75ae6abc3bb20dd04407a082a26
 Patch0:		%{name}-help-path.patch
+Patch1:		%{name}-gda12.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 1:2.14.0
@@ -47,8 +48,8 @@ BuildRequires:	libgoffice-devel >= 0.2.1
 BuildRequires:	libgsf-gnome-devel >= 1.13.2
 %endif
 %if %{with gda}
-BuildRequires:	libgda-devel >= 1.9.100
-BuildRequires:	libgnomedb-devel >= 1.9.100
+BuildRequires:	libgda-devel >= 1:1.2.3
+BuildRequires:	libgnomedb-devel >= 1:1.2.2
 %endif
 BuildRequires:	libglade2-devel >= 1:2.4.0
 %{?with_gnome:BuildRequires:	libgnome-devel >= 2.14.0}
@@ -372,6 +373,7 @@ funkcji.
 %prep
 %setup -q
 %patch0 -p0
+%patch1 -p1
 
 %build
 %{__gnome_doc_common}
