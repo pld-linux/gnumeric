@@ -18,7 +18,7 @@ Summary(uk):	Електронн╕ таблиц╕ для GNOME
 Summary(zh_CN):	Linuxоб╣дExcel -- GNOME╣Гвс╠М╦Я
 Name:		gnumeric
 Version:	1.7.0
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -26,6 +26,7 @@ Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.7/%{name}-%{version}.tar.bz2
 # Source0-md5:	2b90b9631f19130eec5e9f1c1e3cffb4
 Patch0:		%{name}-help-path.patch
+Patch1:		%{name}-gda12.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
@@ -37,7 +38,7 @@ BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.12.0
 BuildRequires:	gnome-common >= 2.12.0
-BuildRequires:	gtk+2-devel >= 2:2.10.0
+BuildRequires:	gtk+2-devel >= 2:2.10.1
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
@@ -46,19 +47,19 @@ BuildRequires:	libgoffice-devel >= 0.3.0
 BuildRequires:	libgsf-gnome-devel >= 1.14.1
 %endif
 %if %{with gda}
-BuildRequires:	libgda-devel >= 1.9.100
-BuildRequires:	libgnomedb-devel >= 1.9.100
+BuildRequires:	libgda-devel >= 1:1.2.3
+BuildRequires:	libgnomedb-devel >= 1:1.2.1
 %endif
 BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgnomeprint-devel >= 2.12.0
 BuildRequires:	libgnomeprintui-devel >= 2.12.1
-%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.15.2}
+%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.15.90}
 BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
 # disabled by default - still experimental
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
-BuildRequires:	pango-devel >= 1:1.13.3
+BuildRequires:	pango-devel >= 1:1.13.4
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
@@ -392,6 +393,7 @@ funkcji.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__gnome_doc_common}
@@ -402,7 +404,6 @@ funkcji.
 %{__autoheader}
 %{__autoconf}
 %{__automake}
-LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--disable-static \
 	--disable-schemas-install \
