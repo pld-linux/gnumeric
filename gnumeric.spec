@@ -113,7 +113,7 @@ Gnumeric - це програма електронних таблиць для GNOME.
 Summary:	libspreadsheet library
 Summary(pl):	Biblioteka libspreadsheet
 Group:		Libraries
-Requires:	libgoffice >= 0.3.0
+%{?with_gnome:Requires:	libgoffice >= 0.3.0}
 
 %description -n libspreadsheet
 libspreadsheet library.
