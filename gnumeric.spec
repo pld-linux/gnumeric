@@ -10,12 +10,12 @@
 %endif
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
-Summary(es):	La hoja de c·lculo del GNOME
-Summary(pl):	Arkusz kalkulacyjny GNOME
-Summary(pt_BR):	A planilha do GNOME
-Summary(ru):	¸Ã≈À‘“œŒŒŸ≈ ‘¡¬Ã…√Ÿ ƒÃ— GNOME
-Summary(uk):	ÂÃ≈À‘“œŒŒ¶ ‘¡¬Ã…√¶ ƒÃ— GNOME
-Summary(zh_CN):	Linuxœ¬µƒExcel -- GNOMEµÁ◊”±Ì∏Ò
+Summary(es.UTF-8):   La hoja de c√°lculo del GNOME
+Summary(pl.UTF-8):   Arkusz kalkulacyjny GNOME
+Summary(pt_BR.UTF-8):   A planilha do GNOME
+Summary(ru.UTF-8):   –≠–ª–µ–∫—Ç—Ä–æ–Ω–Ω—ã–µ —Ç–∞–±–ª–∏—Ü—ã –¥–ª—è GNOME
+Summary(uk.UTF-8):   –ï–ª–µ–∫—Ç—Ä–æ–Ω–Ω—ñ —Ç–∞–±–ª–∏—Ü—ñ –¥–ª—è GNOME
+Summary(zh_CN.UTF-8):   Linux‰∏ãÁöÑExcel -- GNOMEÁîµÂ≠êË°®Ê†º
 Name:		gnumeric
 Version:	1.7.0
 Release:	4
@@ -86,71 +86,71 @@ are familiar with Excel, you should be ready to use Gnumeric. We have
 tried to clone all of the good features and stay as compatible as
 possible with Excel in terms of usability.
 
-%description -l es
-Gnumeric es un programa de hoja de c·lculo para GNOME. Este programa
-procura ser reemplazar los programas comerciales, asÌ que ha gozado
-bastante esfuerzo. Si conoce Excel, deberÌa estar preparado para usar
+%description -l es.UTF-8
+Gnumeric es un programa de hoja de c√°lculo para GNOME. Este programa
+procura ser reemplazar los programas comerciales, as√≠ que ha gozado
+bastante esfuerzo. Si conoce Excel, deber√≠a estar preparado para usar
 Gnumeric. Intentamos clonar todas las buenas cualidades y seguir lo
-m·s compatible que fuera posible, en cuanto a la usabilidad.
+m√°s compatible que fuera posible, en cuanto a la usabilidad.
 
-%description -l pl
-Bazuj±cy na GNOME arkusz kalkulacyjny. Je∂li znasz arkusz Excel to
-jeste∂ gotÛw na uøywanie Gnumerica. Starali∂my siÍ sklonowaÊ wszystkie
-dobre cechy i byÊ kompatybilnym z Excelem w sensie uøyteczno∂ci.
+%description -l pl.UTF-8
+BazujƒÖcy na GNOME arkusz kalkulacyjny. Je≈õli znasz arkusz Excel to
+jeste≈õ got√≥w na u≈ºywanie Gnumerica. Starali≈õmy siƒô sklonowaƒá wszystkie
+dobre cechy i byƒá kompatybilnym z Excelem w sensie u≈ºyteczno≈õci.
 
-%description -l pt_BR
+%description -l pt_BR.UTF-8
 Este pacote instala a planilha do GNOME, que foi feita para substituir
-qualquer planilha comercial, pois uma quantidade razo·vel de trabalho
-foi (e est· sendo) colocada para torn·-la a melhor possÌvel.
+qualquer planilha comercial, pois uma quantidade razo√°vel de trabalho
+foi (e est√° sendo) colocada para torn√°-la a melhor poss√≠vel.
 
-%description -l ru
-Gnumeric - ‹‘œ –“œ«“¡ÕÕ¡ ‹Ã≈À‘“œŒŒŸ» ‘¡¬Ã…√ ƒÃ— GNOME.
+%description -l ru.UTF-8
+Gnumeric - —ç—Ç–æ –ø—Ä–æ–≥—Ä–∞–º–º–∞ —ç–ª–µ–∫—Ç—Ä–æ–Ω–Ω—ã—Ö —Ç–∞–±–ª–∏—Ü –¥–ª—è GNOME.
 
-%description -l uk
-Gnumeric - √≈ –“œ«“¡Õ¡ ≈Ã≈À‘“œŒŒ…» ‘¡¬Ã…√ÿ ƒÃ— GNOME.
+%description -l uk.UTF-8
+Gnumeric - —Ü–µ –ø—Ä–æ–≥—Ä–∞–º–∞ –µ–ª–µ–∫—Ç—Ä–æ–Ω–Ω–∏—Ö —Ç–∞–±–ª–∏—Ü—å –¥–ª—è GNOME.
 
 %package -n libspreadsheet
 Summary:	libspreadsheet library
-Summary(pl):	Biblioteka libspreadsheet
+Summary(pl.UTF-8):   Biblioteka libspreadsheet
 Group:		Libraries
 %{?with_gnome:Requires:	libgoffice >= 0.3.0}
 
 %description -n libspreadsheet
 libspreadsheet library.
 
-%description -n libspreadsheet -l pl
+%description -n libspreadsheet -l pl.UTF-8
 Biblioteka libspreadsheet.
 
 %package -n libspreadsheet-devel
 Summary:	Header files for libspreadsheet library
-Summary(pl):	Pliki nag≥Ûwkowe biblioteki libspreadsheet
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe biblioteki libspreadsheet
 Group:		Development/Libraries
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
 %description -n libspreadsheet-devel
 This is the package containing the header files for libspreadsheet library.
 
-%description -n libspreadsheet-devel -l pl
-Ten pakiet zawiera pliki nag≥Ûwkowe biblioteki libspreadsheet.
+%description -n libspreadsheet-devel -l pl.UTF-8
+Ten pakiet zawiera pliki nag≈Ç√≥wkowe biblioteki libspreadsheet.
 
 # plugins - import/export
 # applix
 %package plugin-applix
 Summary:	Applix plugin
-Summary(pl):	Wtyczka Applix
+Summary(pl.UTF-8):   Wtyczka Applix
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-applix
 Imports Applix 4.[234] spreadsheets.
 
-%description plugin-applix -l pl
+%description plugin-applix -l pl.UTF-8
 Importuje arkusze Applix w wersjach 4.[234].
 
 # data interchange format (DIF) 
 %package plugin-dif
 Summary:	Data Interchange Format plugin
-Summary(pl):	Wtyczka Data Interchange Format
+Summary(pl.UTF-8):   Wtyczka Data Interchange Format
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -158,184 +158,184 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 Reads and writes information stored in the Data Interchange Format
 (*.dif).
 
-%description plugin-dif -l pl
+%description plugin-dif -l pl.UTF-8
 Odczytuje i zapisuje informacje w uniwersalnym formacie wymiany
 danych (*.dif).
 
 # ms excel
 %package plugin-excel
 Summary:	MS Excel (tm) plugin
-Summary(pl):	Wtyczka MS Excel (tm)
+Summary(pl.UTF-8):   Wtyczka MS Excel (tm)
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-excel
 Imports/exports MS Excel (tm) files.
 
-%description plugin-excel -l pl
+%description plugin-excel -l pl.UTF-8
 Importuje/eksporuje pliki MS Excel (tm).
 
 # html
 %package plugin-html
 Summary:	HTML plugin
-Summary(pl):	Wtyczka HTML
+Summary(pl.UTF-8):   Wtyczka HTML
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-html
 Imports/exports of HTML, TeX, DVI and roff formats.
 
-%description plugin-html -l pl
+%description plugin-html -l pl.UTF-8
 Importuje/eksportuje formaty HTML, TeX, DVI i roff.
 
 # lotus 123
 %package plugin-lotus123
 Summary:	Lotus 123 plugin
-Summary(pl):	Wtyczka Lotus 123
+Summary(pl.UTF-8):   Wtyczka Lotus 123
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-lotus123
 Imports Lotus 123 files.
 
-%description plugin-lotus123 -l pl
+%description plugin-lotus123 -l pl.UTF-8
 Importuje pliki Lotusa 123.
 
 # gnu oleo
 %package plugin-gnuoleo
 Summary:	GNU Oleo plugin
-Summary(pl):	Wtyczka GNU Oleo
+Summary(pl.UTF-8):   Wtyczka GNU Oleo
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-gnuoleo
 Imports GNU Oleo documents.
 
-%description plugin-gnuoleo -l pl
+%description plugin-gnuoleo -l pl.UTF-8
 Importuje dokumenty GNU Oleo.
 
 # openoffice
 %package plugin-openoffice
 Summary:	OpenOffice.org plugin
-Summary(pl):	Wtyczka OpenOffice.org
+Summary(pl.UTF-8):   Wtyczka OpenOffice.org
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-openoffice
 Imports/exports OpenOffice.org/StarOffice spreadsheets.
 
-%description plugin-openoffice -l pl
+%description plugin-openoffice -l pl.UTF-8
 Importuje/eksportuje arkusze OpenOffice.org/StarOffice.
 
 # paradox
 %package plugin-paradox
 Summary:	Paradox plugin
-Summary(pl):	Wtyczka Paradox
+Summary(pl.UTF-8):   Wtyczka Paradox
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-paradox
 Imports Paradox files.
 
-%description plugin-paradox -l pl
+%description plugin-paradox -l pl.UTF-8
 Importuje pliki w formacie Paradoxa.
 
 # plan perfect
 %package plugin-planperfect
 Summary:	Plan Perfect plugin
-Summary(pl):	Wtyczka Plan Perfect
+Summary(pl.UTF-8):   Wtyczka Plan Perfect
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-planperfect
 Imports Plan Perfect formatted documents.
 
-%description plugin-planperfect -l pl
+%description plugin-planperfect -l pl.UTF-8
 Importuje dokumenty w formacie Plan Perfect.
 
 # psiconv
 %package plugin-psiconv
 Summary:	Psiconv plugin
-Summary(pl):	Wtyczka Psiconv
+Summary(pl.UTF-8):   Wtyczka Psiconv
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-psiconv
 Imports Psion 5 series Sheet files.
 
-%description plugin-psiconv -l pl
+%description plugin-psiconv -l pl.UTF-8
 Importuje pliki arkuszy Psion serii 5.
 
 # qpro
 %package plugin-qpro
 Summary:	Quattro Pro(tm) plugin
-Summary(pl):	Wtyczka Quattro Pro(tm)
+Summary(pl.UTF-8):   Wtyczka Quattro Pro(tm)
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-qpro
 Imports Quattro Pro (tm) files.
 
-%description plugin-qpro -l pl
+%description plugin-qpro -l pl.UTF-8
 Importuje pliki Quattro Pro (tm).
 
 # sc/xspread
 %package plugin-sc
 Summary:	SC/XSpread plugin
-Summary(pl):	Wtyczka SC/XSpread
+Summary(pl.UTF-8):   Wtyczka SC/XSpread
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-sc
 Imports SC/XSpread files.
 
-%description plugin-sc -l pl
+%description plugin-sc -l pl.UTF-8
 Importuje pliki SC/XSpread.
 
 # sylk
 %package plugin-sylk
 Summary:	MultiPlan (SYLK) plugin
-Summary(pl):	Wtyczka MultiPlan (SYLK)
+Summary(pl.UTF-8):   Wtyczka MultiPlan (SYLK)
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-sylk
 Imports MultiPlan (SYLK) files.
 
-%description plugin-sylk -l pl
+%description plugin-sylk -l pl.UTF-8
 Importuje pliki MultiPlan (SYLK).
 
 # xbase
 %package plugin-xbase
 Summary:	XBase plugin
-Summary(pl):	Wtyczka Xbase
+Summary(pl.UTF-8):   Wtyczka Xbase
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-xbase
 Imports Xbase files.
 
-%description plugin-xbase -l pl
+%description plugin-xbase -l pl.UTF-8
 Importuje pliki XBase.
 
 # other plugins
 # gda
 %package plugin-gdaif
 Summary:	Database plugin
-Summary(pl):	Wtyczka baz danych
+Summary(pl.UTF-8):   Wtyczka baz danych
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-gdaif
 Database functions for retrieval of data from a database.
 
-%description plugin-gdaif -l pl
-Funkcje bazodanowe, pozwalaj±ce na pobieranie danych z baz danych.
+%description plugin-gdaif -l pl.UTF-8
+Funkcje bazodanowe, pozwalajƒÖce na pobieranie danych z baz danych.
 
 # gnome db
 %package plugin-gnomedb
 Summary:	GNOME DB plugin
-Summary(pl):	Wtyczka GNOME DB
+Summary(pl.UTF-8):   Wtyczka GNOME DB
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	gnumeric-plugin-gdaif
@@ -343,41 +343,41 @@ Requires:	gnumeric-plugin-gdaif
 %description plugin-gnomedb
 Gnumeric frontend for libgnomedb.
 
-%description plugin-gnomedb -l pl
-Nak≥adka Gnumerica na libgnomedb.
+%description plugin-gnomedb -l pl.UTF-8
+Nak≈Çadka Gnumerica na libgnomedb.
 
 # samples
 %package plugin-sample
 Summary:	Sample plugins
-Summary(pl):	Przyk≥adowe wtyczki
+Summary(pl.UTF-8):   Przyk≈Çadowe wtyczki
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-sample
 Sample database and UI plugins.
 
-%description plugin-sample -l pl
-Przyk≥adowe wtyczki bazy danych oraz interfejsu uøytkownika.
+%description plugin-sample -l pl.UTF-8
+Przyk≈Çadowe wtyczki bazy danych oraz interfejsu u≈ºytkownika.
 
 # perl/python stuff
 # perl-func/perl loader
 %package plugin-perl
 Summary:	Perl plugin
-Summary(pl):	Wtyczk Perla
+Summary(pl.UTF-8):   Wtyczk Perla
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-perl
 Sample Perl plugin providing some (useless) functions.
 
-%description plugin-perl -l pl
-Przyk≥adowa wtyczka Perla dostarczaj±ca rÛønych (bezuøytecznych)
+%description plugin-perl -l pl.UTF-8
+Przyk≈Çadowa wtyczka Perla dostarczajƒÖca r√≥≈ºnych (bezu≈ºytecznych)
 funkcji.
 
 # perl-func/perl loader
 %package plugin-python
 Summary:	Python plugin
-Summary(pl):	Wtyczk Pythona
+Summary(pl.UTF-8):   Wtyczk Pythona
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-modules
@@ -386,8 +386,8 @@ Requires:	python-pygtk-gtk
 %description plugin-python
 Sample Python plugin providing some (useless) functions.
 
-%description plugin-python -l pl
-Przyk≥adowa wtyczka Pythona, dostarczaj±ca rÛønych (bezuøytecznych)
+%description plugin-python -l pl.UTF-8
+Przyk≈Çadowa wtyczka Pythona, dostarczajƒÖca r√≥≈ºnych (bezu≈ºytecznych)
 funkcji.
 
 %prep
