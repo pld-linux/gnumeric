@@ -10,12 +10,12 @@
 %endif
 %include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
-Summary(es.UTF-8):   La hoja de cálculo del GNOME
-Summary(pl.UTF-8):   Arkusz kalkulacyjny GNOME
-Summary(pt_BR.UTF-8):   A planilha do GNOME
-Summary(ru.UTF-8):   Электронные таблицы для GNOME
-Summary(uk.UTF-8):   Електронні таблиці для GNOME
-Summary(zh_CN.UTF-8):   Linux下的Excel -- GNOME电子表格
+Summary(es.UTF-8):	La hoja de cálculo del GNOME
+Summary(pl.UTF-8):	Arkusz kalkulacyjny GNOME
+Summary(pt_BR.UTF-8):	A planilha do GNOME
+Summary(ru.UTF-8):	Электронные таблицы для GNOME
+Summary(uk.UTF-8):	Електронні таблиці для GNOME
+Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
 Version:	1.7.0
 Release:	4
@@ -111,7 +111,7 @@ Gnumeric - це програма електронних таблиць для GN
 
 %package -n libspreadsheet
 Summary:	libspreadsheet library
-Summary(pl.UTF-8):   Biblioteka libspreadsheet
+Summary(pl.UTF-8):	Biblioteka libspreadsheet
 Group:		Libraries
 %{?with_gnome:Requires:	libgoffice >= 0.3.0}
 
@@ -123,7 +123,7 @@ Biblioteka libspreadsheet.
 
 %package -n libspreadsheet-devel
 Summary:	Header files for libspreadsheet library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki libspreadsheet
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libspreadsheet
 Group:		Development/Libraries
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
@@ -137,7 +137,7 @@ Ten pakiet zawiera pliki nagłówkowe biblioteki libspreadsheet.
 # applix
 %package plugin-applix
 Summary:	Applix plugin
-Summary(pl.UTF-8):   Wtyczka Applix
+Summary(pl.UTF-8):	Wtyczka Applix
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -150,7 +150,7 @@ Importuje arkusze Applix w wersjach 4.[234].
 # data interchange format (DIF) 
 %package plugin-dif
 Summary:	Data Interchange Format plugin
-Summary(pl.UTF-8):   Wtyczka Data Interchange Format
+Summary(pl.UTF-8):	Wtyczka Data Interchange Format
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -165,7 +165,7 @@ danych (*.dif).
 # ms excel
 %package plugin-excel
 Summary:	MS Excel (tm) plugin
-Summary(pl.UTF-8):   Wtyczka MS Excel (tm)
+Summary(pl.UTF-8):	Wtyczka MS Excel (tm)
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -178,7 +178,7 @@ Importuje/eksporuje pliki MS Excel (tm).
 # html
 %package plugin-html
 Summary:	HTML plugin
-Summary(pl.UTF-8):   Wtyczka HTML
+Summary(pl.UTF-8):	Wtyczka HTML
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -191,7 +191,7 @@ Importuje/eksportuje formaty HTML, TeX, DVI i roff.
 # lotus 123
 %package plugin-lotus123
 Summary:	Lotus 123 plugin
-Summary(pl.UTF-8):   Wtyczka Lotus 123
+Summary(pl.UTF-8):	Wtyczka Lotus 123
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -204,7 +204,7 @@ Importuje pliki Lotusa 123.
 # gnu oleo
 %package plugin-gnuoleo
 Summary:	GNU Oleo plugin
-Summary(pl.UTF-8):   Wtyczka GNU Oleo
+Summary(pl.UTF-8):	Wtyczka GNU Oleo
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -217,7 +217,7 @@ Importuje dokumenty GNU Oleo.
 # openoffice
 %package plugin-openoffice
 Summary:	OpenOffice.org plugin
-Summary(pl.UTF-8):   Wtyczka OpenOffice.org
+Summary(pl.UTF-8):	Wtyczka OpenOffice.org
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -230,7 +230,7 @@ Importuje/eksportuje arkusze OpenOffice.org/StarOffice.
 # paradox
 %package plugin-paradox
 Summary:	Paradox plugin
-Summary(pl.UTF-8):   Wtyczka Paradox
+Summary(pl.UTF-8):	Wtyczka Paradox
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -243,7 +243,7 @@ Importuje pliki w formacie Paradoxa.
 # plan perfect
 %package plugin-planperfect
 Summary:	Plan Perfect plugin
-Summary(pl.UTF-8):   Wtyczka Plan Perfect
+Summary(pl.UTF-8):	Wtyczka Plan Perfect
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -256,7 +256,7 @@ Importuje dokumenty w formacie Plan Perfect.
 # psiconv
 %package plugin-psiconv
 Summary:	Psiconv plugin
-Summary(pl.UTF-8):   Wtyczka Psiconv
+Summary(pl.UTF-8):	Wtyczka Psiconv
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -269,7 +269,7 @@ Importuje pliki arkuszy Psion serii 5.
 # qpro
 %package plugin-qpro
 Summary:	Quattro Pro(tm) plugin
-Summary(pl.UTF-8):   Wtyczka Quattro Pro(tm)
+Summary(pl.UTF-8):	Wtyczka Quattro Pro(tm)
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -282,7 +282,7 @@ Importuje pliki Quattro Pro (tm).
 # sc/xspread
 %package plugin-sc
 Summary:	SC/XSpread plugin
-Summary(pl.UTF-8):   Wtyczka SC/XSpread
+Summary(pl.UTF-8):	Wtyczka SC/XSpread
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -295,7 +295,7 @@ Importuje pliki SC/XSpread.
 # sylk
 %package plugin-sylk
 Summary:	MultiPlan (SYLK) plugin
-Summary(pl.UTF-8):   Wtyczka MultiPlan (SYLK)
+Summary(pl.UTF-8):	Wtyczka MultiPlan (SYLK)
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -308,7 +308,7 @@ Importuje pliki MultiPlan (SYLK).
 # xbase
 %package plugin-xbase
 Summary:	XBase plugin
-Summary(pl.UTF-8):   Wtyczka Xbase
+Summary(pl.UTF-8):	Wtyczka Xbase
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -322,7 +322,7 @@ Importuje pliki XBase.
 # gda
 %package plugin-gdaif
 Summary:	Database plugin
-Summary(pl.UTF-8):   Wtyczka baz danych
+Summary(pl.UTF-8):	Wtyczka baz danych
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -335,7 +335,7 @@ Funkcje bazodanowe, pozwalające na pobieranie danych z baz danych.
 # gnome db
 %package plugin-gnomedb
 Summary:	GNOME DB plugin
-Summary(pl.UTF-8):   Wtyczka GNOME DB
+Summary(pl.UTF-8):	Wtyczka GNOME DB
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	gnumeric-plugin-gdaif
@@ -349,7 +349,7 @@ Nakładka Gnumerica na libgnomedb.
 # samples
 %package plugin-sample
 Summary:	Sample plugins
-Summary(pl.UTF-8):   Przykładowe wtyczki
+Summary(pl.UTF-8):	Przykładowe wtyczki
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -363,7 +363,7 @@ Przykładowe wtyczki bazy danych oraz interfejsu użytkownika.
 # perl-func/perl loader
 %package plugin-perl
 Summary:	Perl plugin
-Summary(pl.UTF-8):   Wtyczk Perla
+Summary(pl.UTF-8):	Wtyczk Perla
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -377,7 +377,7 @@ funkcji.
 # perl-func/perl loader
 %package plugin-python
 Summary:	Python plugin
-Summary(pl.UTF-8):   Wtyczk Pythona
+Summary(pl.UTF-8):	Wtyczk Pythona
 Group:		Applications/Productivity
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-modules
