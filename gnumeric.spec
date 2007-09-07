@@ -18,7 +18,7 @@ Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
 Version:	1.7.12
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -47,8 +47,8 @@ BuildRequires:	libgoffice-devel >= 0.5.0
 BuildRequires:	libgsf-gnome-devel >= 1.14.6
 %endif
 %if %{with gda}
-BuildRequires:	libgda-devel >= 3.1.1
-BuildRequires:	libgnomedb-devel >= 3.1.1
+BuildRequires:	libgda3-devel >= 3.1.1
+BuildRequires:	libgnomedb3-devel >= 3.1.1
 %endif
 BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgnomeprint-devel >= 2.12.0
