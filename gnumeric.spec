@@ -17,14 +17,14 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.7.12
-Release:	2
+Version:	1.8.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	d00a63bac78e29920e5ea2fce8cfa25e
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.8/%{name}-%{version}.tar.bz2
+# Source0-md5:	a80ae52484b07d772297dcde6c0dab47
 #Patch0:		%{name}-help-path.patch
 #Patch1:		%{name}-gda12.patch
 URL:		http://www.gnome.org/gnumeric/
@@ -43,7 +43,7 @@ BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.5.0
+BuildRequires:	libgoffice-devel >= 0.6.0
 BuildRequires:	libgsf-gnome-devel >= 1.14.6
 %endif
 %if %{with gda}
@@ -430,7 +430,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/*/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 [ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
 	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name} --with-gnome --all-name
@@ -518,7 +517,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n libspreadsheet-devel
 %defattr(644,root,root,755)
-%{_includedir}/libspreadsheet-1-7
+%{_includedir}/libspreadsheet-1.8
 %{_pkgconfigdir}/*.pc
 
 # applix
