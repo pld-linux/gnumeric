@@ -43,7 +43,7 @@ BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.6.0
+BuildRequires:	libgoffice-devel >= 0.6.3
 BuildRequires:	libgsf-gnome-devel >= 1.14.6
 %endif
 %if %{with gda}
