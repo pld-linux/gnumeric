@@ -20,7 +20,7 @@ Name:		gnumeric
 Version:	1.10.0
 Release:	1
 Epoch:		1
-License:	GPL
+License:	GPL v2+
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.10/%{name}-%{version}.tar.bz2
