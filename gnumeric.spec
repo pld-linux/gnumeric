@@ -17,14 +17,14 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.8.4
-Release:	2
+Version:	1.10.0
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	338f0084f04a16f78797ad01f85d3251
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnumeric/1.10/%{name}-%{version}.tar.bz2
+# Source0-md5:	45ca0c86d41288c1e70b25b74f5cd548
 #Patch0:		%{name}-help-path.patch
 #Patch1:		%{name}-gda12.patch
 URL:		http://www.gnome.org/gnumeric/
@@ -38,13 +38,13 @@ BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.12.0
 BuildRequires:	gnome-common >= 2.12.0
-BuildRequires:	gtk+2-devel >= 2:2.10.1
+BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.6.3
-BuildRequires:	libgsf-gnome-devel >= 1.14.6
+BuildRequires:	libgoffice-devel >= 0.8.0
+BuildRequires:	libgsf-gnome-devel >= 1.14.15
 %endif
 %if %{with gda}
 BuildRequires:	libgda3-devel >= 3.1.1
@@ -471,30 +471,30 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnumeric
 %dir %{_libdir}/gnumeric/%{version}
 %dir %{_libdir}/gnumeric/%{version}/plugins
-%dir %{_libdir}/gnumeric/%{version}/plugins/derivatives
+#%dir %{_libdir}/gnumeric/%{version}/plugins/derivatives
 %dir %{_libdir}/gnumeric/%{version}/plugins/fn-*
 %dir %{_libdir}/gnumeric/%{version}/plugins/mps
-%dir %{_libdir}/gnumeric/%{version}/plugins/numtheory
+#%dir %{_libdir}/gnumeric/%{version}/plugins/numtheory
 
 %if %{with gnome}
-%{_datadir}/gnumeric/%{version}/idl
+#%{_datadir}/gnumeric/%{version}/idl
 %{_sysconfdir}/gconf/schemas/gnumeric-dialogs.schemas
 %{_sysconfdir}/gconf/schemas/gnumeric-general.schemas
 %{_sysconfdir}/gconf/schemas/gnumeric-plugins.schemas
 
-%dir %{_libdir}/gnumeric/%{version}/plugins/corba
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/corba/*.so
-%{_libdir}/gnumeric/%{version}/plugins/corba/*.xml
+#%dir %{_libdir}/gnumeric/%{version}/plugins/corba
+#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/corba/*.so
+#%{_libdir}/gnumeric/%{version}/plugins/corba/*.xml
 %endif
 
-%{_libdir}/gnumeric/%{version}/plugins/derivatives/*.xml
+#%{_libdir}/gnumeric/%{version}/plugins/derivatives/*.xml
 %{_libdir}/gnumeric/%{version}/plugins/fn-*/*.xml
 %{_libdir}/gnumeric/%{version}/plugins/mps/*.xml
-%{_libdir}/gnumeric/%{version}/plugins/numtheory/*.xml
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/derivatives/*.so
+#%{_libdir}/gnumeric/%{version}/plugins/numtheory/*.xml
+#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/derivatives/*.so
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/fn-*/*.so
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/mps/*.so
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/numtheory/*.so
+#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/numtheory/*.so
 
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
@@ -517,7 +517,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n libspreadsheet-devel
 %defattr(644,root,root,755)
-%{_includedir}/libspreadsheet-1.8
+%{_includedir}/libspreadsheet-1.10
 %{_pkgconfigdir}/*.pc
 
 # applix
@@ -622,16 +622,16 @@ rm -rf $RPM_BUILD_ROOT
 # gda
 %files plugin-gdaif
 %defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/gdaif
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gdaif/*.so
-%{_libdir}/gnumeric/%{version}/plugins/gdaif/*.xml
+#%dir %{_libdir}/gnumeric/%{version}/plugins/gdaif
+#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gdaif/*.so
+#%{_libdir}/gnumeric/%{version}/plugins/gdaif/*.xml
 
 # gnome db
 %files plugin-gnomedb
 %defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/gnome-db
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.so
-%{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.xml
+#%dir %{_libdir}/gnumeric/%{version}/plugins/gnome-db
+#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.so
+#%{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.xml
 %endif
 
 # samples
