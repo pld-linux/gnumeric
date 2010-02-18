@@ -653,16 +653,16 @@ rm -rf $RPM_BUILD_ROOT
 # gda
 %files plugin-gdaif
 %defattr(644,root,root,755)
-#%dir %{_libdir}/gnumeric/%{version}/plugins/gdaif
-#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gdaif/*.so
-#%{_libdir}/gnumeric/%{version}/plugins/gdaif/*.xml
+%dir %{_libdir}/gnumeric/%{version}/plugins/gdaif
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gdaif/*.so
+%{_libdir}/gnumeric/%{version}/plugins/gdaif/*.xml
 
 # gnome db
 %files plugin-gnomedb
 %defattr(644,root,root,755)
-#%dir %{_libdir}/gnumeric/%{version}/plugins/gnome-db
-#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.so
-#%{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.xml
+%dir %{_libdir}/gnumeric/%{version}/plugins/gnome-db
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.so
+%{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.xml
 %endif
 
 # samples
