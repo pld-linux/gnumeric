@@ -177,6 +177,19 @@ Imports/exports MS Excel (tm) files.
 %description plugin-excel -l pl.UTF-8
 Importuje/eksporuje pliki MS Excel (tm).
 
+# glpk
+%package plugin-glpk
+Summary:	GLPK plugin
+Summary(pl.UTF-8):	Wtyczka GLPK
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description plugin-glpk
+Imports/exports GLPK files.
+
+%description plugin-glpk -l pl.UTF-8
+Importuje/eksporuje pliki GLPK.
+
 # html
 %package plugin-html
 Summary:	HTML plugin
@@ -202,6 +215,19 @@ Imports Lotus 123 files.
 
 %description plugin-lotus123 -l pl.UTF-8
 Importuje pliki Lotusa 123.
+
+# lpsolve
+%package plugin-lpsolve
+Summary:	lpsolve plugin
+Summary(pl.UTF-8):	Wtyczka lpsolve
+Group:		Applications/Productivity
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description plugin-lpsolve
+Imports lpsolve files.
+
+%description plugin-lpsolve -l pl.UTF-8
+Importuje pliki lpsolve.
 
 # gnu oleo
 %package plugin-gnuoleo
@@ -432,6 +458,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
 	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
+
 %find_lang %{name} --with-gnome --all-name
 
 %clean
@@ -471,30 +498,19 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnumeric
 %dir %{_libdir}/gnumeric/%{version}
 %dir %{_libdir}/gnumeric/%{version}/plugins
-#%dir %{_libdir}/gnumeric/%{version}/plugins/derivatives
 %dir %{_libdir}/gnumeric/%{version}/plugins/fn-*
 %dir %{_libdir}/gnumeric/%{version}/plugins/mps
-#%dir %{_libdir}/gnumeric/%{version}/plugins/numtheory
 
 %if %{with gnome}
-#%{_datadir}/gnumeric/%{version}/idl
 %{_sysconfdir}/gconf/schemas/gnumeric-dialogs.schemas
 %{_sysconfdir}/gconf/schemas/gnumeric-general.schemas
 %{_sysconfdir}/gconf/schemas/gnumeric-plugins.schemas
-
-#%dir %{_libdir}/gnumeric/%{version}/plugins/corba
-#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/corba/*.so
-#%{_libdir}/gnumeric/%{version}/plugins/corba/*.xml
 %endif
 
-#%{_libdir}/gnumeric/%{version}/plugins/derivatives/*.xml
 %{_libdir}/gnumeric/%{version}/plugins/fn-*/*.xml
 %{_libdir}/gnumeric/%{version}/plugins/mps/*.xml
-#%{_libdir}/gnumeric/%{version}/plugins/numtheory/*.xml
-#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/derivatives/*.so
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/fn-*/*.so
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/mps/*.so
-#%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/numtheory/*.so
 
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
@@ -509,6 +525,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_mandir}/man1/gnumeric.1*
 %{_mandir}/man1/ssconvert.1*
+%{_mandir}/man1/ssgrep.1*
 %{_mandir}/man1/ssindex.1*
 
 %files -n libspreadsheet
@@ -541,6 +558,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excel/*.so
 %{_libdir}/gnumeric/%{version}/plugins/excel/*.xml
 
+# glpk
+%files plugin-glpk
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/glpk
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/glpk/*.so
+%{_libdir}/gnumeric/%{version}/plugins/glpk/*.xml
+
 # html
 %files plugin-html
 %defattr(644,root,root,755)
@@ -554,6 +578,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnumeric/%{version}/plugins/lotus
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lotus/*.so
 %{_libdir}/gnumeric/%{version}/plugins/lotus/*.xml
+
+# lpsolve
+%files plugin-lpsolve
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/lpsolve
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lpsolve/*.so
+%{_libdir}/gnumeric/%{version}/plugins/lpsolve/*.xml
 
 # gnu oleo
 %files plugin-gnuoleo
