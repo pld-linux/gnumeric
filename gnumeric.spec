@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	gda	# build without gda
+%bcond_with	gda	# build without gda
 %bcond_without	gnome	# build without gnome
 %bcond_without	python	# build without python support
 %bcond_with	mono	# build without mono scripting engine
@@ -33,7 +33,6 @@ BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	docbook-utils
 BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.12.0
@@ -47,12 +46,10 @@ BuildRequires:	libgoffice-devel >= 0.8.0
 BuildRequires:	libgsf-gnome-devel >= 1.14.15
 %endif
 %if %{with gda}
-BuildRequires:	libgda3-devel >= 3.1.1
-BuildRequires:	libgnomedb3-devel >= 3.1.1
+BuildRequires:	libgda4-devel >= 4.1.1
+BuildRequires:	libgnomedb4-devel >= 3.99.6
 %endif
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeprint-devel >= 2.12.0
-BuildRequires:	libgnomeprintui-devel >= 2.12.1
 %{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.15.90}
 BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	libtool
@@ -61,21 +58,23 @@ BuildRequires:	libxml2-devel >= 1:2.6.26
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
 BuildRequires:	pango-devel >= 1:1.13.4
 BuildRequires:	perl-base
+BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	psiconv-devel >= 0.9.3
 BuildRequires:	pxlib-devel
+BuildRequires:	rpm-perlprov
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 2:2.9.3
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	scrollkeeper
-Requires(post,preun):	GConf2 >= 2.14.0
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	scrollkeeper
-Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
+Requires(post,preun):	GConf2 >= 2.14.0
 %{?with_gnome:Requires:	libgnomeui >= 2.15.1}
+Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -130,7 +129,8 @@ Group:		Development/Libraries
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
 %description -n libspreadsheet-devel
-This is the package containing the header files for libspreadsheet library.
+This is the package containing the header files for libspreadsheet
+library.
 
 %description -n libspreadsheet-devel -l pl.UTF-8
 Ten pakiet zawiera pliki nagłówkowe biblioteki libspreadsheet.
@@ -140,7 +140,7 @@ Ten pakiet zawiera pliki nagłówkowe biblioteki libspreadsheet.
 %package plugin-applix
 Summary:	Applix plugin
 Summary(pl.UTF-8):	Wtyczka Applix
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-applix
@@ -149,11 +149,11 @@ Imports Applix 4.[234] spreadsheets.
 %description plugin-applix -l pl.UTF-8
 Importuje arkusze Applix w wersjach 4.[234].
 
-# data interchange format (DIF) 
+# data interchange format (DIF)
 %package plugin-dif
 Summary:	Data Interchange Format plugin
 Summary(pl.UTF-8):	Wtyczka Data Interchange Format
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-dif
@@ -161,14 +161,14 @@ Reads and writes information stored in the Data Interchange Format
 (*.dif).
 
 %description plugin-dif -l pl.UTF-8
-Odczytuje i zapisuje informacje w uniwersalnym formacie wymiany
-danych (*.dif).
+Odczytuje i zapisuje informacje w uniwersalnym formacie wymiany danych
+(*.dif).
 
 # ms excel
 %package plugin-excel
 Summary:	MS Excel (tm) plugin
 Summary(pl.UTF-8):	Wtyczka MS Excel (tm)
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-excel
@@ -181,7 +181,7 @@ Importuje/eksporuje pliki MS Excel (tm).
 %package plugin-glpk
 Summary:	GLPK plugin
 Summary(pl.UTF-8):	Wtyczka GLPK
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-glpk
@@ -194,7 +194,7 @@ Importuje/eksporuje pliki GLPK.
 %package plugin-html
 Summary:	HTML plugin
 Summary(pl.UTF-8):	Wtyczka HTML
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-html
@@ -207,7 +207,7 @@ Importuje/eksportuje formaty HTML, TeX, DVI i roff.
 %package plugin-lotus123
 Summary:	Lotus 123 plugin
 Summary(pl.UTF-8):	Wtyczka Lotus 123
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-lotus123
@@ -220,7 +220,7 @@ Importuje pliki Lotusa 123.
 %package plugin-lpsolve
 Summary:	lpsolve plugin
 Summary(pl.UTF-8):	Wtyczka lpsolve
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-lpsolve
@@ -233,7 +233,7 @@ Importuje pliki lpsolve.
 %package plugin-gnuoleo
 Summary:	GNU Oleo plugin
 Summary(pl.UTF-8):	Wtyczka GNU Oleo
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-gnuoleo
@@ -246,7 +246,7 @@ Importuje dokumenty GNU Oleo.
 %package plugin-openoffice
 Summary:	OpenOffice.org plugin
 Summary(pl.UTF-8):	Wtyczka OpenOffice.org
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-openoffice
@@ -259,7 +259,7 @@ Importuje/eksportuje arkusze OpenOffice.org/StarOffice.
 %package plugin-paradox
 Summary:	Paradox plugin
 Summary(pl.UTF-8):	Wtyczka Paradox
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-paradox
@@ -272,7 +272,7 @@ Importuje pliki w formacie Paradoxa.
 %package plugin-planperfect
 Summary:	Plan Perfect plugin
 Summary(pl.UTF-8):	Wtyczka Plan Perfect
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-planperfect
@@ -285,7 +285,7 @@ Importuje dokumenty w formacie Plan Perfect.
 %package plugin-psiconv
 Summary:	Psiconv plugin
 Summary(pl.UTF-8):	Wtyczka Psiconv
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-psiconv
@@ -298,7 +298,7 @@ Importuje pliki arkuszy Psion serii 5.
 %package plugin-qpro
 Summary:	Quattro Pro(tm) plugin
 Summary(pl.UTF-8):	Wtyczka Quattro Pro(tm)
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-qpro
@@ -311,7 +311,7 @@ Importuje pliki Quattro Pro (tm).
 %package plugin-sc
 Summary:	SC/XSpread plugin
 Summary(pl.UTF-8):	Wtyczka SC/XSpread
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-sc
@@ -324,7 +324,7 @@ Importuje pliki SC/XSpread.
 %package plugin-sylk
 Summary:	MultiPlan (SYLK) plugin
 Summary(pl.UTF-8):	Wtyczka MultiPlan (SYLK)
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-sylk
@@ -337,7 +337,7 @@ Importuje pliki MultiPlan (SYLK).
 %package plugin-xbase
 Summary:	XBase plugin
 Summary(pl.UTF-8):	Wtyczka Xbase
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-xbase
@@ -351,7 +351,7 @@ Importuje pliki XBase.
 %package plugin-gdaif
 Summary:	Database plugin
 Summary(pl.UTF-8):	Wtyczka baz danych
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-gdaif
@@ -364,7 +364,7 @@ Funkcje bazodanowe, pozwalające na pobieranie danych z baz danych.
 %package plugin-gnomedb
 Summary:	GNOME DB plugin
 Summary(pl.UTF-8):	Wtyczka GNOME DB
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	gnumeric-plugin-gdaif
 
@@ -378,7 +378,7 @@ Nakładka Gnumerica na libgnomedb.
 %package plugin-sample
 Summary:	Sample plugins
 Summary(pl.UTF-8):	Przykładowe wtyczki
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-sample
@@ -392,7 +392,7 @@ Przykładowe wtyczki bazy danych oraz interfejsu użytkownika.
 %package plugin-perl
 Summary:	Perl plugin
 Summary(pl.UTF-8):	Wtyczk Perla
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-perl
@@ -406,7 +406,7 @@ funkcji.
 %package plugin-python
 Summary:	Python plugin
 Summary(pl.UTF-8):	Wtyczk Pythona
-Group:		Applications/Productivity
+Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-modules
 Requires:	python-pygtk-gtk
@@ -449,7 +449,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	docdir=/usr/share/gnome/help/gnumeric/C \
+	docdir=%{_datadir}/gnome/help/gnumeric/C \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/*/*.la
@@ -544,7 +544,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/applix/*.so
 %{_libdir}/gnumeric/%{version}/plugins/applix/*.xml
 
-# data interchange format (DIF) 
+# data interchange format (DIF)
 %files plugin-dif
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/dif
