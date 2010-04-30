@@ -18,7 +18,7 @@ Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
 Version:	1.10.2
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
@@ -75,6 +75,10 @@ Requires(post,postun):	scrollkeeper
 Requires(post,preun):	GConf2 >= 2.14.0
 %{?with_gnome:Requires:	libgnomeui >= 2.15.1}
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
+%if %{without gda}
+Obsoletes:	gnumeric-plugin-gdaif
+Obsoletes:	gnumeric-plugin-gnomedb
+%endif
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
