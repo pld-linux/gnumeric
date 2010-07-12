@@ -17,14 +17,14 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.10.6
-Release:	2
+Version:	1.10.7
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	2c83cafd6e2b69d10122d9e4343bf4ba
+# Source0-md5:	86869fcada3840afdbd861693a9ab30e
 #Patch0:		%{name}-help-path.patch
 #Patch1:		%{name}-gda12.patch
 URL:		http://www.gnome.org/gnumeric/
@@ -42,7 +42,7 @@ BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.8.6
+BuildRequires:	libgoffice-devel >= 0.8.7
 BuildRequires:	libgsf-gnome-devel >= 1.14.15
 %endif
 %if %{with gda}
