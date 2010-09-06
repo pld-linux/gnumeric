@@ -68,7 +68,6 @@ BuildRequires:	rpm-perlprov
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-pygtk-devel >= 2:2.9.3
 %endif
-BuildRequires:	rarian-compat
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	scrollkeeper
 Requires(post,postun):	desktop-file-utils
