@@ -17,14 +17,14 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.10.10
-Release:	3
+Version:	1.10.11
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	4d0150896ecca3d16f2fea3a2414df40
+# Source0-md5:	28933c7b1099329d28fdb2f3ce05030d
 #Patch0:		%{name}-help-path.patch
 #Patch1:		%{name}-gda12.patch
 URL:		http://www.gnome.org/gnumeric/
@@ -42,8 +42,8 @@ BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.8.10
-BuildRequires:	libgsf-gnome-devel >= 1.14.15
+BuildRequires:	libgoffice-devel >= 0.8.11
+BuildRequires:	libgsf-gnome-devel >= 1.14.18
 %endif
 %if %{with gda}
 BuildRequires:	libgda4-devel >= 4.1.1
@@ -51,7 +51,7 @@ BuildRequires:	libgnomedb4-devel >= 3.99.6
 %endif
 BuildRequires:	libglade2-devel >= 1:2.6.0
 %{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.15.90}
-BuildRequires:	libgsf-devel >= 1.14.1
+BuildRequires:	libgsf-devel >= 1.14.18
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
 # disabled by default - still experimental
