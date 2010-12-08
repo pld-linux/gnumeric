@@ -17,16 +17,15 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.10.11
+Version:	1.10.12
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
-Vendor:		Gnumeric List <gnumeric-list@gnome.org>
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	28933c7b1099329d28fdb2f3ce05030d
-#Patch0:		%{name}-help-path.patch
-#Patch1:		%{name}-gda12.patch
+# Source0-md5:	d93c01092fccefa33e796c07ef0a5b37
+#Patch0: 	%{name}-help-path.patch
+#Patch1: 	%{name}-gda12.patch
 URL:		http://www.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
@@ -42,7 +41,7 @@ BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.8.11
+BuildRequires:	libgoffice-devel >= 0.8.12
 BuildRequires:	libgsf-gnome-devel >= 1.14.18
 %endif
 %if %{with gda}
@@ -232,6 +231,19 @@ Imports lpsolve files.
 
 %description plugin-lpsolve -l pl.UTF-8
 Importuje pliki lpsolve.
+
+# nlsolve
+%package plugin-nlsolve
+Summary:	nlsolve plugin
+Summary(pl.UTF-8):	Wtyczka nlsolve
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description plugin-nlsolve
+Imports nlsolve files.
+
+%description plugin-nlsolve -l pl.UTF-8
+Importuje pliki nlsolve.
 
 # gnu oleo
 %package plugin-gnuoleo
@@ -456,9 +468,8 @@ rm -rf $RPM_BUILD_ROOT
 	docdir=%{_datadir}/gnome/help/gnumeric/C \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/*/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
-rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/*/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
 	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
@@ -525,7 +536,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnumeric/%{version}*
 %{_datadir}/gnumeric/%{version}/*.xml
 %{_datadir}/gnumeric/%{version}/autoformat-templates
-%{_datadir}/gnumeric/%{version}/glade
 %{_datadir}/gnumeric/%{version}/templates
 
 %{_mandir}/man1/gnumeric.1*
@@ -590,6 +600,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnumeric/%{version}/plugins/lpsolve
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lpsolve/*.so
 %{_libdir}/gnumeric/%{version}/plugins/lpsolve/*.xml
+
+# nlsolve
+%files plugin-nlsolve
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/nlsolve
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/nlsolve/*.so
+%{_libdir}/gnumeric/%{version}/plugins/nlsolve/*.xml
 
 # gnu oleo
 %files plugin-gnuoleo
