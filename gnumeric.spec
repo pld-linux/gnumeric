@@ -17,13 +17,13 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.10.13
+Version:	1.10.14
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	88f2df1ae1ee83f05416f49526b7906f
+# Source0-md5:	d712851505e33f01d40e32b0c6dae56a
 #Patch0: 	%{name}-help-path.patch
 #Patch1: 	%{name}-gda12.patch
 URL:		http://www.gnome.org/gnumeric/
@@ -41,7 +41,7 @@ BuildRequires:	intltool >= 0.35
 BuildRequires:	libart_lgpl-devel >= 2.3.12
 %if %{with gnome}
 BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.8.13
+BuildRequires:	libgoffice-devel >= 0.8.14
 BuildRequires:	libgsf-gnome-devel >= 1.14.18
 %endif
 %if %{with gda}
@@ -117,7 +117,7 @@ Gnumeric - це програма електронних таблиць для GN
 Summary:	libspreadsheet library
 Summary(pl.UTF-8):	Biblioteka libspreadsheet
 Group:		Libraries
-%{?with_gnome:Requires:	libgoffice >= 0.8.13}
+%{?with_gnome:Requires:	libgoffice >= 0.8.14}
 
 %description -n libspreadsheet
 libspreadsheet library.
