@@ -26,7 +26,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.10/%{name}-%{version}
 # Source0-md5:	c79a7c4b6d2080d249c63a5045b78af3
 #Patch0: 	%{name}-help-path.patch
 #Patch1: 	%{name}-gda12.patch
-URL:		http://www.gnome.org/gnumeric/
+URL:		http://projects.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.52
