@@ -1,4 +1,6 @@
 #
+# TODO: unpackaged files
+#
 # Conditional build:
 %bcond_with	gda	# build without gda
 %bcond_without	gnome	# build without gnome
