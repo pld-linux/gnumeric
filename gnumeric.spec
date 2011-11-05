@@ -536,6 +536,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnumeric/%{version}/*.xml
 %{_datadir}/gnumeric/%{version}/autoformat-templates
 %{_datadir}/gnumeric/%{version}/templates
+%{_datadir}/gnumeric/%{version}/ui
 
 %{_mandir}/man1/gnumeric.1*
 %{_mandir}/man1/ssconvert.1*
