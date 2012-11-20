@@ -3,7 +3,6 @@
 #
 # Conditional build:
 %bcond_with	gda	# build without gda
-%bcond_without	gnome	# build without gnome
 %bcond_without	python	# build without python support
 %bcond_with	mono	# build without mono scripting engine
 #
@@ -19,13 +18,13 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.10.17
+Version:	1.11.90
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	aacc0899222c98fa9cdd85c49a6840be
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.11/%{name}-%{version}.tar.xz
+# Source0-md5:	843970b6d2e1491fe2a09047ac215dd8
 URL:		http://projects.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
@@ -36,20 +35,14 @@ BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.12.0
 BuildRequires:	gnome-common >= 2.12.0
-BuildRequires:	gtk+2-devel >= 2:2.12.0
+BuildRequires:	gtk+3-devel
 BuildRequires:	intltool >= 0.35
-BuildRequires:	libart_lgpl-devel >= 2.3.12
-%if %{with gnome}
-BuildRequires:	libbonoboui-devel >= 2.14.0
-BuildRequires:	libgoffice-devel >= 0.8.17
-BuildRequires:	libgsf-gnome-devel >= 1.14.18
-%endif
+BuildRequires:	libgoffice-devel >= 0.9.90
 %if %{with gda}
 BuildRequires:	libgda4-devel >= 4.1.1
 BuildRequires:	libgnomedb4-devel >= 3.99.6
 %endif
 BuildRequires:	libglade2-devel >= 1:2.6.0
-%{?with_gnome:BuildRequires:	libgnomeui-devel >= 2.15.90}
 BuildRequires:	libgsf-devel >= 1.14.18
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
@@ -65,14 +58,13 @@ BuildRequires:	pxlib-devel
 BuildRequires:	rpm-perlprov
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
-BuildRequires:	python-pygtk-devel >= 2:2.9.3
+BuildRequires:	python-pygobject3-devel
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	scrollkeeper
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	scrollkeeper
 Requires(post,preun):	GConf2 >= 2.14.0
-%{?with_gnome:Requires:	libgnomeui >= 2.15.1}
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 %if %{without gda}
 Obsoletes:	gnumeric-plugin-gdaif
@@ -117,7 +109,7 @@ Gnumeric - це програма електронних таблиць для GN
 Summary:	libspreadsheet library
 Summary(pl.UTF-8):	Biblioteka libspreadsheet
 Group:		Libraries
-%{?with_gnome:Requires:	libgoffice >= 0.8.17}
+Requires:	libgoffice >= 0.9.90
 
 %description -n libspreadsheet
 libspreadsheet library.
@@ -407,7 +399,7 @@ Przykładowe wtyczki bazy danych oraz interfejsu użytkownika.
 # perl-func/perl loader
 %package plugin-perl
 Summary:	Perl plugin
-Summary(pl.UTF-8):	Wtyczk Perla
+Summary(pl.UTF-8):	Wtyczka Perla
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -421,7 +413,7 @@ funkcji.
 # perl-func/perl loader
 %package plugin-python
 Summary:	Python plugin
-Summary(pl.UTF-8):	Wtyczk Pythona
+Summary(pl.UTF-8):	Wtyczka Pythona
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-modules
@@ -433,6 +425,20 @@ Sample Python plugin providing some (useless) functions.
 %description plugin-python -l pl.UTF-8
 Przykładowa wtyczka Pythona, dostarczająca różnych (bezużytecznych)
 funkcji.
+
+# gnumeric support for goffice
+%package plugin-goffice
+Summary:	Gnumeric plugin for goffice
+Summary(pl.UTF-8):	Wtyczka dla goffice
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libgoffice >= 0.9.90
+
+%description plugin-goffice
+Gnumeric plugin for goffice.
+
+%description plugin-goffice -l pl.UTF-8
+Wtyczka dla goffice.
 
 %prep
 %setup -q
@@ -448,14 +454,11 @@ funkcji.
 %{__automake}
 %configure \
 	--disable-static \
-	--disable-schemas-install \
 	--disable-silent-rules \
 	--with-psiconv \
-	--with%{!?with_gnome:out}-gnome \
 	--with%{!?with_python:out}-python \
-	--with%{!?with_gda:out}-gda \
 	--with%{!?with_mono:out}-mono \
-	--without-gb
+	--with%{!?with_gda:out}-gda
 
 %{__make}
 
@@ -479,26 +482,16 @@ rm -rf $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%if %{with gnome}
-%gconf_schema_install gnumeric-dialogs.schemas
-%gconf_schema_install gnumeric-general.schemas
-%gconf_schema_install gnumeric-plugins.schemas
+%glib_compile_schemas
 %update_desktop_database_post
-%endif
 %scrollkeeper_update_post
 
-%if %{with gnome}
 %preun
-%gconf_schema_uninstall gnumeric-dialogs.schemas
-%gconf_schema_uninstall gnumeric-general.schemas
-%gconf_schema_uninstall gnumeric-plugins.schemas
-%endif
+%glib_compile_schemas
 
 %postun
 %scrollkeeper_update_postun
-%if %{with gnome}
 %update_desktop_database_postun
-%endif
 
 %post	-n libspreadsheet -p /sbin/ldconfig
 %postun	-n libspreadsheet -p /sbin/ldconfig
@@ -515,11 +508,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnumeric/%{version}/plugins/fn-*
 %dir %{_libdir}/gnumeric/%{version}/plugins/mps
 
-%if %{with gnome}
-%{_sysconfdir}/gconf/schemas/gnumeric-dialogs.schemas
-%{_sysconfdir}/gconf/schemas/gnumeric-general.schemas
-%{_sysconfdir}/gconf/schemas/gnumeric-plugins.schemas
-%endif
+%{_datadir}/glib-2.0/schemas/org.gnome.gnumeric.dialogs.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.gnumeric.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.gnumeric.plugin.gschema.xml
 
 %{_libdir}/gnumeric/%{version}/plugins/fn-*/*.xml
 %{_libdir}/gnumeric/%{version}/plugins/mps/*.xml
@@ -536,7 +527,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnumeric/%{version}/*.xml
 %{_datadir}/gnumeric/%{version}/autoformat-templates
 %{_datadir}/gnumeric/%{version}/templates
-%{_datadir}/gnumeric/%{version}/ui
 
 %{_mandir}/man1/gnumeric.1*
 %{_mandir}/man1/ssconvert.1*
@@ -549,7 +539,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n libspreadsheet-devel
 %defattr(644,root,root,755)
-%{_includedir}/libspreadsheet-1.10
+%{_includedir}/libspreadsheet-1.12
 %{_pkgconfigdir}/*.pc
 
 # applix
@@ -570,8 +560,11 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-excel
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/excel
+%dir %{_libdir}/gnumeric/%{version}/plugins/excelplugins
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excel/*.so
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excelplugins/*.so
 %{_libdir}/gnumeric/%{version}/plugins/excel/*.xml
+%{_libdir}/gnumeric/%{version}/plugins/excelplugins/*.xml
 
 # glpk
 %files plugin-glpk
@@ -718,3 +711,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}/plugins/gnome-glossary/*.py
 %{_libdir}/gnumeric/%{version}/plugins/gnome-glossary/*.xml
 %endif
+
+%files plugin-goffice
+%defattr(644,root,root,755)
+%dir %{_libdir}/goffice/*/plugins/gnumeric
+%{_libdir}/goffice/*/plugins/gnumeric/*.xml
+%attr(755,root,root) %{_libdir}/goffice/*/plugins/gnumeric/*.so
