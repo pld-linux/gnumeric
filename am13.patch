@@ -1,0 +1,52 @@
+From df890b18fad6ea250b4a44cdbfbbdff947648041 Mon Sep 17 00:00:00 2001
+From: Morten Welinder <terra@gnome.org>
+Date: Mon, 10 Jun 2013 19:49:20 +0000
+Subject: tests: work around problems with automake 1.13
+
+---
+diff --git a/configure.ac b/configure.ac
+index 3e7413e..cae2146 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1036,6 +1036,9 @@ AC_ARG_WITH([typelib-dir],
+ )
+ AC_SUBST(TYPELIBDIR)
+ 
++AC_SUBST([auto_find_tests], ['$(sort $(wildcard $(srcdir)/t[[0-9]][[0-9]][[0-9]][[0-9]]-*.pl))']) 
++
++
+ dnl **************************************************
+ dnl * Config defaults
+ dnl **************************************************
+diff --git a/test/ChangeLog b/test/ChangeLog
+index cc9b478..952552f 100644
+--- a/test/ChangeLog
++++ b/test/ChangeLog
+@@ -1,3 +1,8 @@
++2013-06-10  Morten Welinder  <terra@gnome.org>
++
++	* Makefile.am (TESTS): Work around automake problems with
++	wildcards by going via configure.
++
+ 2013-04-26  Morten Welinder <terra@gnome.org>
+ 
+ 	* Release 1.12.2
+diff --git a/test/Makefile.am b/test/Makefile.am
+index 6b7ee15..f44986d 100644
+--- a/test/Makefile.am
++++ b/test/Makefile.am
+@@ -25,7 +25,11 @@
+ #
+ # 90xx: Misc stuff.
+ 
+-TESTS = $(sort $(wildcard $(srcdir)/t[0-9][0-9][0-9][0-9]-*.pl))
++# This is a working for automake's problem with wildcards.  See
++# http://permalink.gmane.org/gmane.comp.sysutils.automake.bugs/7413
++TESTS_EXTENSIONS=.pl
++TESTS = @auto_find_tests@
++
+ SUPPS = common.supp gui.supp t8003-valgrind-pdf.supp
+ 
+ import-db:
+--
+cgit v0.9.2

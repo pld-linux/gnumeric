@@ -1,0 +1,11 @@
+--- gnumeric-1.12.2/src/print-info.c.wiget	2013-06-11 15:09:03.193548964 +0200
++++ gnumeric-1.12.2/src/print-info.c	2013-06-11 15:10:11.820796976 +0200
+@@ -29,6 +29,8 @@
+ #include "sheet-object-graph.h"
+ 
+ #include <goffice/goffice.h>
++#include <gsf/gsf-doc-meta-data.h>
++#include <gsf/gsf-meta-names.h>
+ 
+ #include <glib/gi18n-lib.h>
+ #include <string.h>

@@ -18,13 +18,15 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.11.90
-Release:	2
+Version:	1.12.2
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.11/%{name}-%{version}.tar.xz
-# Source0-md5:	843970b6d2e1491fe2a09047ac215dd8
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
+# Source0-md5:	711daa98da0138203fb2f8dc4dcddb3c
+Patch0:		am13.patch
+Patch1:		gsf.patch
 URL:		http://projects.gnome.org/gnumeric/
 BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
@@ -37,7 +39,7 @@ BuildRequires:	glib2-devel >= 1:2.12.0
 BuildRequires:	gnome-common >= 2.12.0
 BuildRequires:	gtk+3-devel
 BuildRequires:	intltool >= 0.35
-BuildRequires:	libgoffice-devel >= 0.9.90
+BuildRequires:	libgoffice-devel >= 0.10.2
 %if %{with gda}
 BuildRequires:	libgda4-devel >= 4.1.1
 BuildRequires:	libgnomedb4-devel >= 3.99.6
@@ -442,6 +444,8 @@ Wtyczka dla goffice.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__gnome_doc_common}
@@ -530,6 +534,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_mandir}/man1/gnumeric.1*
 %{_mandir}/man1/ssconvert.1*
+%{_mandir}/man1/ssdiff.1*
 %{_mandir}/man1/ssgrep.1*
 %{_mandir}/man1/ssindex.1*
 
