@@ -19,7 +19,7 @@ Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
 Version:	1.12.2
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
@@ -448,7 +448,6 @@ Wtyczka dla goffice.
 %patch1 -p1
 
 %build
-%{__gnome_doc_common}
 %{__glib_gettextize}
 %{__intltoolize}
 %{__libtoolize}
