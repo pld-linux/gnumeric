@@ -1,12 +1,12 @@
 #
-# TODO: unpackaged files
-#
 # Conditional build:
-%bcond_with	gda	# build without gda
-%bcond_without	python	# build without python support
-%bcond_with	mono	# build without mono scripting engine
+%bcond_without	gda	# GDA support
+%bcond_with	gnomedb	# GNOMEDB support
+%bcond_without	python	# Python support
+%bcond_with	guile	# Guile support [disabled upstream as experimental]
+%bcond_with	mono	# mono scripting engine [disabled upstream as experimental]
 #
-%ifnarch %{ix86} %{x8664} alpha arm hppa ppc s390 sparc sparcv9 sparc64
+%ifnarch %{ix86} %{x8664} %{arm} aarch64 ia64 mips ppc ppc64 s390x sparc sparcv9 sparc64
 %undefine	with_mono
 %endif
 %include	/usr/lib/rpm/macros.perl
@@ -18,62 +18,59 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.2
-Release:	11
+Version:	1.12.45
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	711daa98da0138203fb2f8dc4dcddb3c
-Patch0:		am13.patch
-Patch1:		gsf.patch
-URL:		http://projects.gnome.org/gnumeric/
-BuildRequires:	GConf2-devel >= 2.14.0
-BuildRequires:	ORBit2-devel >= 1:2.14.0
-BuildRequires:	autoconf >= 2.52
+# Source0-md5:	7a7095573fd748f56cd2fc6e4b6acb69
+Patch0:		%{name}-po.patch
+Patch1:		%{name}-gnomedb.patch
+URL:		http://www.gnumeric.org/
+BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
+BuildRequires:	gcc >= 5:3.2
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.12.0
-BuildRequires:	gnome-common >= 2.12.0
-BuildRequires:	gtk+3-devel
+BuildRequires:	glib2-devel >= 1:2.40.0
+BuildRequires:	gobject-introspection-devel >= 1.0.0
+BuildRequires:	gtk+3-devel >= 3.8.7
+%{?with_guile:BuildRequires:	guile-devel >= 1.5}
 BuildRequires:	intltool >= 0.35
-BuildRequires:	libgoffice-devel >= 0.10.2
-%if %{with gda}
-BuildRequires:	libgda4-devel >= 4.1.1
-BuildRequires:	libgnomedb4-devel >= 3.99.6
-%endif
+BuildRequires:	itstool
+BuildRequires:	libgoffice-devel >= 0.10.42
+%{?with_gda:BuildRequires:	libgda5-devel >= 5.0.0}
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgsf-devel >= 1.14.18
-BuildRequires:	libtool
+BuildRequires:	libgsf-devel >= 1.14.33
+BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.6.26
 # disabled by default - still experimental
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
-BuildRequires:	pango-devel >= 1:1.13.4
+BuildRequires:	pango-devel >= 1:1.24.0
 BuildRequires:	perl-base
 BuildRequires:	perl-devel
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.18
 BuildRequires:	popt-devel
 BuildRequires:	psiconv-devel >= 0.9.3
-BuildRequires:	pxlib-devel
+BuildRequires:	pxlib-devel >= 0.4.0
 BuildRequires:	rpm-perlprov
 %if %{with python}
-BuildRequires:	python-devel >= 2.2
-BuildRequires:	python-pygobject3-devel
+BuildRequires:	python-devel >= 1:2.7
+BuildRequires:	python-pygobject3-devel >= 3.0.0
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
-BuildRequires:	scrollkeeper
+BuildRequires:	yelp-tools
+BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	scrollkeeper
-Requires(post,preun):	GConf2 >= 2.14.0
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 %if %{without gda}
 Obsoletes:	gnumeric-plugin-gdaif
+%endif
+%if %{without gnomedb}
 Obsoletes:	gnumeric-plugin-gnomedb
 %endif
-# sr@Latn vs. sr@latin
-Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -111,7 +108,11 @@ Gnumeric - це програма електронних таблиць для GN
 Summary:	libspreadsheet library
 Summary(pl.UTF-8):	Biblioteka libspreadsheet
 Group:		Libraries
-Requires:	libgoffice >= 0.9.90
+Requires:	glib2 >= 1:2.40.0
+Requires:	gtk+3 >= 3.8.7
+Requires:	libgoffice >= 0.10.42
+Requires:	libgsf >= 1.14.33
+Requires:	libxml2 >= 1:2.6.26
 
 %description -n libspreadsheet
 libspreadsheet library.
@@ -124,6 +125,11 @@ Summary:	Header files for libspreadsheet library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libspreadsheet
 Group:		Development/Libraries
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
+Requires:	glib2-devel >= 1:2.40.0
+Requires:	gtk+3-devel >= 3.8.7
+Requires:	libgoffice-devel >= 0.10.42
+Requires:	libgsf-devel >= 1.14.33
+Requires:	libxml2-devel >= 1:2.6.26
 
 %description -n libspreadsheet-devel
 This is the package containing the header files for libspreadsheet
@@ -167,6 +173,7 @@ Summary:	MS Excel (tm) plugin
 Summary(pl.UTF-8):	Wtyczka MS Excel (tm)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
 %description plugin-excel
 Imports/exports MS Excel (tm) files.
@@ -377,12 +384,13 @@ Summary(pl.UTF-8):	Wtyczka GNOME DB
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	gnumeric-plugin-gdaif
+Requires:	/usr/bin/gnome-database-properties-4.0
 
 %description plugin-gnomedb
-Gnumeric frontend for libgnomedb.
+Gnumeric frontend for GNOME DB configuration tool.
 
 %description plugin-gnomedb -l pl.UTF-8
-Nakładka Gnumerica na libgnomedb.
+Interfejs Gnumerica do narzędzia konfiguracyjnego GNOME DB.
 
 # samples
 %package plugin-sample
@@ -412,14 +420,13 @@ Sample Perl plugin providing some (useless) functions.
 Przykładowa wtyczka Perla dostarczająca różnych (bezużytecznych)
 funkcji.
 
-# perl-func/perl loader
+# python-func/python loader
 %package plugin-python
 Summary:	Python plugin
 Summary(pl.UTF-8):	Wtyczka Pythona
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-modules
-Requires:	python-pygtk-gtk
 
 %description plugin-python
 Sample Python plugin providing some (useless) functions.
@@ -434,7 +441,9 @@ Summary:	Gnumeric plugin for goffice
 Summary(pl.UTF-8):	Wtyczka dla goffice
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libgoffice >= 0.9.90
+Requires:	libgoffice >= 0.10.42
+Requires:	libgsf >= 1.14.33
+Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
 %description plugin-goffice
 Gnumeric plugin for goffice.
@@ -445,23 +454,25 @@ Wtyczka dla goffice.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+# actually libgnomedb is not required to build gnomedb plugin
+# ... but it expects gnome-database-properties-4.0 tool, which no longer exists
+#patch1 -p1
 
 %build
 %{__glib_gettextize}
 %{__intltoolize}
 %{__libtoolize}
-%{__aclocal}
-%{__autoheader}
+%{__aclocal} -I m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
-	--disable-static \
 	--disable-silent-rules \
+	--with-gda%{!?with_gda:=no} \
+	--with-guile%{!?with_guile:=no} \
+	--with-mono%{!?with_mono:=no} \
 	--with-psiconv \
-	--with%{!?with_python:out}-python \
-	--with%{!?with_mono:out}-mono \
-	--with%{!?with_gda:out}-gda
+	--with-python%{!?with_python:=no}
 
 %{__make}
 
@@ -469,16 +480,14 @@ Wtyczka dla goffice.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	docdir=%{_datadir}/gnome/help/gnumeric/C \
-	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
+	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libspreadsheet.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/gnumeric/%{version}/plugins/*/*.la
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/goffice/*/plugins/gnumeric/*.la
 
-[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
-	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
-
+# "gnumeric-%{version}" and "gnumeric-%{version}-functions" po domains
+# "gnumeric" help domain
 %find_lang %{name} --with-gnome --all-name
 
 %clean
@@ -487,13 +496,9 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %glib_compile_schemas
 %update_desktop_database_post
-%scrollkeeper_update_post
-
-%preun
-%glib_compile_schemas
 
 %postun
-%scrollkeeper_update_postun
+%glib_compile_schemas
 %update_desktop_database_postun
 
 %post	-n libspreadsheet -p /sbin/ldconfig
@@ -503,31 +508,41 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/gnumeric
+%attr(755,root,root) %{_bindir}/gnumeric-%{version}
+%attr(755,root,root) %{_bindir}/ssconvert
+%attr(755,root,root) %{_bindir}/ssdiff
+%attr(755,root,root) %{_bindir}/ssgrep
+%attr(755,root,root) %{_bindir}/ssindex
 
 %dir %{_libdir}/gnumeric
 %dir %{_libdir}/gnumeric/%{version}
 %dir %{_libdir}/gnumeric/%{version}/plugins
 %dir %{_libdir}/gnumeric/%{version}/plugins/fn-*
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/fn-*/*.so
+%{_libdir}/gnumeric/%{version}/plugins/fn-*/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/mps
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/mps/mps.so
+%{_libdir}/gnumeric/%{version}/plugins/mps/plugin.xml
 
+%{_datadir}/appdata/gnumeric.appdata.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.gnumeric.dialogs.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.gnumeric.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.gnumeric.plugin.gschema.xml
 
-%{_libdir}/gnumeric/%{version}/plugins/fn-*/*.xml
-%{_libdir}/gnumeric/%{version}/plugins/mps/*.xml
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/fn-*/*.so
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/mps/*.so
-
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*
-%{_iconsdir}/hicolor/*/apps/gnumeric.*
-%{_omf_dest_dir}/%{name}
+%{_desktopdir}/gnumeric.desktop
+%{_pixmapsdir}/gnumeric
+%{_pixmapsdir}/gnome-application-vnd.lotus-1-2-3.png
+%{_pixmapsdir}/gnome-application-x-applix-spreadsheet.png
+%{_pixmapsdir}/gnome-application-x-generic-spreadsheet.png
+%{_pixmapsdir}/gnome-application-x-gnumeric.png
+%{_pixmapsdir}/gnome-application-x-xls.png
+%{_pixmapsdir}/win32-gnumeric.ico
+%{_iconsdir}/hicolor/*x*/apps/gnumeric.png
 
 %dir %{_datadir}/gnumeric
-%dir %{_datadir}/gnumeric/%{version}*
-%{_datadir}/gnumeric/%{version}/*.xml
+%dir %{_datadir}/gnumeric/%{version}
+%{_datadir}/gnumeric/%{version}/Gnumeric-embed.xml
 %{_datadir}/gnumeric/%{version}/autoformat-templates
 %{_datadir}/gnumeric/%{version}/templates
 
@@ -539,185 +554,202 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n libspreadsheet
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/libspreadsheet-%{version}.so
 
 %files -n libspreadsheet-devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libspreadsheet.so
 %{_includedir}/libspreadsheet-1.12
-%{_pkgconfigdir}/*.pc
+%{_pkgconfigdir}/libspreadsheet-1.12.pc
 
 # applix
 %files plugin-applix
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/applix
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/applix/*.so
-%{_libdir}/gnumeric/%{version}/plugins/applix/*.xml
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/applix/applix.so
+%{_libdir}/gnumeric/%{version}/plugins/applix/plugin.xml
 
 # data interchange format (DIF)
 %files plugin-dif
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/dif
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/dif/*.so
-%{_libdir}/gnumeric/%{version}/plugins/dif/*.xml
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/dif/dif.so
+%{_libdir}/gnumeric/%{version}/plugins/dif/plugin.xml
 
 # ms excel
 %files plugin-excel
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/excel
+# R: zlib
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excel/excel.so
+%{_libdir}/gnumeric/%{version}/plugins/excel/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/excelplugins
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excel/*.so
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excelplugins/*.so
-%{_libdir}/gnumeric/%{version}/plugins/excel/*.xml
-%{_libdir}/gnumeric/%{version}/plugins/excelplugins/*.xml
-
-# glpk
-%files plugin-glpk
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/glpk
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/glpk/*.so
-%{_libdir}/gnumeric/%{version}/plugins/glpk/*.xml
-
-# html
-%files plugin-html
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/html
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/html/*.so
-%{_libdir}/gnumeric/%{version}/plugins/html/*.xml
-
-# lotus 123
-%files plugin-lotus123
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/lotus
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lotus/*.so
-%{_libdir}/gnumeric/%{version}/plugins/lotus/*.xml
-
-# lpsolve
-%files plugin-lpsolve
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/lpsolve
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lpsolve/*.so
-%{_libdir}/gnumeric/%{version}/plugins/lpsolve/*.xml
-
-# nlsolve
-%files plugin-nlsolve
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/nlsolve
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/nlsolve/*.so
-%{_libdir}/gnumeric/%{version}/plugins/nlsolve/*.xml
-
-# gnu oleo
-%files plugin-gnuoleo
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/oleo
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/oleo/*.so
-%{_libdir}/gnumeric/%{version}/plugins/oleo/*.xml
-
-# openoffice
-%files plugin-openoffice
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/openoffice
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/openoffice/*.so
-%{_libdir}/gnumeric/%{version}/plugins/openoffice/*.xml
-
-# paradox
-%files plugin-paradox
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/paradox
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/paradox/*.so
-%{_libdir}/gnumeric/%{version}/plugins/paradox/*.xml
-
-# plan perfect
-%files plugin-planperfect
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/plan_perfect
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/plan_perfect/*.so
-%{_libdir}/gnumeric/%{version}/plugins/plan_perfect/*.xml
-
-# psiconv
-%files plugin-psiconv
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/psiconv
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/psiconv/*.so
-%{_libdir}/gnumeric/%{version}/plugins/psiconv/*.xml
-
-# qpro
-%files plugin-qpro
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/qpro
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/qpro/*.so
-%{_libdir}/gnumeric/%{version}/plugins/qpro/*.xml
-
-# sc/xspread
-%files plugin-sc
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/sc
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sc/*.so
-%{_libdir}/gnumeric/%{version}/plugins/sc/*.xml
-
-# sylk
-%files plugin-sylk
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/sylk
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sylk/*.so
-%{_libdir}/gnumeric/%{version}/plugins/sylk/*.xml
-
-# xbase
-%files plugin-xbase
-%defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/xbase
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/xbase/*.so
-%{_libdir}/gnumeric/%{version}/plugins/xbase/*.xml
+# R: libspreadsheet libgoffice
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excelplugins/plugin.so
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excelplugins/xlcall32.so
+%{_libdir}/gnumeric/%{version}/plugins/excelplugins/plugin.xml
 
 %if %{with gda}
 # gda
 %files plugin-gdaif
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/gdaif
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gdaif/*.so
-%{_libdir}/gnumeric/%{version}/plugins/gdaif/*.xml
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gdaif/gdaif.so
+%{_libdir}/gnumeric/%{version}/plugins/gdaif/plugin.xml
+%{_libdir}/gnumeric/%{version}/plugins/gdaif/ui.xml
+%endif
 
+%if %{with gnomedb}
 # gnome db
 %files plugin-gnomedb
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/gnome-db
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.so
-%{_libdir}/gnumeric/%{version}/plugins/gnome-db/*.xml
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnome-db/gnomedb.so
+%{_libdir}/gnumeric/%{version}/plugins/gnome-db/plugin.xml
 %endif
+
+# glpk
+%files plugin-glpk
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/glpk
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/glpk/glpk.so
+%{_libdir}/gnumeric/%{version}/plugins/glpk/plugin.xml
+
+# html
+%files plugin-html
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/html
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/html/html.so
+%{_libdir}/gnumeric/%{version}/plugins/html/plugin.xml
+
+# lotus 123
+%files plugin-lotus123
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/lotus
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lotus/lotus.so
+%{_libdir}/gnumeric/%{version}/plugins/lotus/plugin.xml
+
+# lpsolve
+%files plugin-lpsolve
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/lpsolve
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lpsolve/lpsolve.so
+%{_libdir}/gnumeric/%{version}/plugins/lpsolve/plugin.xml
+
+# nlsolve
+%files plugin-nlsolve
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/nlsolve
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/nlsolve/nlsolve.so
+%{_libdir}/gnumeric/%{version}/plugins/nlsolve/plugin.xml
+
+# gnu oleo
+%files plugin-gnuoleo
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/oleo
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/oleo/oleo.so
+%{_libdir}/gnumeric/%{version}/plugins/oleo/plugin.xml
+
+# openoffice
+%files plugin-openoffice
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/openoffice
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/openoffice/openoffice.so
+%{_libdir}/gnumeric/%{version}/plugins/openoffice/plugin.xml
+
+# paradox
+%files plugin-paradox
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/paradox
+# R: pxlib
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/paradox/paradox.so
+%{_libdir}/gnumeric/%{version}/plugins/paradox/plugin.xml
+
+# plan perfect
+%files plugin-planperfect
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/plan_perfect
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/plan_perfect/plan_perfect.so
+%{_libdir}/gnumeric/%{version}/plugins/plan_perfect/plugin.xml
+
+# psiconv
+%files plugin-psiconv
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/psiconv
+# R: psiconv
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/psiconv/psiconv.so
+%{_libdir}/gnumeric/%{version}/plugins/psiconv/plugin.xml
+
+# qpro
+%files plugin-qpro
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/qpro
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/qpro/qpro.so
+%{_libdir}/gnumeric/%{version}/plugins/qpro/plugin.xml
+
+# sc/xspread
+%files plugin-sc
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/sc
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sc/sc.so
+%{_libdir}/gnumeric/%{version}/plugins/sc/plugin.xml
+
+# sylk
+%files plugin-sylk
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/sylk
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sylk/sylk.so
+%{_libdir}/gnumeric/%{version}/plugins/sylk/plugin.xml
+
+# xbase
+%files plugin-xbase
+%defattr(644,root,root,755)
+%dir %{_libdir}/gnumeric/%{version}/plugins/xbase
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/xbase/xbase.so
+%{_libdir}/gnumeric/%{version}/plugins/xbase/plugin.xml
 
 # samples
 %files plugin-sample
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/sample_datasource
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sample_datasource/sample_datasource.so
+%{_libdir}/gnumeric/%{version}/plugins/sample_datasource/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/uihello
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sample_datasource/*.so
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/uihello/*.so
-%{_libdir}/gnumeric/%{version}/plugins/sample_datasource/*.xml
-%{_libdir}/gnumeric/%{version}/plugins/uihello/*.xml
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/uihello/plugin.so
+%{_libdir}/gnumeric/%{version}/plugins/uihello/hello.xml
+%{_libdir}/gnumeric/%{version}/plugins/uihello/plugin.xml
 
 # perl-func/perl loader
 %files plugin-perl
 %defattr(644,root,root,755)
-%dir %{_libdir}/gnumeric/%{version}/plugins/perl-*
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/perl-*/*.so
-%{_libdir}/gnumeric/%{version}/plugins/perl-*/*.pl
-%{_libdir}/gnumeric/%{version}/plugins/perl-*/*.xml
+%dir %{_libdir}/gnumeric/%{version}/plugins/perl-func
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/perl-func/perl_func.pl
+%{_libdir}/gnumeric/%{version}/plugins/perl-func/plugin.xml
+%dir %{_libdir}/gnumeric/%{version}/plugins/perl-loader
+# R: perl-libs
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/perl-loader/perl_loader.so
+%{_libdir}/gnumeric/%{version}/plugins/perl-loader/plugin.xml
 
-# python-func/perl loader
+# python-func/python loader
 %if %{with python}
 %files plugin-python
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/gnome-glossary
-%dir %{_libdir}/gnumeric/%{version}/plugins/py*
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/py*/*.so
-%{_libdir}/gnumeric/%{version}/plugins/py*/*.py
-%{_libdir}/gnumeric/%{version}/plugins/py*/*.xml
 %{_libdir}/gnumeric/%{version}/plugins/gnome-glossary/glossary-po-header
-%{_libdir}/gnumeric/%{version}/plugins/gnome-glossary/*.py
-%{_libdir}/gnumeric/%{version}/plugins/gnome-glossary/*.xml
+%{_libdir}/gnumeric/%{version}/plugins/gnome-glossary/gnome_glossary.py
+%{_libdir}/gnumeric/%{version}/plugins/gnome-glossary/plugin.xml
+%dir %{_libdir}/gnumeric/%{version}/plugins/py-func
+%{_libdir}/gnumeric/%{version}/plugins/py-func/py_func.py
+%{_libdir}/gnumeric/%{version}/plugins/py-func/plugin.xml
+%dir %{_libdir}/gnumeric/%{version}/plugins/python-loader
+# R: python-libs
+%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/python-loader/python_loader.so
+%{_libdir}/gnumeric/%{version}/plugins/python-loader/plugin.xml
+%{_libdir}/gnumeric/%{version}/plugins/python-loader/ui-console-menu.xml
 %endif
 
 %files plugin-goffice
 %defattr(644,root,root,755)
-%dir %{_libdir}/goffice/*/plugins/gnumeric
-%{_libdir}/goffice/*/plugins/gnumeric/*.xml
-%attr(755,root,root) %{_libdir}/goffice/*/plugins/gnumeric/*.so
+%dir %{_libdir}/goffice/0.10/plugins/gnumeric
+%attr(755,root,root) %{_libdir}/goffice/0.10/plugins/gnumeric/gnumeric.so
+%{_libdir}/goffice/0.10/plugins/gnumeric/plugin.xml
