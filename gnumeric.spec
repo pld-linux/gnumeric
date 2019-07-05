@@ -41,7 +41,10 @@ BuildRequires:	gtk+3-devel >= 3.8.7
 BuildRequires:	intltool >= 0.35
 BuildRequires:	itstool
 BuildRequires:	libgoffice-devel >= 0.10.42
-%{?with_gda:BuildRequires:	libgda5-devel >= 5.0.0}
+%if %{with gda}
+BuildRequires:	libgda5-devel >= 5.0.0
+BuildRequires:	libgda5-ui-devel >= 5.0.0
+%endif
 BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgsf-devel >= 1.14.33
 BuildRequires:	libtool >= 2:2.2.6
@@ -594,6 +597,7 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-gdaif
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/gdaif
+# R: libgda5 libgda5-ui
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gdaif/gdaif.so
 %{_libdir}/gnumeric/%{version}/plugins/gdaif/plugin.xml
 %{_libdir}/gnumeric/%{version}/plugins/gdaif/ui.xml
