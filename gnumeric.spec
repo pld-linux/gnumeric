@@ -1,3 +1,4 @@
+# TODO: switch to python3 when supported upstream
 #
 # Conditional build:
 %bcond_without	gda	# GDA support
@@ -18,15 +19,14 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.45
+Version:	1.12.46
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	7a7095573fd748f56cd2fc6e4b6acb69
-Patch0:		%{name}-po.patch
-Patch1:		%{name}-gnomedb.patch
+# Source0-md5:	c44f6817e83a0dba1b4cccbe6a51b80d
+Patch0:		%{name}-gnomedb.patch
 URL:		http://www.gnumeric.org/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -456,10 +456,9 @@ Wtyczka dla goffice.
 
 %prep
 %setup -q
-%patch0 -p1
 # actually libgnomedb is not required to build gnomedb plugin
 # ... but it expects gnome-database-properties-4.0 tool, which no longer exists
-#patch1 -p1
+#patch0 -p1
 
 %build
 %{__glib_gettextize}
@@ -470,6 +469,7 @@ Wtyczka dla goffice.
 %{__autoheader}
 %{__automake}
 %configure \
+	PYTHON=%{__python} \
 	--disable-silent-rules \
 	--with-gda%{!?with_gda:=no} \
 	--with-guile%{!?with_guile:=no} \
