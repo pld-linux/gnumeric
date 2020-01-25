@@ -10,7 +10,6 @@
 %ifnarch %{ix86} %{x8664} %{arm} aarch64 ia64 mips ppc ppc64 s390x sparc sparcv9 sparc64
 %undefine	with_mono
 %endif
-%include	/usr/lib/rpm/macros.perl
 Summary:	The GNOME spreadsheet
 Summary(es.UTF-8):	La hoja de cálculo del GNOME
 Summary(pl.UTF-8):	Arkusz kalkulacyjny GNOME
