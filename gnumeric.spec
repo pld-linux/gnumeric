@@ -1,4 +1,3 @@
-# TODO: switch to python3 when supported upstream
 #
 # Conditional build:
 %bcond_without	gda	# GDA support
@@ -18,13 +17,13 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.47
+Version:	1.12.48
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	b0ce0a20438f39d5019618f59c743324
+# Source0-md5:	6141a2ff1790484933aafec2d0dce129
 Patch0:		%{name}-gnomedb.patch
 URL:		http://www.gnumeric.org/
 BuildRequires:	autoconf >= 2.54
@@ -39,7 +38,7 @@ BuildRequires:	gtk+3-devel >= 3.8.7
 %{?with_guile:BuildRequires:	guile-devel >= 1.5}
 BuildRequires:	intltool >= 0.35
 BuildRequires:	itstool
-BuildRequires:	libgoffice-devel >= 0.10.46
+BuildRequires:	libgoffice-devel >= 0.10.48
 %if %{with gda}
 BuildRequires:	libgda5-devel >= 5.0.0
 BuildRequires:	libgda5-ui-devel >= 5.0.0
@@ -59,8 +58,8 @@ BuildRequires:	psiconv-devel >= 0.9.3
 BuildRequires:	pxlib-devel >= 0.4.0
 BuildRequires:	rpm-perlprov
 %if %{with python}
-BuildRequires:	python-devel >= 1:2.7
-BuildRequires:	python-pygobject3-devel >= 3.0.0
+BuildRequires:	python3-devel >= 1:2.7
+BuildRequires:	python3-pygobject3-devel >= 3.0.0
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	yelp-tools
@@ -112,7 +111,7 @@ Summary(pl.UTF-8):	Biblioteka libspreadsheet
 Group:		Libraries
 Requires:	glib2 >= 1:2.40.0
 Requires:	gtk+3 >= 3.8.7
-Requires:	libgoffice >= 0.10.46
+Requires:	libgoffice >= 0.10.48
 Requires:	libgsf >= 1.14.33
 Requires:	libxml2 >= 1:2.6.26
 
@@ -129,7 +128,7 @@ Group:		Development/Libraries
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 Requires:	glib2-devel >= 1:2.40.0
 Requires:	gtk+3-devel >= 3.8.7
-Requires:	libgoffice-devel >= 0.10.46
+Requires:	libgoffice-devel >= 0.10.48
 Requires:	libgsf-devel >= 1.14.33
 Requires:	libxml2-devel >= 1:2.6.26
 
@@ -443,7 +442,7 @@ Summary:	Gnumeric plugin for goffice
 Summary(pl.UTF-8):	Wtyczka dla goffice
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libgoffice >= 0.10.46
+Requires:	libgoffice >= 0.10.48
 Requires:	libgsf >= 1.14.33
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
@@ -468,7 +467,7 @@ Wtyczka dla goffice.
 %{__autoheader}
 %{__automake}
 %configure \
-	PYTHON=%{__python} \
+	PYTHON=%{__python3} \
 	--disable-silent-rules \
 	--with-gda%{!?with_gda:=no} \
 	%{?with_guile:--with-guile} \
