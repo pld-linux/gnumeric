@@ -5,6 +5,7 @@
 %bcond_without	python	# Python support
 %bcond_with	guile	# Guile support [disabled upstream as experimental]
 %bcond_with	mono	# mono scripting engine [disabled upstream as experimental]
+%bcond_with	psiconv		# psiconv / psion support
 #
 %ifnarch %{ix86} %{x8664} %{arm} aarch64 ia64 mips ppc ppc64 s390x sparc sparcv9 sparc64
 %undefine	with_mono
@@ -18,7 +19,7 @@ Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
 Version:	1.12.48
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
@@ -54,7 +55,7 @@ BuildRequires:	perl-base
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig >= 1:0.18
 BuildRequires:	popt-devel
-BuildRequires:	psiconv-devel >= 0.9.3
+%{?with_psiconv:BuildRequires:	psiconv-devel >= 0.9.3}
 BuildRequires:	pxlib-devel >= 0.4.0
 BuildRequires:	rpm-perlprov
 %if %{with python}
@@ -472,7 +473,7 @@ Wtyczka dla goffice.
 	--with-gda%{!?with_gda:=no} \
 	%{?with_guile:--with-guile} \
 	%{?with_mono:--with-mono} \
-	--with-psiconv \
+	%{?with_psiconv:--with-psiconv} \
 	--with-python%{!?with_python:=no}
 
 %{__make}
@@ -675,12 +676,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}/plugins/plan_perfect/plugin.xml
 
 # psiconv
+%if %{with psiconv}
 %files plugin-psiconv
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/psiconv
 # R: psiconv
 %attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/psiconv/psiconv.so
 %{_libdir}/gnumeric/%{version}/plugins/psiconv/plugin.xml
+%endif
 
 # qpro
 %files plugin-qpro
