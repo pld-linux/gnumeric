@@ -1,11 +1,11 @@
 #
 # Conditional build:
-%bcond_without	gda	# GDA support
-%bcond_with	gnomedb	# GNOMEDB support
-%bcond_without	python	# Python support
-%bcond_with	guile	# Guile support [disabled upstream as experimental]
-%bcond_with	mono	# mono scripting engine [disabled upstream as experimental]
-%bcond_with	psiconv		# psiconv / psion support
+%bcond_without	gda		# GDA support
+%bcond_with	gnomedb		# GNOMEDB support
+%bcond_without	python		# Python support
+%bcond_with	guile		# Guile support [disabled upstream as experimental]
+%bcond_with	mono		# mono scripting engine [disabled upstream as experimental]
+%bcond_without	psiconv		# psiconv / psion support
 #
 %ifnarch %{ix86} %{x8664} %{arm} aarch64 ia64 mips ppc ppc64 s390x sparc sparcv9 sparc64
 %undefine	with_mono
@@ -18,13 +18,13 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.48
-Release:	4
+Version:	1.12.49
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	6141a2ff1790484933aafec2d0dce129
+Source0:	https://download.gnome.org/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
+# Source0-md5:	eec230a9fbd7388f856570e3f9648531
 Patch0:		%{name}-gnomedb.patch
 URL:		http://www.gnumeric.org/
 BuildRequires:	autoconf >= 2.54
@@ -63,15 +63,17 @@ BuildRequires:	python3-devel >= 1:2.7
 BuildRequires:	python3-pygobject3-devel >= 3.0.0
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 BuildRequires:	yelp-tools
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 %if %{without gda}
-Obsoletes:	gnumeric-plugin-gdaif
+Obsoletes:	gnumeric-plugin-gdaif < 1:%{version}
 %endif
 %if %{without gnomedb}
-Obsoletes:	gnumeric-plugin-gnomedb
+Obsoletes:	gnumeric-plugin-gnomedb < 1:%{version}
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -473,7 +475,7 @@ Wtyczka dla goffice.
 	--with-gda%{!?with_gda:=no} \
 	%{?with_guile:--with-guile} \
 	%{?with_mono:--with-mono} \
-	%{?with_psiconv:--with-psiconv} \
+	%{!?with_psiconv:--without-psiconv} \
 	--with-python%{!?with_python:=no}
 
 %{__make}
@@ -533,13 +535,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.gnumeric.plugin.gschema.xml
 
 %{_desktopdir}/gnumeric.desktop
-%{_pixmapsdir}/gnumeric
-%{_pixmapsdir}/gnome-application-vnd.lotus-1-2-3.png
-%{_pixmapsdir}/gnome-application-x-applix-spreadsheet.png
-%{_pixmapsdir}/gnome-application-x-generic-spreadsheet.png
-%{_pixmapsdir}/gnome-application-x-gnumeric.png
-%{_pixmapsdir}/gnome-application-x-xls.png
-%{_pixmapsdir}/win32-gnumeric.ico
 %{_iconsdir}/hicolor/*x*/apps/gnumeric.png
 
 %dir %{_datadir}/gnumeric
