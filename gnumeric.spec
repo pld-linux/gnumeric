@@ -18,13 +18,13 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.50
+Version:	1.12.51
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	06868b655c5a231a4e9c1009ed701cc1
+# Source0-md5:	78836667682f796788a529f982168aa3
 Patch0:		%{name}-gnomedb.patch
 URL:		http://www.gnumeric.org/
 BuildRequires:	autoconf >= 2.54
@@ -39,7 +39,7 @@ BuildRequires:	gtk+3-devel >= 3.8.7
 %{?with_guile:BuildRequires:	guile-devel >= 1.5}
 BuildRequires:	intltool >= 0.35
 BuildRequires:	itstool
-BuildRequires:	libgoffice-devel >= 0.10.49
+BuildRequires:	libgoffice-devel >= 0.10.51
 %if %{with gda}
 BuildRequires:	libgda6-devel >= 6.0.0
 BuildRequires:	libgda6-ui-devel >= 6.0.0
@@ -114,7 +114,7 @@ Summary(pl.UTF-8):	Biblioteka libspreadsheet
 Group:		Libraries
 Requires:	glib2 >= 1:2.40.0
 Requires:	gtk+3 >= 3.8.7
-Requires:	libgoffice >= 0.10.49
+Requires:	libgoffice >= 0.10.51
 Requires:	libgsf >= 1.14.33
 Requires:	libxml2 >= 1:2.6.26
 
@@ -131,7 +131,7 @@ Group:		Development/Libraries
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 Requires:	glib2-devel >= 1:2.40.0
 Requires:	gtk+3-devel >= 3.8.7
-Requires:	libgoffice-devel >= 0.10.49
+Requires:	libgoffice-devel >= 0.10.51
 Requires:	libgsf-devel >= 1.14.33
 Requires:	libxml2-devel >= 1:2.6.26
 
@@ -445,7 +445,7 @@ Summary:	Gnumeric plugin for goffice
 Summary(pl.UTF-8):	Wtyczka dla goffice
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libgoffice >= 0.10.49
+Requires:	libgoffice >= 0.10.51
 Requires:	libgsf >= 1.14.33
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
