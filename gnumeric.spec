@@ -18,13 +18,13 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.53
-Release:	2
+Version:	1.12.55
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	d771cd81e19441a3dc390b2b03cd1edf
+# Source0-md5:	76ab216b25c48b4f5fbf05f73e1ca7d9
 Patch0:		%{name}-gnomedb.patch
 URL:		http://www.gnumeric.org/
 BuildRequires:	autoconf >= 2.54
