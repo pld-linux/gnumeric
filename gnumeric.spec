@@ -18,13 +18,13 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.57
-Release:	4
+Version:	1.12.59
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	237ce4f6c43661892e802bf81dbff1b2
+# Source0-md5:	b4629f134acc1649b79c99be13e9f1e9
 Patch0:		%{name}-gnomedb.patch
 URL:		http://www.gnumeric.org/
 BuildRequires:	autoconf >= 2.54
@@ -39,7 +39,7 @@ BuildRequires:	gtk+3-devel >= 3.8.7
 %{?with_guile:BuildRequires:	guile-devel >= 1.5}
 BuildRequires:	intltool >= 0.35
 BuildRequires:	itstool
-BuildRequires:	libgoffice-devel >= 0.10.51
+BuildRequires:	libgoffice-devel >= 0.10.57
 %if %{with gda}
 BuildRequires:	libgda6-devel >= 6.0.0
 BuildRequires:	libgda6-ui-devel >= 6.0.0
@@ -50,7 +50,7 @@ BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.6.26
 # disabled by default - still experimental
 %{?with_mono:BuildRequires:	mono-devel >= 1.0.0}
-BuildRequires:	pango-devel >= 1:1.24.0
+BuildRequires:	pango-devel >= 1:1.46.0
 BuildRequires:	perl-base
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig >= 1:0.18
@@ -114,9 +114,10 @@ Summary(pl.UTF-8):	Biblioteka libspreadsheet
 Group:		Libraries
 Requires:	glib2 >= 1:2.40.0
 Requires:	gtk+3 >= 3.8.7
-Requires:	libgoffice >= 0.10.51
+Requires:	libgoffice >= 0.10.57
 Requires:	libgsf >= 1.14.33
 Requires:	libxml2 >= 1:2.6.26
+Requires:	pango >= 1:1.46.0
 
 %description -n libspreadsheet
 libspreadsheet library.
@@ -131,7 +132,7 @@ Group:		Development/Libraries
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 Requires:	glib2-devel >= 1:2.40.0
 Requires:	gtk+3-devel >= 3.8.7
-Requires:	libgoffice-devel >= 0.10.51
+Requires:	libgoffice-devel >= 0.10.57
 Requires:	libgsf-devel >= 1.14.33
 Requires:	libxml2-devel >= 1:2.6.26
 
@@ -445,7 +446,7 @@ Summary:	Gnumeric plugin for goffice
 Summary(pl.UTF-8):	Wtyczka dla goffice
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libgoffice >= 0.10.51
+Requires:	libgoffice >= 0.10.57
 Requires:	libgsf >= 1.14.33
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
