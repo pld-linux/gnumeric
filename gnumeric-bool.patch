@@ -1,0 +1,12 @@
+bool requires <stdbool.h> or C23; whole remaining code uses gboolean
+--- gnumeric-1.12.60/src/sstest.c.orig	2026-02-11 03:07:03.000000000 +0100
++++ gnumeric-1.12.60/src/sstest.c	2026-02-12 21:06:49.556061858 +0100
+@@ -898,7 +898,7 @@ test_insert_delete (void)
+ /* ------------------------------------------------------------------------- */
+ 
+ static gboolean
+-check_help_expression (const char *text, GnmFunc const *fd, bool localized)
++check_help_expression (const char *text, GnmFunc const *fd, gboolean localized)
+ {
+ 	GnmConventions const *convs = gnm_conventions_default;
+ 	GnmParsePos pp;

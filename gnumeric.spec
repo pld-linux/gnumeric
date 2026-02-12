@@ -18,14 +18,15 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.59
-Release:	3
+Version:	1.12.60
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	b4629f134acc1649b79c99be13e9f1e9
+# Source0-md5:	6fef90fa329332b8776bd66e98473f27
 Patch0:		%{name}-gnomedb.patch
+Patch1:		%{name}-bool.patch
 URL:		http://www.gnumeric.org/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -461,6 +462,7 @@ Wtyczka dla goffice.
 # actually libgnomedb is not required to build gnomedb plugin
 # ... but it expects gnome-database-properties-4.0 tool, which no longer exists
 #patch0 -p1
+%patch -P1 -p1
 
 %build
 %{__glib_gettextize}
@@ -524,10 +526,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnumeric/%{version}
 %dir %{_libdir}/gnumeric/%{version}/plugins
 %dir %{_libdir}/gnumeric/%{version}/plugins/fn-*
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/fn-*/*.so
+%{_libdir}/gnumeric/%{version}/plugins/fn-*/*.so
 %{_libdir}/gnumeric/%{version}/plugins/fn-*/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/mps
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/mps/mps.so
+%{_libdir}/gnumeric/%{version}/plugins/mps/mps.so
 %{_libdir}/gnumeric/%{version}/plugins/mps/plugin.xml
 
 %{_datadir}/glib-2.0/schemas/org.gnome.gnumeric.dialogs.gschema.xml
@@ -552,11 +554,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n libspreadsheet
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libspreadsheet-%{version}.so
+%{_libdir}/libspreadsheet-%{version}.so
 
 %files -n libspreadsheet-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libspreadsheet.so
+%{_libdir}/libspreadsheet.so
 %{_includedir}/libspreadsheet-1.12
 %{_pkgconfigdir}/libspreadsheet-1.12.pc
 
@@ -564,14 +566,14 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-applix
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/applix
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/applix/applix.so
+%{_libdir}/gnumeric/%{version}/plugins/applix/applix.so
 %{_libdir}/gnumeric/%{version}/plugins/applix/plugin.xml
 
 # data interchange format (DIF)
 %files plugin-dif
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/dif
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/dif/dif.so
+%{_libdir}/gnumeric/%{version}/plugins/dif/dif.so
 %{_libdir}/gnumeric/%{version}/plugins/dif/plugin.xml
 
 # ms excel
@@ -579,12 +581,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/excel
 # R: zlib
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excel/excel.so
+%{_libdir}/gnumeric/%{version}/plugins/excel/excel.so
 %{_libdir}/gnumeric/%{version}/plugins/excel/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/excelplugins
 # R: libspreadsheet libgoffice
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excelplugins/plugin.so
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/excelplugins/xlcall32.so
+%{_libdir}/gnumeric/%{version}/plugins/excelplugins/plugin.so
+%{_libdir}/gnumeric/%{version}/plugins/excelplugins/xlcall32.so
 %{_libdir}/gnumeric/%{version}/plugins/excelplugins/plugin.xml
 
 %if %{with gda}
@@ -593,7 +595,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/gdaif
 # R: libgda6 libgda6-ui
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gdaif/gdaif.so
+%{_libdir}/gnumeric/%{version}/plugins/gdaif/gdaif.so
 %{_libdir}/gnumeric/%{version}/plugins/gdaif/plugin.xml
 %{_libdir}/gnumeric/%{version}/plugins/gdaif/ui.xml
 %endif
@@ -603,7 +605,7 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-gnomedb
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/gnome-db
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/gnome-db/gnomedb.so
+%{_libdir}/gnumeric/%{version}/plugins/gnome-db/gnomedb.so
 %{_libdir}/gnumeric/%{version}/plugins/gnome-db/plugin.xml
 %endif
 
@@ -611,49 +613,49 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-glpk
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/glpk
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/glpk/glpk.so
+%{_libdir}/gnumeric/%{version}/plugins/glpk/glpk.so
 %{_libdir}/gnumeric/%{version}/plugins/glpk/plugin.xml
 
 # html
 %files plugin-html
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/html
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/html/html.so
+%{_libdir}/gnumeric/%{version}/plugins/html/html.so
 %{_libdir}/gnumeric/%{version}/plugins/html/plugin.xml
 
 # lotus 123
 %files plugin-lotus123
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/lotus
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lotus/lotus.so
+%{_libdir}/gnumeric/%{version}/plugins/lotus/lotus.so
 %{_libdir}/gnumeric/%{version}/plugins/lotus/plugin.xml
 
 # lpsolve
 %files plugin-lpsolve
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/lpsolve
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/lpsolve/lpsolve.so
+%{_libdir}/gnumeric/%{version}/plugins/lpsolve/lpsolve.so
 %{_libdir}/gnumeric/%{version}/plugins/lpsolve/plugin.xml
 
 # nlsolve
 %files plugin-nlsolve
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/nlsolve
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/nlsolve/nlsolve.so
+%{_libdir}/gnumeric/%{version}/plugins/nlsolve/nlsolve.so
 %{_libdir}/gnumeric/%{version}/plugins/nlsolve/plugin.xml
 
 # gnu oleo
 %files plugin-gnuoleo
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/oleo
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/oleo/oleo.so
+%{_libdir}/gnumeric/%{version}/plugins/oleo/oleo.so
 %{_libdir}/gnumeric/%{version}/plugins/oleo/plugin.xml
 
 # openoffice
 %files plugin-openoffice
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/openoffice
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/openoffice/openoffice.so
+%{_libdir}/gnumeric/%{version}/plugins/openoffice/openoffice.so
 %{_libdir}/gnumeric/%{version}/plugins/openoffice/plugin.xml
 
 # paradox
@@ -661,14 +663,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/paradox
 # R: pxlib
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/paradox/paradox.so
+%{_libdir}/gnumeric/%{version}/plugins/paradox/paradox.so
 %{_libdir}/gnumeric/%{version}/plugins/paradox/plugin.xml
 
 # plan perfect
 %files plugin-planperfect
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/plan_perfect
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/plan_perfect/plan_perfect.so
+%{_libdir}/gnumeric/%{version}/plugins/plan_perfect/plan_perfect.so
 %{_libdir}/gnumeric/%{version}/plugins/plan_perfect/plugin.xml
 
 # psiconv
@@ -677,7 +679,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/psiconv
 # R: psiconv
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/psiconv/psiconv.so
+%{_libdir}/gnumeric/%{version}/plugins/psiconv/psiconv.so
 %{_libdir}/gnumeric/%{version}/plugins/psiconv/plugin.xml
 %endif
 
@@ -685,38 +687,38 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-qpro
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/qpro
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/qpro/qpro.so
+%{_libdir}/gnumeric/%{version}/plugins/qpro/qpro.so
 %{_libdir}/gnumeric/%{version}/plugins/qpro/plugin.xml
 
 # sc/xspread
 %files plugin-sc
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/sc
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sc/sc.so
+%{_libdir}/gnumeric/%{version}/plugins/sc/sc.so
 %{_libdir}/gnumeric/%{version}/plugins/sc/plugin.xml
 
 # sylk
 %files plugin-sylk
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/sylk
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sylk/sylk.so
+%{_libdir}/gnumeric/%{version}/plugins/sylk/sylk.so
 %{_libdir}/gnumeric/%{version}/plugins/sylk/plugin.xml
 
 # xbase
 %files plugin-xbase
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/xbase
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/xbase/xbase.so
+%{_libdir}/gnumeric/%{version}/plugins/xbase/xbase.so
 %{_libdir}/gnumeric/%{version}/plugins/xbase/plugin.xml
 
 # samples
 %files plugin-sample
 %defattr(644,root,root,755)
 %dir %{_libdir}/gnumeric/%{version}/plugins/sample_datasource
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/sample_datasource/sample_datasource.so
+%{_libdir}/gnumeric/%{version}/plugins/sample_datasource/sample_datasource.so
 %{_libdir}/gnumeric/%{version}/plugins/sample_datasource/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/uihello
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/uihello/plugin.so
+%{_libdir}/gnumeric/%{version}/plugins/uihello/plugin.so
 %{_libdir}/gnumeric/%{version}/plugins/uihello/hello.xml
 %{_libdir}/gnumeric/%{version}/plugins/uihello/plugin.xml
 
@@ -728,7 +730,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}/plugins/perl-func/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/perl-loader
 # R: perl-libs
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/perl-loader/perl_loader.so
+%{_libdir}/gnumeric/%{version}/plugins/perl-loader/perl_loader.so
 %{_libdir}/gnumeric/%{version}/plugins/perl-loader/plugin.xml
 
 # python-func/python loader
@@ -744,7 +746,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}/plugins/py-func/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/python-loader
 # R: python-libs
-%attr(755,root,root) %{_libdir}/gnumeric/%{version}/plugins/python-loader/python_loader.so
+%{_libdir}/gnumeric/%{version}/plugins/python-loader/python_loader.so
 %{_libdir}/gnumeric/%{version}/plugins/python-loader/plugin.xml
 %{_libdir}/gnumeric/%{version}/plugins/python-loader/ui-console-menu.xml
 %endif
@@ -752,5 +754,5 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-goffice
 %defattr(644,root,root,755)
 %dir %{_libdir}/goffice/0.10/plugins/gnumeric
-%attr(755,root,root) %{_libdir}/goffice/0.10/plugins/gnumeric/gnumeric.so
+%{_libdir}/goffice/0.10/plugins/gnumeric/gnumeric.so
 %{_libdir}/goffice/0.10/plugins/gnumeric/plugin.xml
