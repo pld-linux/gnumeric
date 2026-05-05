@@ -18,35 +18,35 @@ Summary(ru.UTF-8):	Электронные таблицы для GNOME
 Summary(uk.UTF-8):	Електронні таблиці для GNOME
 Summary(zh_CN.UTF-8):	Linux下的Excel -- GNOME电子表格
 Name:		gnumeric
-Version:	1.12.60
+Version:	1.12.61
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnumeric/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	6fef90fa329332b8776bd66e98473f27
+# Source0-md5:	8c6cbffb41eb2a8ffb97708e21482d7f
 Patch0:		%{name}-gnomedb.patch
-Patch1:		%{name}-bool.patch
+Patch1:		%{name}-psiconv.patch
 URL:		http://www.gnumeric.org/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gcc >= 5:3.2
-BuildRequires:	gettext-tools
+BuildRequires:	gettext-tools >= 0.13
 BuildRequires:	glib2-devel >= 1:2.40.0
 BuildRequires:	gobject-introspection-devel >= 1.0.0
-BuildRequires:	gtk+3-devel >= 3.8.7
+BuildRequires:	gtk+3-devel >= 3.20.0
 %{?with_guile:BuildRequires:	guile-devel >= 1.5}
 BuildRequires:	intltool >= 0.35
 BuildRequires:	itstool
-BuildRequires:	libgoffice-devel >= 0.10.57
+BuildRequires:	libgoffice-devel >= 0.10.61
 %if %{with gda}
 BuildRequires:	libgda6-devel >= 6.0.0
 BuildRequires:	libgda6-ui-devel >= 6.0.0
 %endif
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgsf-devel >= 1.14.33
+BuildRequires:	libgsf-devel >= 1.14.45
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.6.26
 # disabled by default - still experimental
@@ -60,7 +60,7 @@ BuildRequires:	popt-devel
 BuildRequires:	pxlib-devel >= 0.4.0
 BuildRequires:	rpm-perlprov
 %if %{with python}
-BuildRequires:	python3-devel >= 1:2.7
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-pygobject3-devel >= 3.0.0
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
@@ -114,9 +114,9 @@ Summary:	libspreadsheet library
 Summary(pl.UTF-8):	Biblioteka libspreadsheet
 Group:		Libraries
 Requires:	glib2 >= 1:2.40.0
-Requires:	gtk+3 >= 3.8.7
-Requires:	libgoffice >= 0.10.57
-Requires:	libgsf >= 1.14.33
+Requires:	gtk+3 >= 3.20.0
+Requires:	libgoffice >= 0.10.61
+Requires:	libgsf >= 1.14.45
 Requires:	libxml2 >= 1:2.6.26
 Requires:	pango >= 1:1.46.0
 
@@ -132,9 +132,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libspreadsheet
 Group:		Development/Libraries
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 Requires:	glib2-devel >= 1:2.40.0
-Requires:	gtk+3-devel >= 3.8.7
-Requires:	libgoffice-devel >= 0.10.57
-Requires:	libgsf-devel >= 1.14.33
+Requires:	gtk+3-devel >= 3.20.0
+Requires:	libgoffice-devel >= 0.10.61
+Requires:	libgsf-devel >= 1.14.45
 Requires:	libxml2-devel >= 1:2.6.26
 
 %description -n libspreadsheet-devel
@@ -179,7 +179,6 @@ Summary:	MS Excel (tm) plugin
 Summary(pl.UTF-8):	Wtyczka MS Excel (tm)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
 %description plugin-excel
 Imports/exports MS Excel (tm) files.
@@ -432,7 +431,7 @@ Summary:	Python plugin
 Summary(pl.UTF-8):	Wtyczka Pythona
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	python-modules
+Requires:	python3-modules >= 1:3.2
 
 %description plugin-python
 Sample Python plugin providing some (useless) functions.
@@ -447,8 +446,8 @@ Summary:	Gnumeric plugin for goffice
 Summary(pl.UTF-8):	Wtyczka dla goffice
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libgoffice >= 0.10.57
-Requires:	libgsf >= 1.14.33
+Requires:	libgoffice >= 0.10.61
+Requires:	libgsf >= 1.14.45
 Requires:	libspreadsheet = %{epoch}:%{version}-%{release}
 
 %description plugin-goffice
@@ -461,7 +460,7 @@ Wtyczka dla goffice.
 %setup -q
 # actually libgnomedb is not required to build gnomedb plugin
 # ... but it expects gnome-database-properties-4.0 tool, which no longer exists
-#patch0 -p1
+#patch -P0 -p1
 %patch -P1 -p1
 
 %build
@@ -583,11 +582,6 @@ rm -rf $RPM_BUILD_ROOT
 # R: zlib
 %{_libdir}/gnumeric/%{version}/plugins/excel/excel.so
 %{_libdir}/gnumeric/%{version}/plugins/excel/plugin.xml
-%dir %{_libdir}/gnumeric/%{version}/plugins/excelplugins
-# R: libspreadsheet libgoffice
-%{_libdir}/gnumeric/%{version}/plugins/excelplugins/plugin.so
-%{_libdir}/gnumeric/%{version}/plugins/excelplugins/xlcall32.so
-%{_libdir}/gnumeric/%{version}/plugins/excelplugins/plugin.xml
 
 %if %{with gda}
 # gda
@@ -745,7 +739,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnumeric/%{version}/plugins/py-func/py_func.py
 %{_libdir}/gnumeric/%{version}/plugins/py-func/plugin.xml
 %dir %{_libdir}/gnumeric/%{version}/plugins/python-loader
-# R: python-libs
+# R: python3-libs
 %{_libdir}/gnumeric/%{version}/plugins/python-loader/python_loader.so
 %{_libdir}/gnumeric/%{version}/plugins/python-loader/plugin.xml
 %{_libdir}/gnumeric/%{version}/plugins/python-loader/ui-console-menu.xml

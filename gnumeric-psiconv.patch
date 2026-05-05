@@ -1,0 +1,23 @@
+Readd code fragment lost during AI-driven refactor
+--- gnumeric-1.12.61/plugins/psiconv/psiconv-read.c.orig	2026-05-05 18:28:38.506635966 +0200
++++ gnumeric-1.12.61/plugins/psiconv/psiconv-read.c	2026-05-05 18:29:16.676429183 +0200
+@@ -57,6 +57,19 @@ psi_new_string (psiconv_ucs2 const *data
+ }
+ 
+ 
++static GnmCellRef *
++p_cellref_init (GnmCellRef *res,
++		int row, gboolean row_abs,
++		int col, gboolean col_abs)
++{
++	res->sheet = NULL;
++	res->row = row;
++	res->col = col;
++	res->row_relative = row_abs ? 0 : 1;
++	res->col_relative = col_abs ? 0 : 1;
++	return res;
++}
++
+ static void
+ set_format (GnmStyle *style, const psiconv_sheet_numberformat psi_numberformat)
+ {
